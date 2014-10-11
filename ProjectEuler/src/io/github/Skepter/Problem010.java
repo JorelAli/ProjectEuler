@@ -1,9 +1,6 @@
 package io.github.Skepter;
 import io.github.Skepter.resources.SieveWithBitset;
 
-import java.math.BigInteger;
-import java.util.List;
-
 public class Problem010 {
 
 	/* The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
@@ -35,12 +32,11 @@ public class Problem010 {
 //		return true;
 //	}
 	
-	public static void main(String[] args) {
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(2000000);
+	public static void main(final String[] args) {
+		final List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(2000000);
 		BigInteger bi = new BigInteger("0");
-		for(int i : primes) {
+		for(final int i : primes)
 			bi = bi.add(new BigInteger(String.valueOf(i)));
-		}
 		System.out.println(bi);
 	}
 }

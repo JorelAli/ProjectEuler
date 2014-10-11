@@ -1,29 +1,25 @@
 package io.github.Skepter.resources;
 
-import java.util.BitSet;
-import java.util.List;
-import java.util.ArrayList;
-
 public class SieveWithBitset {
-	private BitSet sieve;
+	private final BitSet sieve;
 
-	public SieveWithBitset(int size) {
+	public SieveWithBitset(final int size) {
 		sieve = new BitSet((size + 1) / 2);
 	}
 
-	public boolean isComposite(int k) {
-		assert k >= 3 && (k % 2) == 1;
+	public boolean isComposite(final int k) {
+		assert (k >= 3) && ((k % 2) == 1);
 		return sieve.get((k - 3) / 2);
 	}
 
-	public void setComposite(int k) {
-		assert k >= 3 && (k % 2) == 1;
+	public void setComposite(final int k) {
+		assert (k >= 3) && ((k % 2) == 1);
 		sieve.set((k - 3) / 2);
 	}
 
-	public static List<Integer> sieveOfEratosthenes(int max) {
-		SieveWithBitset sieve = new SieveWithBitset(max + 1); // +1 to include max itself
-		for (int i = 3; i * i <= max; i += 2) {
+	public static List<Integer> sieveOfEratosthenes(final int max) {
+		final SieveWithBitset sieve = new SieveWithBitset(max + 1); // +1 to include max itself
+		for (int i = 3; (i * i) <= max; i += 2) {
 			if (sieve.isComposite(i))
 				continue;
 
@@ -32,7 +28,7 @@ public class SieveWithBitset {
 				sieve.setComposite(multiplei);
 		}
 
-		List<Integer> primes = new ArrayList<Integer>();
+		final List<Integer> primes = new ArrayList<Integer>();
 		primes.add(2);
 		for (int i = 3; i <= max; i += 2)
 			if (!sieve.isComposite(i))

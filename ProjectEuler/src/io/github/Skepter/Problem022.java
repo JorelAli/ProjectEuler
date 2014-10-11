@@ -15,7 +15,7 @@ public class Problem022 {
 
 	 What is the total of all the name scores in the file?
 	 */
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 
 	}
 }

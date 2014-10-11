@@ -1,11 +1,9 @@
 package io.github.Skepter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Problem012 {
 
 	//What is the value of the first triangle number to have over five hundred divisors?
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		final long old = System.currentTimeMillis();
 		//calculate triangle numbers
 		//1, 3, 6, 10, 15, 21, 28, 36, 45, 55, ...
@@ -22,15 +20,14 @@ public class Problem012 {
 		}
 		System.out.println(getFactors(count).size() + " factors");
 		System.out.println(n + "th term: " + count);
-		System.out.println(System.currentTimeMillis() - old + "ms");
+		System.out.println((System.currentTimeMillis() - old) + "ms");
 	}
 
-	public static List<Integer> getFactors(int j) {
-		List<Integer> list = new ArrayList<Integer>();
-		for (int i = 1; i <= j; i++) {
-			if (j % i == 0)
+	public static List<Integer> getFactors(final int j) {
+		final List<Integer> list = new ArrayList<Integer>();
+		for (int i = 1; i <= j; i++)
+			if ((j % i) == 0)
 				list.add(i);
-		}
 		return list;
 	}
 }

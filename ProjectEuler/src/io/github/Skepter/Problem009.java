@@ -10,24 +10,18 @@ public class Problem009 {
 	There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 	Find the product abc.
 	 */
-	public static void main(String[] args) {
-		int x = 1000;
-		for (int i = 1; i < x + 1; i++) {
-			for (int j = 1; j < x + 1; j++) {
-
+	public static void main(final String[] args) {
+		final int x = 1000;
+		for (int i = 1; i < (x + 1); i++)
+			for (int j = 1; j < (x + 1); j++)
 				for (int z = 0; z < x; z++) {
-					int k = j + z;
-					if (((i * i) + (j * j) == (k * k)) && i < j) {
-						if (i + j + k == x) {
-//							System.out.println("A: " + i + " B: " + j + " C: " + k);
+					final int k = j + z;
+					if ((((i * i) + (j * j)) == (k * k)) && (i < j))
+						if ((i + j + k) == x)
+							//							System.out.println("A: " + i + " B: " + j + " C: " + k);
 //							System.out.println("A^2: " + i * i + " B^2: " + j * j + " C^2: " + k * k);
 							System.out.println(i * j * k);
-						}
-					}
 				}
-
-			}
-		}
 
 	}
 }

@@ -7,18 +7,17 @@ public class Problem005 {
 	 * What is the smallest positive number that is evenly 
 	 * divisible by all of the numbers from 1 to 20?
 	 */
-	public static void main(String[] args) {
-		for (int i = 1; i < Integer.MAX_VALUE; i++) {
+	public static void main(final String[] args) {
+		for (int i = 1; i < Integer.MAX_VALUE; i++)
 			if(check(i)) {
 				System.out.println(i);
 				break;
 			}
-		}
 	}
 
-	private static boolean check(int checkInt) {
+	private static boolean check(final int checkInt) {
 		for (int i = 1; i <= 20; i++) 
-			if (!(checkInt % i == 0))
+			if (!((checkInt % i) == 0))
 				return false;
 		return true;
 	}
