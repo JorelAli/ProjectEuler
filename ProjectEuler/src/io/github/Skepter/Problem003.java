@@ -1,5 +1,8 @@
 package io.github.Skepter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Problem003 {
 
 	//What is the largest prime factor of the number 600851475143 ?

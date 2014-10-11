@@ -1,5 +1,7 @@
 package io.github.Skepter.resources;
 
+import java.util.List;
+
 public class Utils {
 
 	public static long sumOfDigits(final String s) {

@@ -1,5 +1,8 @@
 package io.github.Skepter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Problem012 {
 
 	//What is the value of the first triangle number to have over five hundred divisors?

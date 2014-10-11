@@ -1,5 +1,7 @@
 package io.github.Skepter;
 
+import java.math.BigInteger;
+
 public class Problem016 {
 
 	//What is the sum of the digits of the number 2^1000?

@@ -1,5 +1,9 @@
 package io.github.Skepter;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Problem002 {
 
 	//Find sum of all even Fibonacci numbers up to 4 million

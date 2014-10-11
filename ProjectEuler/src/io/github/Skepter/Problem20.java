@@ -1,6 +1,8 @@
 package io.github.Skepter;
 import io.github.Skepter.resources.Utils;
 
+import java.math.BigInteger;
+
 public class Problem20 {
 
 	//Find the sum of the digits in the number 100!

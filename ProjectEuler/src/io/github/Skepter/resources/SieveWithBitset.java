@@ -1,5 +1,9 @@
 package io.github.Skepter.resources;
 
+import java.util.ArrayList;
+import java.util.BitSet;
+import java.util.List;
+
 public class SieveWithBitset {
 	private final BitSet sieve;
 

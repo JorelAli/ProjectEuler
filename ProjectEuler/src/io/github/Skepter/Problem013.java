@@ -1,5 +1,9 @@
 package io.github.Skepter;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Problem013 {
 
 	/*Find the first 10 digits of the sum of the baseString*/

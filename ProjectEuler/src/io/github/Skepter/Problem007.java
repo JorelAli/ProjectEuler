@@ -1,5 +1,8 @@
 package io.github.Skepter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Problem007 {
 
 	//What is the 10001st prime number?

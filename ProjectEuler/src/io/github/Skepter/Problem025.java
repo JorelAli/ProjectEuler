@@ -1,5 +1,9 @@
 package io.github.Skepter;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Problem025 {
 
 	//What is the first term in the Fibonacci sequence to contain 1000 digits?
