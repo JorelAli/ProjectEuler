@@ -28,6 +28,7 @@ public class Problem014 {
 		for (long i = 1; i < 1000000; i++) {
 			int count = 0;
 			long j = i;
+			
 			//System.out.println("begin: " + i);
 			while (j != 1) {
 				//if even
