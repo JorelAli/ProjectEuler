@@ -3,7 +3,7 @@ import io.github.Skepter.resources.Utils;
 
 import java.math.BigInteger;
 
-public class Problem20 {
+public class Problem020 {
 
 	//Find the sum of the digits in the number 100!
 	public static void main(final String[] args) {
