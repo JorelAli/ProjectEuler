@@ -1,5 +1,7 @@
 package io.github.Skepter.resources;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Utils {
@@ -40,4 +42,9 @@ public class Utils {
 		for(final Object i : list)
 			System.out.println(i);
 	}
+	
+	public static void printListSingleLine(final Collection<?> list) {
+		System.out.println(Arrays.toString(list.toArray()).toString());
+	}
+	
 }
