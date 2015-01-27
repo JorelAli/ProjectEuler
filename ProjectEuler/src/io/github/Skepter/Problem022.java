@@ -1,5 +1,11 @@
 package io.github.Skepter;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.Arrays;
+
 public class Problem022 {
 
 	/*
@@ -15,7 +21,27 @@ public class Problem022 {
 
 	 What is the total of all the name scores in the file?
 	 */
-	public static void main(final String[] args) {
+	public static void main(final String[] args) throws IOException {
 
+		URL url = Problem022.class.getResource("/ResourceFiles/names.txt");
+		BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+		String inputLine = in.readLine();
+		in.close();
+
+		inputLine = inputLine.replace("\"", "");
+		String[] arr = inputLine.split(",");
+		Arrays.sort(arr);
+
+		int answer = 0;
+		for (int i = 0; i < arr.length; i++) {
+			String string = arr[i];
+			Long count = 0L;
+			for (int j = 0; j < string.length(); j++) {
+				count += string.charAt(j) - 64;
+			}
+			//int started at 0, +1 to sort out the positioning
+			answer += count * (i + 1);
+		}
+		System.out.println(answer);
 	}
 }
