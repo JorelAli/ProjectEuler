@@ -25,36 +25,35 @@ public class Problem014 extends RT {
 	NOTE: Once the chain starts the terms are allowed to go above one million.
 	 */
 	public static void main(final String[] args) {
-		begin();
 		final Map<Long, Integer> map = new HashMap<Long, Integer>();
 		for (long i = 1; i < 1000000; i++) {
 			int count = 0;
 			long j = i;
-			
-			//System.out.println("begin: " + i);
-			while (j != 1)
-				//if even
+
+			/* Stop when it gets to 1 and store it */
+			while (j != 1) {
+				/* If it is even, divide by 2 */
 				if ((j % 2) == 0) {
 					j /= 2;
-					count++;
 				} else {
+					/* Otherwise, times it by 3 and add 1 */
 					j *= 3;
 					j++;
-					count++;
 				}
-				//System.out.println(j);
+				count++;
+			}
 			map.put(i, count);
 		}
+		
+		/* Compare which is longest */
 		long key = 0;
 		int max = 0;
-		for(final Entry<Long, Integer> entry : map.entrySet())
-			if(entry.getValue() > max) {
+		for (final Entry<Long, Integer> entry : map.entrySet())
+			if (entry.getValue() > max) {
 				max = entry.getValue();
 				key = entry.getKey();
 			}
-		
 		System.out.println(key + ": " + max);
-		//10 seconds
-		end();
+		uptime();
 	}
 }
