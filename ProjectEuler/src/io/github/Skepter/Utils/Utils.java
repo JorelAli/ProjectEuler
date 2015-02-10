@@ -1,5 +1,7 @@
 package io.github.Skepter.Utils;
 
+import io.github.Skepter.ForeignUtils.SieveWithBitset;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -36,6 +38,10 @@ public class Utils {
 		if (reversedString.equals(str))
 			return true;
 		return false;
+	}
+
+	public static boolean isPrime(int i) {
+		return SieveWithBitset.sieveOfEratosthenes(i).contains(i);
 	}
 	
 	public static void printList(final List<?> list) {
