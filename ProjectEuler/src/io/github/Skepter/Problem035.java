@@ -1,5 +1,5 @@
 package io.github.Skepter;
-import io.github.Skepter.resources.SieveWithBitset;
+import io.github.Skepter.ForeignUtils.SieveWithBitset;
 
 import java.util.ArrayList;
 import java.util.HashSet;

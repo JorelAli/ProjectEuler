@@ -23,22 +23,21 @@ public class Problem022 {
 	 */
 	public static void main(final String[] args) throws IOException {
 
-		URL url = Problem022.class.getResource("/ResourceFiles/names.txt");
-		BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+		final URL url = Problem022.class.getResource("/ResourceFiles/names.txt");
+		final BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 		String inputLine = in.readLine();
 		in.close();
 
 		inputLine = inputLine.replace("\"", "");
-		String[] arr = inputLine.split(",");
+		final String[] arr = inputLine.split(",");
 		Arrays.sort(arr);
 
 		int answer = 0;
 		for (int i = 0; i < arr.length; i++) {
-			String string = arr[i];
+			final String string = arr[i];
 			Long count = 0L;
-			for (int j = 0; j < string.length(); j++) {
+			for (int j = 0; j < string.length(); j++)
 				count += string.charAt(j) - 64;
-			}
 			//int started at 0, +1 to sort out the positioning
 			answer += count * (i + 1);
 		}

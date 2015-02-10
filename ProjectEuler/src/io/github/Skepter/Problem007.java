@@ -16,6 +16,8 @@ public class Problem007 {
 			}
 		System.out.println(list.get(list.size() - 1));
 	}
+	
+	//19030ms
 
 	//checks whether an int is prime or not.
 	static boolean isPrime(final int n) {

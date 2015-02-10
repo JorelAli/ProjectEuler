@@ -1,5 +1,5 @@
 package io.github.Skepter;
-import io.github.Skepter.resources.Utils;
+import io.github.Skepter.Utils.Utils;
 
 
 public class Problem036 {

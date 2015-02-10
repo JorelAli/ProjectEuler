@@ -13,7 +13,7 @@ public class Problem240 {
 		roll(20, 12, 10, 70);
 	}
 
-	public static void roll(int numberOfDice, int numberOfSides, int numberSum, int result) {
+	public static void roll(final int numberOfDice, final int numberOfSides, final int numberSum, final int result) {
 		/*
 		 * Create lists:
 		 * {1,1,1,1,1,1,1,1.......}
@@ -33,28 +33,27 @@ public class Problem240 {
 		System.out.println(in);
 		//for (int z = 1; z <= maxOutcomes; z++) {
 			for (int s = 1; s <= numberOfSides; s++) {
-				List<Integer> list = new ArrayList<Integer>();
+				final List<Integer> list = new ArrayList<Integer>();
 				for (int i = 1; i <= numberOfSides; i++) {
 					list.add(s);
 					list.add(i);
 				}
 				Collections.sort(list);
 
-				int result1 = count(list.subList(list.size() - numberSum, list.size()), numberSum);
+				final int result1 = count(list.subList(list.size() - numberSum, list.size()), numberSum);
 				print(list, result1);
 			}
 		//}
 	}
 
-	public static int count(List<Integer> list, int amount) {
+	public static int count(final List<Integer> list, final int amount) {
 		int count = 0;
-		for (int i = 0; i < amount; i++) {
+		for (int i = 0; i < amount; i++)
 			count += list.get(i);
-		}
 		return count;
 	}
 
-	public static void print(List<?> list, Object object) {
+	public static void print(final List<?> list, final Object object) {
 		System.out.println(Arrays.toString(list.toArray()).toString() + " - " + object);
 	}
 }

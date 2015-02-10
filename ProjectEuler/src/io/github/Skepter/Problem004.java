@@ -1,10 +1,12 @@
 package io.github.Skepter;
 
+import io.github.Skepter.Utils.RT;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Problem004 {
+public class Problem004 extends RT{
 
 	/*
 	 * A palindromic number reads the same both ways. 
@@ -12,6 +14,7 @@ public class Problem004 {
 	 * Find the largest palindrome made from the product of two 3-digit numbers.
 	 */
 	public static void main(final String[] args) {
+		begin();
 		final List<Integer> list = new ArrayList<Integer>();
 		for (int i = 100; i <= 999; i++)
 			for (int j = 100; j <= 999; j++)
@@ -19,6 +22,7 @@ public class Problem004 {
 					list.add(i * j);
 		Collections.sort(list);
 		System.out.println(list.get(list.size() - 1));
+		end();
 	}
 
 	static boolean isPalindrome(final int i) {

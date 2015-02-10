@@ -19,10 +19,10 @@ public class Problem487 {
 		System.out.println(functionS(4, 50));
 	}
 
-	public static BigInteger functionF(int k, int n) {
+	public static BigInteger functionF(final int k, final int n) {
 		BigInteger count = BigInteger.ZERO;
 		for (int i = 1; i <= n; i++) {
-			BigInteger valueToAdd = new BigInteger(String.valueOf(i));
+			final BigInteger valueToAdd = new BigInteger(String.valueOf(i));
 			count = count.add(valueToAdd.pow(k));
 			/*
 			 * What you want to do here is take the last few numbers, add them up
@@ -35,11 +35,10 @@ public class Problem487 {
 		return count;
 	}
 
-	public static BigInteger functionS(int k, long n) {
+	public static BigInteger functionS(final int k, final long n) {
 		BigInteger count = BigInteger.ZERO;
-		for (int i = 1; i <= n; i++) {
+		for (int i = 1; i <= n; i++)
 			count = count.add(functionF(k, i));
-		}
 		return count;
 	}
 

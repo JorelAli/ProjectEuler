@@ -1,13 +1,16 @@
 package io.github.Skepter;
 
+import io.github.Skepter.Utils.RT;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Problem002 {
+public class Problem002 extends RT {
 
 	//Find sum of all even Fibonacci numbers up to 4 million
 	public static void main(final String[] args) {
+		begin();
 		final List<Long> list = new ArrayList<Long>();
 		list.add(1L);
 		list.add(1L);
@@ -24,10 +27,10 @@ public class Problem002 {
 				i.remove();
 
 		long count = 0;
-		for (final long l : list) {
-			System.out.println(l);
+		for (final long l : list)
+			//System.out.println(l);
 			count += l;
-		}
-		System.out.println("\n" + count);
+		System.out.println(count);
+		end();
 	}
 }
