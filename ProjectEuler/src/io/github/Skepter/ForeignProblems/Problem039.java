@@ -11,7 +11,9 @@ public class Problem039 extends RT {
 		for (int p = 120; p < 1000; p++) {
 			int counter = 0;
 			for (int a = 1; a < p; a++)
-				for (int b = 1; b < a; b++) {
+				/** b has to be less than a */
+				for (int b = 1; b < a; b++) { 
+					/** c doesn't have to be calculated using a loop, use p to check if c fits the triangle */
 					int c = p - a - b;
 					if (a * a + b * b == c * c)
 						counter++;
