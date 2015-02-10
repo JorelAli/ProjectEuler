@@ -1,12 +1,14 @@
 package io.github.Skepter.Problems;
 
+import io.github.Skepter.Utils.Incomplete;
+
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Problem240 {
+public class Problem240 implements Incomplete {
 
 	//Find sum of all multiples of 3 and 5 up to 1000
 	public static void main(final String[] args) {
@@ -29,20 +31,20 @@ public class Problem240 {
 
 		BigInteger in = new BigInteger(String.valueOf(numberOfSides));
 		in = in.pow(numberOfDice);
-		
+
 		System.out.println(in);
 		//for (int z = 1; z <= maxOutcomes; z++) {
-			for (int s = 1; s <= numberOfSides; s++) {
-				final List<Integer> list = new ArrayList<Integer>();
-				for (int i = 1; i <= numberOfSides; i++) {
-					list.add(s);
-					list.add(i);
-				}
-				Collections.sort(list);
-
-				final int result1 = count(list.subList(list.size() - numberSum, list.size()), numberSum);
-				print(list, result1);
+		for (int s = 1; s <= numberOfSides; s++) {
+			final List<Integer> list = new ArrayList<Integer>();
+			for (int i = 1; i <= numberOfSides; i++) {
+				list.add(s);
+				list.add(i);
 			}
+			Collections.sort(list);
+
+			final int result1 = count(list.subList(list.size() - numberSum, list.size()), numberSum);
+			print(list, result1);
+		}
 		//}
 	}
 

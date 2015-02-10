@@ -1,8 +1,13 @@
 package io.github.Skepter.Problems;
 
-import java.math.BigInteger;
+import io.github.Skepter.Utils.Incomplete;
+import io.github.Skepter.Utils.RT;
 
-public class Problem487 {
+import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Problem487 extends RT implements Incomplete {
 
 	//	Let fk(n) be the sum of the kth powers of the first n positive integers.
 	//
@@ -11,34 +16,45 @@ public class Problem487 {
 	//	Let Sk(n) be the sum of fk(i) for 1 ≤ i ≤ n. For example, S4(100) = 35375333830.
 	//
 	//	What is ∑ (S10000(10^12) mod p) over all primes p between 2x10^9 and 2x10^9 + 2000?
+
+	static Map<Integer, BigInteger> valueToAddCache = new HashMap<Integer, BigInteger>();
+
 	public static void main(final String[] args) {
 		//		System.out.println(functionF(2, 10));
-		//		System.out.println(functionS(4, 100));
+		System.out.println(functionS(4, 100));
+		//		System.out.println(functionS(10000, 1000000000000L));
+		uptime();
 
-		//		System.out.println(functionS(10000, 1));
-		System.out.println(functionS(4, 50));
 	}
+	
+	//create a cache of functionF's results
 
 	public static BigInteger functionF(final int k, final int n) {
 		BigInteger count = BigInteger.ZERO;
 		for (int i = 1; i <= n; i++) {
 			final BigInteger valueToAdd = new BigInteger(String.valueOf(i));
-			count = count.add(valueToAdd.pow(k));
+			//			count = count.add(valueToAdd.pow(k));
+
+			count = count.add(valueToAddCache.computeIfAbsent(i, value -> {
+				return valueToAdd.pow(k);
+			}));
+
 			/*
 			 * What you want to do here is take the last few numbers, add them up
 			 * and then use those for the next ones 
 			 * and then you're reducing calculation amount and thus
 			 * speeding up the final output
 			 */
-			System.out.println(count);
+			//			System.out.println(count);
 		}
 		return count;
 	}
 
 	public static BigInteger functionS(final int k, final long n) {
 		BigInteger count = BigInteger.ZERO;
-		for (int i = 1; i <= n; i++)
+		for (int i = 1; i <= n; i++) {
 			count = count.add(functionF(k, i));
+		}
 		return count;
 	}
 

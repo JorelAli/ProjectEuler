@@ -1,12 +1,13 @@
 package io.github.Skepter.Problems;
 
+import io.github.Skepter.Utils.Incomplete;
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Problem046 extends RT {
+public class Problem046 extends RT implements Incomplete {
 
 	/*It was proposed by Christian Goldbach that every odd composite number 
 	 * can be written as the sum of a prime and twice a square.
@@ -25,10 +26,10 @@ public class Problem046 extends RT {
 		/* Just go up to a million for testing sake */
 		int max = 1000000;
 		int exponentMax = 100;
-		
+
 		List<Integer> list = new ArrayList<Integer>();
 		List<Integer> otherList = new ArrayList<Integer>();
-		
+
 		for (int i = 3; i < max; i += 2) {
 			otherList.add(i);
 			System.out.println(i + "/" + max);
@@ -38,18 +39,19 @@ public class Problem046 extends RT {
 					break;
 				}
 				if (Utils.isPrime(possiblePrime) && (possiblePrime + twiceSquare(e) == i)) {
-//					System.out.println(i + " = " + possiblePrime + " + 2x" + e + "^2");
+					//					System.out.println(i + " = " + possiblePrime + " + 2x" + e + "^2");
 					list.add(i);
 					continue;
 				} else {
-					if(!list.contains(i)) {
-//						System.out.println(i + " DOES NOT EQUAL " + possiblePrime + " + 2x" + e + "^2");
+					if (!list.contains(i)) {
+						//						System.out.println(i + " DOES NOT EQUAL " + possiblePrime + " + 2x" + e + "^2");
 						//break mainForLoop;
 					}
 				}
 			}
 		}
-		if(list.removeAll(otherList));
+		if (list.removeAll(otherList))
+			;
 		uptime();
 	}
 

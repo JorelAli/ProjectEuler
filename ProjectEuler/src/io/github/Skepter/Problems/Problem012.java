@@ -1,9 +1,11 @@
 package io.github.Skepter.Problems;
 
+import io.github.Skepter.Utils.Incomplete;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Problem012 {
+public class Problem012 implements Incomplete {
 
 	//What is the value of the first triangle number to have over five hundred divisors?
 	public static void main(final String[] args) {
@@ -16,7 +18,7 @@ public class Problem012 {
 		int count = 0;
 		for (int i = 1; i <= n; i++) {
 			count += i;
-			if(getFactors(count).size() >= 500) {
+			if (getFactors(count).size() >= 500) {
 				n = i;
 				break;
 			}
