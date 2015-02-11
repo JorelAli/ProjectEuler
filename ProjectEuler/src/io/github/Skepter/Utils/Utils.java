@@ -52,5 +52,11 @@ public class Utils {
 	public static void printListSingleLine(final Collection<?> list) {
 		System.out.println(Arrays.toString(list.toArray()).toString());
 	}
+
+	public static void printArray(int[] split) {
+		for(int item : split) {
+			System.out.println(item);
+		}
+	}
 	
 }
