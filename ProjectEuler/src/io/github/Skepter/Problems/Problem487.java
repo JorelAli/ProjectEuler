@@ -18,42 +18,38 @@ public class Problem487 extends RT implements Incomplete {
 	//	What is ∑ (S10000(10^12) mod p) over all primes p between 2x10^9 and 2x10^9 + 2000?
 
 	static Map<Integer, BigInteger> valueToAddCache = new HashMap<Integer, BigInteger>();
+	static Map<Integer, BigInteger> functionFCache = new HashMap<Integer, BigInteger>();
 
 	public static void main(final String[] args) {
-		//		System.out.println(functionF(2, 10));
 		System.out.println(functionS(4, 100));
+		System.out.println(functionS(2, 10));
 		//		System.out.println(functionS(10000, 1000000000000L));
 		uptime();
 
 	}
-	
+
 	//create a cache of functionF's results
 
-	public static BigInteger functionF(final int k, final int n) {
+	public static BigInteger functionF(final int exponent, final int max) {
 		BigInteger count = BigInteger.ZERO;
-		for (int i = 1; i <= n; i++) {
+		for (int i = 1; i <= max; i++) {
 			final BigInteger valueToAdd = new BigInteger(String.valueOf(i));
 			//			count = count.add(valueToAdd.pow(k));
+			count = count.add(valueToAddCache.computeIfAbsent(i, value -> valueToAdd.pow(exponent)));
 
-			count = count.add(valueToAddCache.computeIfAbsent(i, value -> {
-				return valueToAdd.pow(k);
-			}));
-
-			/*
-			 * What you want to do here is take the last few numbers, add them up
-			 * and then use those for the next ones 
-			 * and then you're reducing calculation amount and thus
-			 * speeding up the final output
-			 */
 			//			System.out.println(count);
 		}
 		return count;
 	}
 
-	public static BigInteger functionS(final int k, final long n) {
+	public static BigInteger functionS(final int fExponent, final long max) {
 		BigInteger count = BigInteger.ZERO;
-		for (int i = 1; i <= n; i++) {
-			count = count.add(functionF(k, i));
+		for (int i = 1; i <= max; i++) {
+			//count = count.add(functionF(fExponent, i));
+			final int iClone = i;
+			count = count.add(functionFCache.computeIfAbsent(i, value -> {
+				return functionF(fExponent, iClone);
+			}));
 		}
 		return count;
 	}
