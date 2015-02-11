@@ -2,8 +2,9 @@ package io.github.Skepter.Problems;
 
 import io.github.Skepter.Utils.RT;
 
+//Goodness! This took a good 40 minutes to complete this one!
 public class Problem017 extends RT {
-
+	
 	/*If the numbers 1 to 5 are written out in words: one, two, three, four, five, then 
 	 * there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
 
