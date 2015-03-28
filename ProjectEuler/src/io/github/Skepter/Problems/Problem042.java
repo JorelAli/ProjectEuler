@@ -1,15 +1,13 @@
 package io.github.Skepter.Problems;
 
-import io.github.Skepter.Utils.Incomplete;
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class Problem042 extends RT implements Incomplete {
+public class Problem042 extends RT {
 
 	/* The nth term of the sequence of triangle numbers is given by, 
 	 * tn = ½n(n+1); so the first ten triangle numbers are:
@@ -24,47 +22,32 @@ public class Problem042 extends RT implements Incomplete {
 	Using words.txt a 16K text file containing 
 	nearly two-thousand common English words, how many are triangle words?*/
 
-	//number : triangle number
-	public static Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+	public static List<Integer> triangles = new ArrayList<Integer>();
 
 	public static void main(final String[] args) {
 		init();
+		//read file, turn it into a list
 		String input = Utils.readFromFile("words.txt").get(0);
 		String input1 = input.replace("\"", "");
 		List<String> str = Arrays.asList(input1.split(","));
+		//go through each word to see if it is triangle or not
 		int count = 0;
-		for(String s : str) {
-			if(isTriangleWord(s.toLowerCase()))
+		for (String s : str)
+			if (isTriangleWord(s.toLowerCase()))
 				count++;
-			else continue;
-		}
 		System.out.println(count);
 		uptime();
 	}
 
 	public static boolean isTriangleWord(String str) {
 		int count = 0;
-		for (char c : str.toCharArray()) {
+		for (char c : str.toCharArray())
 			count += Utils.letterToNumber(c);
-		}
-		if (getTriangleNumber(count) != -1)
-			return true;
-		else
-			return false;
-	}
-
-	public static int getTriangleNumber(int number) {
-		if (Utils.reverse(map).get(number) == null) {
-			return -1;
-		} else
-			return Utils.reverse(map).get(number);
+		return triangles.contains(count);
 	}
 
 	public static void init() {
-		for (int i = 1; i <= 10000; i++) {
-			int n1 = i * (i + 1);
-			int n2 = n1 >> 1;
-			map.put(i, n2);
-		}
+		for (int i = 1; i <= 10000; i++)
+			triangles.add((i * (i + 1)) >> 1);
 	}
 }
