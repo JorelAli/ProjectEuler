@@ -8,7 +8,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Utils {
 
@@ -27,6 +30,10 @@ public class Utils {
 			product = product * remainder;
 		}
 		return product;
+	}
+	
+	public static int letterToNumber(char c) {
+		return (String.valueOf(c).toLowerCase().toCharArray()[0] - 'a' + 1);
 	}
 
 	public static boolean isPalindrome(final int i) {
@@ -83,6 +90,14 @@ public class Utils {
 		} catch (Exception e) {
 		}
 		return null;
+	}
+	
+	public static <A, B> Map<B, A> reverse(Map<A, B> map) {
+		Map<B, A> newMap = new HashMap<B, A>();
+		for (Entry<A, B> entry : map.entrySet()) {
+			newMap.put(entry.getValue(), entry.getKey());
+		}
+		return newMap;
 	}
 
 }
