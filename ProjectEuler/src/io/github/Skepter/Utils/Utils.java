@@ -4,6 +4,8 @@ import io.github.Skepter.ForeignUtils.SieveWithBitset;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -98,6 +100,14 @@ public class Utils {
 			newMap.put(entry.getValue(), entry.getKey());
 		}
 		return newMap;
+	}
+	
+	public static BigInteger combinations(final int N, final int r) {
+		BigInteger ret = BigInteger.ONE;
+		for (int k = 0; k < r; k++) {
+			ret = ret.multiply(BigInteger.valueOf(N - k)).divide(BigInteger.valueOf(k + 1));
+		}
+		return ret;
 	}
 
 }
