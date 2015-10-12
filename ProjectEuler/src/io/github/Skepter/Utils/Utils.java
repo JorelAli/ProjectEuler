@@ -4,7 +4,6 @@ import io.github.Skepter.ForeignUtils.SieveWithBitset;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
