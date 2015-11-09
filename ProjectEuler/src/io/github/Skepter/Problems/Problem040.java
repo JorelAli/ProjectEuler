@@ -20,18 +20,11 @@ public class Problem040 extends RT {
 
 	public static void main(final String[] args) {
 		StringBuilder builder = new StringBuilder();
-		//Has to be 0 or get(1) would be 2 and it would be offcenter.
+		//Has to be 0 or get(1) would be 2 and it would be off center.
 		for (int i = 0; i < 1000000; i++) {
 			builder.append(i);
 		}
 		string = builder.toString();
-		System.out.println(get(1));
-		System.out.println(get(10));
-		System.out.println(get(100));
-		System.out.println(get(1000));
-		System.out.println(get(10000));
-		System.out.println(get(100000));
-		System.out.println(get(1000000));
 		System.out.println(get(1) * get(10) * get(100) * get(1000) * get(10000) * get(100000) * get(1000000));
 		uptime();
 	}

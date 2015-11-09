@@ -8,8 +8,8 @@ import java.util.List;
 public class Problem003 extends RT {
 
 	//What is the largest prime factor of the number 600851475143 ?
+	//101ms
 	public static void main(final String[] args) {
-		begin();
 		long l = 600851475143L;
 		final List<Integer> list = new ArrayList<Integer>();
 		//loop through numbers from 2 to 600851475143
@@ -19,6 +19,6 @@ public class Problem003 extends RT {
 				l /= i;
 			}
 		System.out.println(list.get(list.size() - 1));
-		end();
+		uptime();
 	}
 }

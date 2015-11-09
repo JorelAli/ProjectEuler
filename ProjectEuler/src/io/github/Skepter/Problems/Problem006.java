@@ -1,5 +1,8 @@
 package io.github.Skepter.Problems;
-public class Problem006 {
+
+import io.github.Skepter.Utils.RT;
+
+public class Problem006 extends RT{
 
 	/*
 	 * The sum of the squares of the first ten natural numbers is,
@@ -11,6 +14,8 @@ public class Problem006 {
 	Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is 3025 − 385 = 2640.
 
 	Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+	
+	145ms
 	 */
 	public static void main(final String[] args) {
 		final int size = 100;
@@ -23,5 +28,6 @@ public class Problem006 {
 			sumSquared += i;
 		sumSquared = (int) Math.pow(sumSquared, 2);		
 		System.out.println(sumSquared - sumOfSquares);
+		uptime();
 	}
 }

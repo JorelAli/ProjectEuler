@@ -1,9 +1,10 @@
 package io.github.Skepter.Problems;
 
+import io.github.Skepter.Utils.Incomplete;
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
 
-public class Problem089 extends RT {
+public class Problem089 extends RT implements Incomplete{
 
 	/*For a number written in Roman numerals to be considered valid there are 
 	 * basic rules which must be followed. Even though the rules allow some 

@@ -12,7 +12,9 @@ public class Problem056 extends RT {
 	 * is almost unimaginably large: one followed by two-hundred zeros. Despite their size, 
 	 * the sum of the digits in each number is only 1.
 
-	Considering natural numbers of the form, a^b, where a, b < 100, what is the maximum digital sum?*/
+	Considering natural numbers of the form, a^b, where a, b < 100, what is the maximum digital sum?
+	403ms
+	*/
 	public static void main(final String[] args) {
 		int biggestSum = 0;
 		for (int a = 0; a < 100; a++) {

@@ -1,12 +1,13 @@
 package io.github.Skepter.Problems;
 import io.github.Skepter.ForeignUtils.SieveWithBitset;
+import io.github.Skepter.Utils.RT;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Problem035 {
+public class Problem035 extends RT{
 
 	/*
 	 * The number, 197, is called a circular prime 
@@ -18,6 +19,7 @@ public class Problem035 {
 	and 97.
 
 	How many circular primes are there below one million?
+	37260ms (37 seconds)
 	 */
 	public static void main(final String[] args) {
 		//		for(int i : getCircleNumbers(12345))
@@ -29,6 +31,7 @@ public class Problem035 {
 			if (check(primes, i))
 				set.add(i);
 		System.out.println(set.size());
+		uptime();
 	}
 
 	private static boolean check(final List<Integer> primes, final int i) {

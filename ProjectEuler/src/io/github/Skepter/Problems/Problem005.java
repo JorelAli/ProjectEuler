@@ -1,11 +1,16 @@
 package io.github.Skepter.Problems;
-public class Problem005 {
+
+import io.github.Skepter.Utils.RT;
+
+public class Problem005 extends RT{
 
 	/*
 	 * 2520 is the smallest number that can be divided by 
 	 * each of the numbers from 1 to 10 without any remainder.
 	 * What is the smallest positive number that is evenly 
 	 * divisible by all of the numbers from 1 to 20?
+	 * 
+	 * 580ms
 	 */
 	public static void main(final String[] args) {
 		for (int i = 1; i < Integer.MAX_VALUE; i++)
@@ -13,6 +18,7 @@ public class Problem005 {
 				System.out.println(i);
 				break;
 			}
+		uptime();
 	}
 
 	private static boolean check(final int checkInt) {

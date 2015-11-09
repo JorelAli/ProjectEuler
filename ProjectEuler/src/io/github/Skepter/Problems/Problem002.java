@@ -9,8 +9,8 @@ import java.util.List;
 public class Problem002 extends RT {
 
 	//Find sum of all even Fibonacci numbers up to 4 million
+	//101ms
 	public static void main(final String[] args) {
-		begin();
 		final List<Long> list = new ArrayList<Long>();
 		list.add(1L);
 		list.add(1L);
@@ -31,6 +31,6 @@ public class Problem002 extends RT {
 			//System.out.println(l);
 			count += l;
 		System.out.println(count);
-		end();
+		uptime();
 	}
 }

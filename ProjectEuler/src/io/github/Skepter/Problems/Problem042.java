@@ -20,7 +20,9 @@ public class Problem042 extends RT {
 	shall call the word a triangle word.
 
 	Using words.txt a 16K text file containing 
-	nearly two-thousand common English words, how many are triangle words?*/
+	nearly two-thousand common English words, how many are triangle words?
+	
+	242ms*/
 
 	public static List<Integer> triangles = new ArrayList<Integer>();
 
@@ -46,6 +48,7 @@ public class Problem042 extends RT {
 		return triangles.contains(count);
 	}
 
+	//Generate the first 10,000 triangle numbers
 	public static void init() {
 		for (int i = 1; i <= 10000; i++)
 			triangles.add((i * (i + 1)) >> 1);

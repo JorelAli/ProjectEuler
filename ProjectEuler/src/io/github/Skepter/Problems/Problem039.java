@@ -14,7 +14,7 @@ public class Problem039 extends RT {
 
 	For which value of p ≤ 1000, is the number of solutions maximised?*/
 	
-	//Takes around 16 minutes!
+	//637894ms (10.6 mins)
 	public static void main(final String[] args) {
 		//int p = 1000;
 		int triangles = 0;

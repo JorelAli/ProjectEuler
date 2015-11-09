@@ -8,7 +8,9 @@ import java.util.List;
 
 public class Problem030 extends RT {
 
-	/* https://projecteuler.net/problem=30 */
+	/* https://projecteuler.net/problem=30 
+	 * 
+	 * 1249ms*/
 	public static void main(final String[] args) {
 		List<Integer> thingy = new ArrayList<Integer>();
 		/*1 million is a good place to stop at (I tried with 10 million
