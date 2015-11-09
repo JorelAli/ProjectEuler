@@ -31,6 +31,8 @@ public class Problem089 extends RT implements Incomplete {
 	 * 
 	 * Note: You can assume that all the Roman numerals in the file contain no
 	 * more than four consecutive identical units.
+	 * 
+	 * 145ms
 	 */
 	public static void main(final String[] args) {
 		int count = 0;
@@ -38,14 +40,11 @@ public class Problem089 extends RT implements Incomplete {
 
 			int number = convertRomanToInt(string);
 			String condensedRoman = convertIntToRoman(number);
-			System.out.println(string + ", " + convertIntToRoman(number));
 			if (condensedRoman.length() < string.length()) {
 				count += (string.length() - condensedRoman.length());
 			}
 		}
 		System.out.println(count);
-
-		System.out.println(convertIntToRoman(3364));
 		uptime();
 	}
 
