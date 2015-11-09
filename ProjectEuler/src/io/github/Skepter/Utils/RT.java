@@ -7,10 +7,12 @@ public class RT {
 
 	static private long before = 0L;
 
+	@Deprecated
 	public static void begin() {
 		before = System.currentTimeMillis();
 	}
 
+	@Deprecated
 	public static void end() {
 		if (before != 0L)
 			System.out.println("Program took " + (System.currentTimeMillis() - before) + "ms");

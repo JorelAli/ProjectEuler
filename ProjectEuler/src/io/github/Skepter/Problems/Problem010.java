@@ -8,7 +8,9 @@ import java.util.List;
 public class Problem010 extends RT {
 
 	/* The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
-	 * Find the sum of all the primes below two million.*/
+	 * Find the sum of all the primes below two million.
+	 * 
+	 * 646ms*/
 	
 	/** Method doesn't work as int isn't big enough */
 	
@@ -37,12 +39,11 @@ public class Problem010 extends RT {
 //	}
 	
 	public static void main(final String[] args) {
-		begin();
 		final List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(20000000);
 		BigInteger bi = BigInteger.ZERO;
 		for(final int i : primes)
 			bi = bi.add(new BigInteger(String.valueOf(i)));
 		System.out.println(bi);
-		end();
+		uptime();
 	}
 }

@@ -9,7 +9,8 @@ import java.util.List;
 public class Problem030 extends RT {
 
 	/* https://projecteuler.net/problem=30 
-	 * 
+	 * Find the sum of all the numbers that can be 
+	 * written as the sum of fifth powers of their digits.
 	 * 1249ms*/
 	public static void main(final String[] args) {
 		List<Integer> thingy = new ArrayList<Integer>();
