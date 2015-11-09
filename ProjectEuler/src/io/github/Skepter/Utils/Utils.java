@@ -22,6 +22,14 @@ public class Utils {
 			count += Long.parseLong(String.valueOf(s.charAt(i)));
 		return count;
 	}
+	
+	public static List<Integer> digits(int value) {
+		String s = String.valueOf(value);
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i < s.length(); i++)
+			list.add(Integer.parseInt(String.valueOf(s.charAt(i))));
+		return list;
+	}
 
 	public static long productOfDigits(long l) {
 		long remainder = 0, product = 1;
