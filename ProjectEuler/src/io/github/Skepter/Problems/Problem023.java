@@ -36,50 +36,31 @@ public class Problem023 extends RT {
 	 */
 
 	public static void main(String[] args) {
+		/* Get all abundant numbers */
 		List<Integer> abundantNumbers = new ArrayList<Integer>();
 		for (int i = 1; i <= 28123 / 2; i++) {
 			if (isAbundant(i))
 				abundantNumbers.add(i);
 		}
 
-		Set<Integer> stuff = new HashSet<Integer>();
-		for (int i = 1; i <= 28123; i++) {
-			if (i % 10 == 0)
-				System.out.println(i);
-			for (int j = 0; j < abundantNumbers.size(); j++) {
-				if (abundantNumbers.get(j) >= i) {
-					break;
-				} else {
-					// for (int k = 0; k < abundantNumbers.size(); k++) {
-					try {
-						if (abundantNumbers.get(j) + abundantNumbers.get(j - 1) == i) {
-							stuff.add(i);
-							break;
-						}
-					} catch (Exception e) {
-					}
-					// }
-				}
+		/* Get all of the numbers which are sums of all of the abundant numbers */
+		Set<Integer> abundantNumbersx2 = new HashSet<Integer>();
+		for(int i = 0; i < abundantNumbers.size(); i++) {
+			for(int j = 0; j < abundantNumbers.size(); j++) {
+				abundantNumbersx2.add(abundantNumbers.get(i) + abundantNumbers.get(j));
 			}
 		}
-
+		
+		/* Get all of the numbers which are from 1 to 28123 */
 		List<Integer> nums = new ArrayList<Integer>();
 		for (int i = 1; i <= 28123; i++) {
 			nums.add(i);
 		}
-
-		List<Integer> stuff1 = Utils.convertSetToList(stuff);
-		Collections.sort(stuff1);
 		
-		for(int i = 0; i < stuff1.size(); i++) {
-			nums.remove((Object) i);
-		}
-		
-		System.out.println(nums);
-
+		nums.removeAll(abundantNumbers);
+	
 		int counter = 0;
 		for (int i : nums) {
-
 			counter += i;
 		}
 		System.out.println(counter);
