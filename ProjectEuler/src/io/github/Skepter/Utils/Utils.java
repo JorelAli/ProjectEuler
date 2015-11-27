@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class Utils {
 
@@ -115,6 +117,15 @@ public class Utils {
 			ret = ret.multiply(BigInteger.valueOf(N - k)).divide(BigInteger.valueOf(k + 1));
 		}
 		return ret;
+	}
+	
+	public static <T> List<T> convertSetToList(Set<T> set) {
+		List<T> list = new ArrayList<T>();
+		Iterator<T> it = set.iterator();
+		while(it.hasNext()) {
+			list.add(it.next());
+		}
+		return list;
 	}
 
 }
