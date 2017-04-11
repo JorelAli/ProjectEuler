@@ -5,6 +5,14 @@ import io.github.Skepter.Utils.RT;
 public class Problem587 extends RT {
 
 	/* https://projecteuler.net/problem=587
+	 * 
+	 * Links used:
+	 * http://www.scienceforums.net/topic/84453-finding-the-area-under-a-circle-using-integrals/?p=816742
+	 * https://www.mathsisfun.com/geometry/circle-sector-segment.html
+	 * 
+	 * Custom desmos graph by me :)
+	 * https://www.desmos.com/calculator/sv4ehlogjf
+	 * 
 	 * 117ms */
 	public static void main(final String[] args) {
 //		System.out.println(solveX(2));
