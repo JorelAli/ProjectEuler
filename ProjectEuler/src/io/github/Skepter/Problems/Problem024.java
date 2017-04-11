@@ -37,9 +37,9 @@ public class Problem024 extends RT {
 		int count = 0;
 		for (long i = 2000000000; i < 3000000000L; i++) {
 			if(isPermutation(i)) {
-				if(count == (274240 - 1)) {
+				if(count == (274240 - 1)) { //oboe
 					System.out.println(i + "<<--");
-					break;
+					break; 
 				}
 				count++;
 				System.out.println(count + ": " + i);

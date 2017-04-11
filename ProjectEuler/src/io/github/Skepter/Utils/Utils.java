@@ -69,6 +69,9 @@ public class Utils {
 	}
 
 	public static boolean isPrime(int i) {
+		if(i <=0 ) {
+			return false;
+		}
 		return SieveWithBitset.sieveOfEratosthenes(i).contains(i);
 	}
 
