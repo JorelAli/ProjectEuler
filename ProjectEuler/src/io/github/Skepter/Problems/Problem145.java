@@ -62,9 +62,9 @@ public class Problem145 extends RT implements Incomplete {
 	public static int findReversables(int min, int max) {
 		int count = -5;
 		for (int i = min; i <= max; i++) {
-			if (isEven(i) && isEven(Utils.getPalindrome(i)))
+			if (isEven(i) && isEven(Utils.getReverse(i)))
 				continue;
-			if (isAllOdd(i + Utils.getPalindrome(i))) {
+			if (isAllOdd(i + Utils.getReverse(i))) {
 				count++;
 			}
 		}

@@ -1,7 +1,5 @@
 package io.github.Skepter.Utils;
 
-import io.github.Skepter.ForeignUtils.SieveWithBitset;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
@@ -16,8 +14,16 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import io.github.Skepter.ForeignUtils.SieveWithBitset;
+
 public class Utils {
 
+	/**
+	 * Returns the sum of digits of a number
+	 * e.g. 123 = 6
+	 * @param s - input string
+	 * @return sum of digits
+	 */
 	public static long sumOfDigits(final String s) {
 		long count = 0;
 		for (int i = 0; i < s.length(); i++)
@@ -55,7 +61,7 @@ public class Utils {
 		return false;
 	}
 
-	public static int getPalindrome(final int i) {
+	public static int getReverse(final int i) {
 		final String str = String.valueOf(i);
 		final String reversedString = new StringBuilder(str).reverse().toString();
 		return Integer.parseInt(reversedString);
