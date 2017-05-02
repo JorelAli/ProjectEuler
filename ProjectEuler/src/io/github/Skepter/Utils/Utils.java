@@ -89,6 +89,12 @@ public class Utils {
 			System.out.println(item);
 		}
 	}
+	
+	public static void printMap(Map<?, ?> map) {
+		for (Object key : map.keySet()) {
+			System.out.println(key + ": " + map.get(key));
+		}
+	}
 
 	public static List<String> readFromFile(String fileName) {
 		try {
