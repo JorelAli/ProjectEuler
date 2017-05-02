@@ -75,7 +75,7 @@ public class Utils {
 		return SieveWithBitset.sieveOfEratosthenes(i).contains(i);
 	}
 
-	public static void printList(final List<?> list) {
+	public static void printList(final Collection<?> list) {
 		for (final Object i : list)
 			System.out.println(i);
 	}
