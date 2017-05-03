@@ -20,9 +20,6 @@ public class Utils {
 
 	/**
 	 * Returns the sum of digits of a number
-	 * e.g. 123 = 6
-	 * @param s - input string
-	 * @return sum of digits
 	 */
 	public static long sumOfDigits(final String s) {
 		long count = 0;
@@ -31,6 +28,9 @@ public class Utils {
 		return count;
 	}
 	
+	/**
+	 * Returns a list of the digits of a number 
+	 */
 	public static List<Integer> digits(int value) {
 		String s = String.valueOf(value);
 		List<Integer> list = new ArrayList<Integer>();
@@ -39,6 +39,9 @@ public class Utils {
 		return list;
 	}
 
+	/**
+	 * Returns the product of digits of a number
+	 */
 	public static long productOfDigits(long l) {
 		long remainder = 0, product = 1;
 		while (l != 0) {
@@ -49,24 +52,32 @@ public class Utils {
 		return product;
 	}
 	
+	/**
+	 * Converts letters to numbers (a = 1, b = 2... z = 26)
+	 */
 	public static int letterToNumber(char c) {
 		return (String.valueOf(c).toLowerCase().toCharArray()[0] - 'a' + 1);
 	}
 
+	/**
+	 * Checks if an integer is a palindrome (the same as in reverse)
+	 */
 	public static boolean isPalindrome(final int i) {
-		final String str = String.valueOf(i);
-		final String reversedString = new StringBuilder(str).reverse().toString();
-		if (reversedString.equals(str))
-			return true;
-		return false;
+		return isPalindrome(String.valueOf(i));
 	}
 
+	/**
+	 * Gets the reverse of an integer
+	 */
 	public static int getReverse(final int i) {
 		final String str = String.valueOf(i);
 		final String reversedString = new StringBuilder(str).reverse().toString();
 		return Integer.parseInt(reversedString);
 	}
 
+	/**
+	 * Checks if a String is a palindrome (the same as in reverse)
+	 */
 	public static boolean isPalindrome(final String str) {
 		final String reversedString = new StringBuilder(str).reverse().toString();
 		if (reversedString.equals(str))
@@ -74,6 +85,11 @@ public class Utils {
 		return false;
 	}
 
+	/**
+	 * Checks if a number is prime<br>
+	 * If using this function multiple times, consider extracting it and using the function once 
+	 * @see Problem037
+	 */
 	public static boolean isPrime(int i) {
 		if(i <=0 ) {
 			return false;
@@ -81,33 +97,49 @@ public class Utils {
 		return SieveWithBitset.sieveOfEratosthenes(i).contains(i);
 	}
 
+	/**
+	 * Prints a list
+	 */
 	public static void printList(final Collection<?> list) {
 		for (final Object i : list)
 			System.out.println(i);
 	}
 
+	/**
+	 * Prints a list to onto a single line
+	 */
 	public static void printListSingleLine(final Collection<?> list) {
 		System.out.println(Arrays.toString(list.toArray()).toString());
 	}
-
-	public static void printArray(int[] input) {
-		for (int item : input) {
+	
+	/**
+	 * Prints an array
+	 */
+	public static void printArray(Object[] input) {
+		for (Object item : input) {
 			System.out.println(item);
 		}
 	}
 	
-	public static void printArray(String[] input) {
-		for (String item : input) {
-			System.out.println(item);
-		}
+	/**
+	 * Prints an array onto a single line
+	 */
+	public static void printArraySingleLine(Object[] input) {
+		System.out.println(Arrays.toString(input).toString());
 	}
 	
+	/**
+	 * Prints a map
+	 */
 	public static void printMap(Map<?, ?> map) {
 		for (Object key : map.keySet()) {
 			System.out.println(key + ": " + map.get(key));
 		}
 	}
 
+	/**
+	 * Allows you to read data from files in /ResourceFiles/
+	 */
 	public static List<String> readFromFile(String fileName) {
 		try {
 			List<String> lines = new ArrayList<String>();
@@ -124,6 +156,9 @@ public class Utils {
 		return null;
 	}
 	
+	/**
+	 * Reverses a map (replaces values with keys)
+	 */
 	public static <A, B> Map<B, A> reverse(Map<A, B> map) {
 		Map<B, A> newMap = new HashMap<B, A>();
 		for (Entry<A, B> entry : map.entrySet()) {
@@ -132,6 +167,9 @@ public class Utils {
 		return newMap;
 	}
 	
+	/**
+	 * Performs the combinations function (nCr)
+	 */
 	public static BigInteger combinations(final int N, final int r) {
 		BigInteger ret = BigInteger.ONE;
 		for (int k = 0; k < r; k++) {
@@ -140,6 +178,9 @@ public class Utils {
 		return ret;
 	}
 	
+	/**
+	 * Converts a Set<> into a List<>
+	 */
 	public static <T> List<T> convertSetToList(Set<T> set) {
 		List<T> list = new ArrayList<T>();
 		Iterator<T> it = set.iterator();
@@ -150,13 +191,12 @@ public class Utils {
 	}
 	
 	/**
-	 * Returns an array of truncated combinations?
-	 * Input = (hello, false)
-	 * Output = [hello, hell, hel, he, h]
-	 * 
-	 * Input = (hello, true)
-	 * Output = [hello, ello, llo, lo, o]
-	 * @return
+	 * Returns an array of truncated combinations<br>
+	 * Input = (hello, false)<br>
+	 * Output = [hello, hell, hel, he, h]<br>
+	 * <br>
+	 * Input = (hello, true)<br>
+	 * Output = [hello, ello, llo, lo, o]<br>
 	 */
 	public static String[] getTruncatedArray(String input, boolean reverse) {
 		if(reverse) {
