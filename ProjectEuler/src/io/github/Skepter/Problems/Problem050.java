@@ -13,12 +13,6 @@ public class Problem050 extends RT {
 	 * */
 	public static void main(final String[] args) {
 		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(1000000);
-//		int count = 0;
-//		for(int i = 0; i < 21; i++) {
-//			count += primes.get(i);
-//		}
-//		System.out.println(count);
-//		
 		
 		//maximise sumOfPrimes(a) - sumOfPrimes(b);
 		
@@ -29,7 +23,7 @@ public class Problem050 extends RT {
 		int maxi = 0;
 		int maxj = 0;
 		
-		LoadingBar b = new LoadingBar(10000);
+		LoadingBar b = new LoadingBar("Problem 50", 10000);
 		
 		for(int i = 0; i < 10000; i++) {
 			//Assuming that j is less than 100
@@ -53,8 +47,6 @@ public class Problem050 extends RT {
 			
 		}
 		System.out.println(max + ": Using primes between " + maxj + " and " + maxi);
-		
-//		System.out.println(count);
 		uptime();
 	}
 	

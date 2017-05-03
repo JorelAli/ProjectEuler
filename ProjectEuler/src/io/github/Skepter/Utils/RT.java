@@ -1,6 +1,8 @@
 package io.github.Skepter.Utils;
 
 import java.lang.management.ManagementFactory;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /** Calculates running time of a program */
 public class RT {
@@ -21,6 +23,14 @@ public class RT {
 	}
 
 	public static void uptime() {
-		System.out.println("Program took " + ManagementFactory.getRuntimeMXBean().getUptime() + "ms");
+		String time = new SimpleDateFormat("mm:ss:SSS").format(new Date(ManagementFactory.getRuntimeMXBean().getUptime()));
+		String formattedTime = "";
+		if(time.split(":")[0].equals("00")) {
+			formattedTime = time.split(":")[1] + " seconds, " + time.split(":")[2] + " milliseconds";
+		}
+		if(time.split(":")[1].equals("00")) {
+			formattedTime = time.split(":")[2] + " milliseconds";
+		}
+		System.out.println("Program took " + formattedTime);
 	}
 }

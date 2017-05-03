@@ -1,6 +1,5 @@
 package io.github.Skepter.Problems;
 
-import io.github.Skepter.Utils.Incomplete;
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
 
