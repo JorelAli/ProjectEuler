@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 
+/*
+ * https://gist.github.com/rmfbarker/6314416
+ * http://stackoverflow.com/a/32417991
+ */
 public class SieveWithBitset {
 	private final BitSet sieve;
 
@@ -28,8 +32,8 @@ public class SieveWithBitset {
 				continue;
 
 			// We increment by 2*i to skip even multiples of i
-			for (int multiplei = i * i; multiplei <= max; multiplei += 2 * i)
-				sieve.setComposite(multiplei);
+			for (int multiple_i = i * i; multiple_i <= max; multiple_i += 2 * i)
+				sieve.setComposite(multiple_i);
 		}
 
 		final List<Integer> primes = new ArrayList<Integer>();

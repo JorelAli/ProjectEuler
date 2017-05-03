@@ -3,6 +3,7 @@ package io.github.Skepter.Problems;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.Skepter.ForeignUtils.SieveWithBitset;
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
 
@@ -19,14 +20,21 @@ public class Problem037 extends RT {
 	 * 
 	 * NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 	 * 
-	 * 4.39 minutes !!!!
+	 * 14091ms
 	 */
+	
+	public static final int MAX = 1000000;
+	static List<Integer> allPrimes;
+	
 	public static void main(final String[] args) {
+		
+		allPrimes = SieveWithBitset.sieveOfEratosthenes(MAX);
+		
 		List<Integer> primes = new ArrayList<Integer>();
-		for(int i = 10; i <= 1000000; i++) {
+		for(int i = 10; i <= MAX; i++) {
 			if(String.valueOf(i).startsWith("2") || String.valueOf(i).startsWith("3") || String.valueOf(i).startsWith("5") || String.valueOf(i).startsWith("7")) {
 				if(String.valueOf(i).endsWith("3") || String.valueOf(i).endsWith("7")) {
-					if(Utils.isPrime(i)) {
+					if(isPrime(i)) {
 						primes.add(i);
 					}
 				}
@@ -40,12 +48,12 @@ public class Problem037 extends RT {
 		for(int i : primes) {
 			boolean isPrime = true;
 			for(String prime : Utils.getTruncatedArray(String.valueOf(i), false)) {
-				if(!Utils.isPrime(Integer.parseInt(prime))) {
+				if(!isPrime(Integer.parseInt(prime))) {
 					isPrime = false;
 				}
 			}
 			for(String prime : Utils.getTruncatedArray(String.valueOf(i), true)) {
-				if(!Utils.isPrime(Integer.parseInt(prime))) {
+				if(!isPrime(Integer.parseInt(prime))) {
 					isPrime = false;
 				}
 			}
@@ -59,9 +67,11 @@ public class Problem037 extends RT {
 			count += i;
 		}
 		System.out.println(count);
-		
-		Utils.printList(primes2);
 		uptime();
+	}
+	
+	private static boolean isPrime(int i) {
+		return allPrimes.contains(i);
 	}
 	
 	
