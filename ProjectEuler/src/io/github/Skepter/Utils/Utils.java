@@ -90,8 +90,14 @@ public class Utils {
 		System.out.println(Arrays.toString(list.toArray()).toString());
 	}
 
-	public static void printArray(int[] split) {
-		for (int item : split) {
+	public static void printArray(int[] input) {
+		for (int item : input) {
+			System.out.println(item);
+		}
+	}
+	
+	public static void printArray(String[] input) {
+		for (String item : input) {
 			System.out.println(item);
 		}
 	}
@@ -141,6 +147,35 @@ public class Utils {
 			list.add(it.next());
 		}
 		return list;
+	}
+	
+	/**
+	 * Returns an array of truncated combinations?
+	 * Input = (hello, false)
+	 * Output = [hello, hell, hel, he, h]
+	 * 
+	 * Input = (hello, true)
+	 * Output = [hello, ello, llo, lo, o]
+	 * @return
+	 */
+	public static String[] getTruncatedArray(String input, boolean reverse) {
+		if(reverse) {
+			String[] arr = new String[input.length()];
+			for(int i = 1; i < input.length(); i++) {
+				arr[i - 1] = input.substring(i-1, input.length());
+			}
+			arr[0] = input;
+			arr[input.length() - 1] = input.substring(input.length() - 1, input.length() - 0);
+			return arr;
+		} else {
+			String[] arr = new String[input.length()];
+			for(int i = 1; i < input.length(); i++) {
+				arr[i - 1] = input.substring(0, i);
+			}
+			arr[input.length() - 1] = input;
+			return arr;
+		}
+		
 	}
 
 }
