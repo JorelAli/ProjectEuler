@@ -20,6 +20,7 @@ public class Problem045 extends RT {
 	 */
 	public static void main(final String[] args) {
 		long MAX = 100000;
+		//http://stackoverflow.com/a/29208675/4779071
 		Set<Long> triangles = new HashSet<Long>();
 		Set<Long> pentagons = new HashSet<Long>();
 		Set<Long> hexagons = new HashSet<Long>();
