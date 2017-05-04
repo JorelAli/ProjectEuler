@@ -1,7 +1,9 @@
 package io.github.Skepter.Problems;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
@@ -14,13 +16,13 @@ public class Problem045 extends RT {
 	 * 
 	 * Find the next triangle number that is also pentagonal and hexagonal.
 	 * 
-	 * Program took 43 seconds, 008 milliseconds :/
+	 * Program took 172 milliseconds :/
 	 */
 	public static void main(final String[] args) {
 		long MAX = 100000;
-		List<Long> triangles = new ArrayList<Long>();
-		List<Long> pentagons = new ArrayList<Long>();
-		List<Long> hexagons = new ArrayList<Long>();
+		Set<Long> triangles = new HashSet<Long>();
+		Set<Long> pentagons = new HashSet<Long>();
+		Set<Long> hexagons = new HashSet<Long>();
 
 		for (long i = 1; i <= MAX; i++) {
 			triangles.add(getTriangle(i));
