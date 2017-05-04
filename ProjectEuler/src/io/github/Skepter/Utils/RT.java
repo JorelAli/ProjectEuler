@@ -23,8 +23,9 @@ public class RT {
 	}
 
 	public static void uptime() {
-		String time = new SimpleDateFormat("mm:ss:SSS").format(new Date(ManagementFactory.getRuntimeMXBean().getUptime()));
-		String formattedTime = "";
+		long uptime = ManagementFactory.getRuntimeMXBean().getUptime();
+		String time = new SimpleDateFormat("mm:ss:SSS").format(new Date(uptime));
+		String formattedTime = time.split(":")[0] + " minutes, " + time.split(":")[1] + " seconds, " + time.split(":")[2] + " milliseconds";
 		if(time.split(":")[0].equals("00")) {
 			formattedTime = time.split(":")[1] + " seconds, " + time.split(":")[2] + " milliseconds";
 		}
