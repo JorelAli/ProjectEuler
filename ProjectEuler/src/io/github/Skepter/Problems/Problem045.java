@@ -1,8 +1,6 @@
 package io.github.Skepter.Problems;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import io.github.Skepter.Utils.RT;
