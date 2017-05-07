@@ -240,4 +240,23 @@ public class Utils {
 		return isNPandigital(String.valueOf(input), lowerN, upperN);
 	}
 	
+	/**
+	 * Returns true if the number is n-pandigital.
+	 * For example, nPandigital(12345, 1, 5) returns true because it is pandigital for numbers up to 5
+	 */
+	public static boolean isNPandigital(long input, int lowerN, int upperN) {
+		return isNPandigital(String.valueOf(input), lowerN, upperN);
+	}
+	
+	public static boolean hasDuplicateCharacters(String str) {
+		List<Character> charSet = new ArrayList<Character>();
+		for(char c : str.toCharArray())
+			if(charSet.contains(c)) {
+				return true;
+			} else {
+				charSet.add(c);
+			}
+		return false;
+	}
+	
 }
