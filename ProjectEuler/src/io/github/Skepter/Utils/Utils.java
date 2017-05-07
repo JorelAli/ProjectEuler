@@ -214,8 +214,30 @@ public class Utils {
 			}
 			arr[input.length() - 1] = input;
 			return arr;
-		}
-		
+		}	
 	}
-
+	
+	/**
+	 * Returns true if the number is n-pandigital.
+	 * For example, nPandigital(12345, 1, 5) returns true because it is pandigital for numbers up to 5
+	 */
+	public static boolean isNPandigital(String input, int lowerN, int upperN) {
+		for(int i = lowerN; i <= upperN; i++) {
+			if(!input.contains(String.valueOf(i))) {
+				return false;
+			}
+			input = input.replaceFirst(String.valueOf(i), "");
+		}
+		return input.equals("");
+	}
+	
+	
+	/**
+	 * Returns true if the number is n-pandigital.
+	 * For example, nPandigital(12345, 1, 5) returns true because it is pandigital for numbers up to 5
+	 */
+	public static boolean isNPandigital(int input, int lowerN, int upperN) {
+		return isNPandigital(String.valueOf(input), lowerN, upperN);
+	}
+	
 }
