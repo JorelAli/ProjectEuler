@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import io.github.Skepter.ForeignUtils.SieveWithBitset;
+import io.github.Skepter.Problems.Problem037;
 
 public class Utils {
 
@@ -27,9 +29,9 @@ public class Utils {
 			count += Long.parseLong(String.valueOf(s.charAt(i)));
 		return count;
 	}
-	
+
 	/**
-	 * Returns a list of the digits of a number 
+	 * Returns a list of the digits of a number
 	 */
 	public static List<Integer> digits(int value) {
 		String s = String.valueOf(value);
@@ -51,7 +53,7 @@ public class Utils {
 		}
 		return product;
 	}
-	
+
 	/**
 	 * Converts letters to numbers (a = 1, b = 2... z = 26)
 	 */
@@ -87,11 +89,13 @@ public class Utils {
 
 	/**
 	 * Checks if a number is prime<br>
-	 * If using this function multiple times, consider extracting it and using the function once 
+	 * If using this function multiple times, consider extracting it and using
+	 * the function once
+	 * 
 	 * @see Problem037
 	 */
 	public static boolean isPrime(int i) {
-		if(i <=0 ) {
+		if (i <= 0) {
 			return false;
 		}
 		return SieveWithBitset.sieveOfEratosthenes(i).contains(i);
@@ -111,7 +115,7 @@ public class Utils {
 	public static void printListSingleLine(final Collection<?> list) {
 		System.out.println(Arrays.toString(list.toArray()).toString());
 	}
-	
+
 	/**
 	 * Prints an array
 	 */
@@ -120,14 +124,14 @@ public class Utils {
 			System.out.println(item);
 		}
 	}
-	
+
 	/**
 	 * Prints an array onto a single line
 	 */
 	public static void printArraySingleLine(Object[] input) {
 		System.out.println(Arrays.toString(input).toString());
 	}
-	
+
 	/**
 	 * Prints a map
 	 */
@@ -146,7 +150,7 @@ public class Utils {
 			final URL url = Utils.class.getResource("/ResourceFiles/" + fileName);
 			final BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
 			String inputLine;
-			while((inputLine = in.readLine()) != null) {
+			while ((inputLine = in.readLine()) != null) {
 				lines.add(inputLine);
 			}
 			in.close();
@@ -155,7 +159,7 @@ public class Utils {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Reverses a map (replaces values with keys)
 	 */
@@ -166,7 +170,7 @@ public class Utils {
 		}
 		return newMap;
 	}
-	
+
 	/**
 	 * Performs the combinations function (nCr)
 	 */
@@ -177,19 +181,19 @@ public class Utils {
 		}
 		return ret;
 	}
-	
+
 	/**
 	 * Converts a Set<> into a List<>
 	 */
 	public static <T> List<T> convertSetToList(Set<T> set) {
 		List<T> list = new ArrayList<T>();
 		Iterator<T> it = set.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			list.add(it.next());
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Returns an array of truncated combinations<br>
 	 * Input = (hello, false)<br>
@@ -199,64 +203,99 @@ public class Utils {
 	 * Output = [hello, ello, llo, lo, o]<br>
 	 */
 	public static String[] getTruncatedArray(String input, boolean reverse) {
-		if(reverse) {
+		if (reverse) {
 			String[] arr = new String[input.length()];
-			for(int i = 1; i < input.length(); i++) {
-				arr[i - 1] = input.substring(i-1, input.length());
+			for (int i = 1; i < input.length(); i++) {
+				arr[i - 1] = input.substring(i - 1, input.length());
 			}
 			arr[0] = input;
 			arr[input.length() - 1] = input.substring(input.length() - 1, input.length() - 0);
 			return arr;
 		} else {
 			String[] arr = new String[input.length()];
-			for(int i = 1; i < input.length(); i++) {
+			for (int i = 1; i < input.length(); i++) {
 				arr[i - 1] = input.substring(0, i);
 			}
 			arr[input.length() - 1] = input;
 			return arr;
-		}	
+		}
 	}
-	
+
 	/**
-	 * Returns true if the number is n-pandigital.
-	 * For example, nPandigital(12345, 1, 5) returns true because it is pandigital for numbers up to 5
+	 * Returns true if the number is n-pandigital. For example,
+	 * nPandigital(12345, 1, 5) returns true because it is pandigital for
+	 * numbers up to 5
 	 */
 	public static boolean isNPandigital(String input, int lowerN, int upperN) {
-		for(int i = lowerN; i <= upperN; i++) {
-			if(!input.contains(String.valueOf(i))) {
+		for (int i = lowerN; i <= upperN; i++) {
+			if (!input.contains(String.valueOf(i))) {
 				return false;
 			}
 			input = input.replaceFirst(String.valueOf(i), "");
 		}
 		return input.equals("");
 	}
-	
-	
+
 	/**
-	 * Returns true if the number is n-pandigital.
-	 * For example, nPandigital(12345, 1, 5) returns true because it is pandigital for numbers up to 5
+	 * Returns true if the number is n-pandigital. For example,
+	 * nPandigital(12345, 1, 5) returns true because it is pandigital for
+	 * numbers up to 5
 	 */
 	public static boolean isNPandigital(int input, int lowerN, int upperN) {
 		return isNPandigital(String.valueOf(input), lowerN, upperN);
 	}
-	
+
 	/**
-	 * Returns true if the number is n-pandigital.
-	 * For example, nPandigital(12345, 1, 5) returns true because it is pandigital for numbers up to 5
+	 * Returns true if the number is n-pandigital. For example,
+	 * nPandigital(12345, 1, 5) returns true because it is pandigital for
+	 * numbers up to 5
 	 */
 	public static boolean isNPandigital(long input, int lowerN, int upperN) {
 		return isNPandigital(String.valueOf(input), lowerN, upperN);
 	}
-	
+
+	/**
+	 * Checks if a string has duplicate charactors
+	 */
 	public static boolean hasDuplicateCharacters(String str) {
 		List<Character> charSet = new ArrayList<Character>();
-		for(char c : str.toCharArray())
-			if(charSet.contains(c)) {
+		for (char c : str.toCharArray())
+			if (charSet.contains(c)) {
 				return true;
 			} else {
 				charSet.add(c);
 			}
 		return false;
 	}
+
+	/**
+	 * Gets prime factors of a number
+	 * input cannot be less than or equal to 0
+	 */
+	public static List<Integer> getPrimeFactors(int input, List<Integer> primes) {
+		List<Integer> factors = new ArrayList<Integer>();
+		for (int i : primes) {
+			while (input % i == 0) {
+				factors.add(i);
+				input /= i;
+			}
+		}
+		return factors;
+	}
 	
+	/**
+	 * Gets prime factor set of a number (List has no repeated factors)
+	 * input cannot be less than or equal to 0
+	 */
+	public static Set<Integer> getPrimeFactorSet(int input, List<Integer> primes) {
+		Set<Integer> factors = new HashSet<Integer>();
+		for (int i : primes) {
+			while (input % i == 0) {
+				factors.add(i);
+				input /= i;
+			}
+		}
+		return factors;
+	}
+
 }
