@@ -4,27 +4,27 @@ import io.github.Skepter.Utils.Utils;
 
 public class BigFraction {
 
-	int numerator;
-	int denominator;
+	long numerator;
+	long denominator;
 
-	public void setNumerator(int numerator) {
+	public void setNumerator(long numerator) {
 		this.numerator = numerator;
 	}
 
-	public void setDenominator(int denominator) {
+	public void setDenominator(long denominator) {
 		this.denominator = denominator;
 	}
 	
-	public BigFraction(int numerator, int denominator) {
+	public BigFraction(long numerator, long denominator) {
 		this.numerator = numerator;
 		this.denominator = denominator;
 	}
 	
-	public int getNumerator() {
+	public long getNumerator() {
 		return numerator;
 	}
 	
-	public int getDenominator() {
+	public long getDenominator() {
 		return denominator;
 	}
 	
@@ -52,22 +52,23 @@ public class BigFraction {
 		return this;
 	}
 	
-	public BigFraction pow(int i) {
-		setNumerator((int) Math.pow(numerator, i));
-		setDenominator((int) Math.pow(denominator, i));
+	public BigFraction pow(long i) {
+		setNumerator((long) Math.pow(numerator, i));
+		setDenominator((long) Math.pow(denominator, i));
 		return this;
 	}
 	
 	public BigFraction simplify() {
-		int divisor = Utils.gcd(numerator, denominator);
+		long divisor = Utils.gcd(numerator, denominator);
 		setNumerator(numerator/divisor);
 		setDenominator(denominator/divisor);
 		return this;
 	}
 	
 	public BigFraction flip() {
+		long temp = numerator;
 		setNumerator(denominator);
-		setDenominator(numerator);
+		setDenominator(temp);
 		return this;
 	}
 	

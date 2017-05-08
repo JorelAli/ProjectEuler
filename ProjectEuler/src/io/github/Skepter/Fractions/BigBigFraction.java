@@ -20,39 +20,50 @@ public class BigBigFraction {
 		return denominator;
 	}
 	
+	public void setNumerator(BigInteger numerator) {
+		this.numerator = numerator;
+	}
+
+	public void setDenominator(BigInteger denominator) {
+		this.denominator = denominator;
+	}
+	
 	public BigBigFraction add(BigBigFraction f) {
-		BigInteger num = (f.getDenominator().multiply(numerator)).add(denominator.multiply(f.getNumerator()));
-		BigInteger denom = f.getDenominator().multiply(denominator);
-		return new BigBigFraction(num, denom);
+		setNumerator((f.getDenominator().multiply(numerator)).add(denominator.multiply(f.getNumerator())));
+		setDenominator(f.getDenominator().multiply(denominator));
+		return this;
 	}
 	
 	public BigBigFraction subtract(BigBigFraction f) {
-		BigInteger num = (f.getDenominator().multiply(numerator)).subtract(denominator.multiply(f.getNumerator()));
-		BigInteger denom = f.getDenominator().multiply(denominator);
-		return new BigBigFraction(num, denom);
+		setNumerator((f.getDenominator().multiply(numerator)).subtract(denominator.multiply(f.getNumerator())));
+		setDenominator(f.getDenominator().multiply(denominator));
+		return this;
 	}
 	
 	public BigBigFraction multiply(BigBigFraction f) {
-		BigInteger num = numerator.multiply(f.numerator);
-		BigInteger denom = f.denominator.multiply(denominator);
-		return new BigBigFraction(num, denom);
+		setNumerator(numerator.multiply(f.numerator));
+		setDenominator(f.denominator.multiply(denominator));
+		return this;
 	}
 
 	public BigBigFraction divide(BigBigFraction f) {
-		BigInteger num = numerator.multiply(f.denominator);
-		BigInteger denom = denominator.multiply(f.numerator);
-		return new BigBigFraction(num, denom);
+		setNumerator(numerator.multiply(f.denominator));
+		setDenominator(denominator.multiply(f.numerator));
+		return this;
 	}
 	
 	public BigBigFraction simplify() {
 		BigInteger divisor = gcd(numerator, denominator);
-		return new BigBigFraction(numerator.divide(divisor), denominator.divide(divisor));
+		setNumerator(numerator.divide(divisor));
+		setDenominator(denominator.divide(divisor));
+		return this;
 	}
 
 	public BigBigFraction flip() {
-		BigInteger num = denominator;
-		BigInteger denom = numerator;
-		return new BigBigFraction(num, denom);
+		BigInteger temp = numerator;
+		setNumerator(denominator);
+		setDenominator(temp);
+		return this;
 	}
 	
 	private BigInteger gcd(BigInteger a, BigInteger b) {

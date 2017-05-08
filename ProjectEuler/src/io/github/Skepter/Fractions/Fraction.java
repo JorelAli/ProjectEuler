@@ -66,8 +66,9 @@ public class Fraction {
 	}
 	
 	public Fraction flip() {
+		int temp = numerator;
 		setNumerator(denominator);
-		setDenominator(numerator);
+		setDenominator(temp);
 		return this;
 	}
 	
