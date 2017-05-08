@@ -310,25 +310,15 @@ public class Utils {
 	 * gcd(8, 12) = 4
 	 */
 	public static int gcd(int a, int b) {
-		Set<Integer> aFactors = new HashSet<Integer>();
-		aFactors.add(a);
-		Set<Integer> bFactors = new HashSet<Integer>();
-		bFactors.add(b);
-		for(int i = 1; i <= a/2; i++) {
-			if(a % i == 0) 
-				aFactors.add(i);
-		}
-		for(int i = 1; i <= b/2; i++) {
-			if(b % i == 0) 
-				bFactors.add(i);
-		}
-		aFactors.retainAll(bFactors);
-		int max = 0;
-		for(int i : aFactors) {
-			if(i > max)
-				max = i;
-		}
-		return max;
+		return b == 0 ? a : gcd(b, a % b);
+	}
+
+	/**
+	 * Returns the greatest common divisor between a and b.
+	 * gcd(8, 12) = 4
+	 */
+	public static long gcd(long a, long b) {
+		return b == 0 ? a : gcd(b, a % b);
 	}
 	
 	/**
