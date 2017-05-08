@@ -1,5 +1,7 @@
 package io.github.Skepter.Fractions;
 
+import java.math.BigInteger;
+
 import io.github.Skepter.Utils.Utils;
 
 public class BigFraction {
@@ -70,6 +72,10 @@ public class BigFraction {
 		setNumerator(denominator);
 		setDenominator(temp);
 		return this;
+	}
+	
+	public BigBigFraction toBigBigFraction() {
+		return new BigBigFraction(BigInteger.valueOf(numerator), BigInteger.valueOf(denominator));
 	}
 	
 	@Override
