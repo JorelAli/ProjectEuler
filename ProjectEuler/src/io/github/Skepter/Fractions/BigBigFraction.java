@@ -2,8 +2,6 @@ package io.github.Skepter.Fractions;
 
 import java.math.BigInteger;
 
-import io.github.Skepter.Utils.Utils;
-
 public class BigBigFraction {
 
 	BigInteger numerator;
@@ -46,28 +44,24 @@ public class BigBigFraction {
 		return new BigBigFraction(num, denom);
 	}
 	
-//	public BigBigFraction pow(BigInteger i) {
-//		BigInteger num = (BigInteger) Math.pow(numerator, i);
-//		BigInteger denom = (BigInteger) Math.pow(denominator, i);
-//		return new BigBigFraction(num, denom);		
-//	}
-	
 	public BigBigFraction simplify() {
 		BigInteger divisor = gcd(numerator, denominator);
 		return new BigBigFraction(numerator.divide(divisor), denominator.divide(divisor));
 	}
+
+	public BigBigFraction flip() {
+		BigInteger num = denominator;
+		BigInteger denom = numerator;
+		return new BigBigFraction(num, denom);
+	}
 	
-	/**
-	 * Returns the greatest common divisor between a and b.
-	 * gcd(8, 12) = 4
-	 */
 	private BigInteger gcd(BigInteger a, BigInteger b) {
 		return b.equals(BigInteger.ZERO) ? a : gcd(b, a.mod(b));
 	}
 	
 	@Override
 	public String toString() {
-		return numerator + "/" + denominator;
+		return numerator.toString() + "/" + denominator.toString();
 	}
 	
 }

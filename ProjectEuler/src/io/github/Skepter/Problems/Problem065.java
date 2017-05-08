@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.github.Skepter.Fractions.BigBigFraction;
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
 
@@ -34,6 +35,9 @@ public class Problem065 extends RT {
 			k++;
 			list.add(1);
 		}
+		
+		new BigBigFraction(1, new BigBigFraction(1,2).add(new BigBigFraction(1,1))).toString();
+		
 //		Utils.printListSingleLine(list);
 		//BigDecimal hTerm = getNumerator(BigDecimal.valueOf(2D).add(BigDecimal.ONE.divide(denominator(BigDecimal.valueOf((long) list.get(0))), 1000, RoundingMode.HALF_DOWN)));
 //		double hundredthTerm = getNumerator(2D + 1D/denominator(list.get(0)));
