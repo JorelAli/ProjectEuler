@@ -16,7 +16,7 @@ public class Problem065 extends RT {
 	public static int term = 100;
 	
 	/* https://projecteuler.net/problem=65 */
-	public static void main(final String[] args) {
+	public static void main(final String[] args) {  
 		//Array sequence for value of e
 		list = new ArrayList<Integer>();
 		int k = 1;
@@ -41,6 +41,8 @@ public class Problem065 extends RT {
 		}
 		fraction = fraction.add(new BigBigFraction(BigInteger.valueOf(2L), BigInteger.ONE));
 		System.out.println(Utils.sumOfDigits(fraction.getNumerator().toString()));
+		
 		uptime();
 	}
+
 }
