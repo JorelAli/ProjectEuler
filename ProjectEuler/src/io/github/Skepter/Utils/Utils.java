@@ -24,8 +24,10 @@ public class Utils {
 	 */
 	public static long sumOfDigits(final String s) {
 		long count = 0;
-		for (int i = 0; i < s.length(); i++)
-			count += Long.parseLong(String.valueOf(s.charAt(i)));
+		for (int i = 0; i < s.length(); i++) {
+			if(s.charAt(i) != '.')
+				count += Long.parseLong(String.valueOf(s.charAt(i)));
+		}
 		return count;
 	}
 
