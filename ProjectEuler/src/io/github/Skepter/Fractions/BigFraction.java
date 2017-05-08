@@ -4,61 +4,71 @@ import io.github.Skepter.Utils.Utils;
 
 public class BigFraction {
 
-	long numerator;
-	long denominator;
+	int numerator;
+	int denominator;
+
+	public void setNumerator(int numerator) {
+		this.numerator = numerator;
+	}
+
+	public void setDenominator(int denominator) {
+		this.denominator = denominator;
+	}
 	
-	public BigFraction(long numerator, long denominator) {
+	public BigFraction(int numerator, int denominator) {
 		this.numerator = numerator;
 		this.denominator = denominator;
 	}
 	
-	public long getNumerator() {
+	public int getNumerator() {
 		return numerator;
 	}
 	
-	public long getDenominator() {
+	public int getDenominator() {
 		return denominator;
 	}
 	
 	public BigFraction add(BigFraction f) {
-		long num = (f.getDenominator() * numerator) + (denominator * f.getNumerator());
-		long denom = f.getDenominator() * denominator;
-		return new BigFraction(num, denom);
+		setNumerator((f.getDenominator() * numerator) + (denominator * f.getNumerator()));
+		setDenominator(f.getDenominator() * denominator);
+		return this;
 	}
 	
 	public BigFraction subtract(BigFraction f) {
-		long num = (f.getDenominator() * numerator) - (denominator * f.getNumerator());
-		long denom = f.getDenominator() * denominator;
-		return new BigFraction(num, denom);
+		setNumerator((f.getDenominator() * numerator) - (denominator * f.getNumerator()));
+		setDenominator(f.getDenominator() * denominator);
+		return this;
 	}
 	
 	public BigFraction multiply(BigFraction f) {
-		long num = numerator * f.numerator;
-		long denom = f.denominator * denominator;
-		return new BigFraction(num, denom);
+		setNumerator(numerator * f.numerator);
+		setDenominator(f.denominator * denominator);
+		return this;
 	}
 
 	public BigFraction divide(BigFraction f) {
-		long num = numerator * f.denominator;
-		long denom = denominator * f.numerator;
-		return new BigFraction(num, denom);
+		setNumerator(numerator * f.denominator);
+		setDenominator(denominator * f.numerator);
+		return this;
 	}
 	
-	public BigFraction pow(long i) {
-		long num = (long) Math.pow(numerator, i);
-		long denom = (long) Math.pow(denominator, i);
-		return new BigFraction(num, denom);		
+	public BigFraction pow(int i) {
+		setNumerator((int) Math.pow(numerator, i));
+		setDenominator((int) Math.pow(denominator, i));
+		return this;
 	}
 	
 	public BigFraction simplify() {
-		long divisor = Utils.gcd(numerator, denominator);
-		return new BigFraction(numerator/divisor, denominator/divisor);
+		int divisor = Utils.gcd(numerator, denominator);
+		setNumerator(numerator/divisor);
+		setDenominator(denominator/divisor);
+		return this;
 	}
-
+	
 	public BigFraction flip() {
-		long num = denominator;
-		long denom = numerator;
-		return new BigFraction(num, denom);
+		setNumerator(denominator);
+		setDenominator(numerator);
+		return this;
 	}
 	
 	@Override

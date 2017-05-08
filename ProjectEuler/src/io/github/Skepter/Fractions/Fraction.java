@@ -1,13 +1,19 @@
 package io.github.Skepter.Fractions;
 
-import java.math.BigInteger;
-
 import io.github.Skepter.Utils.Utils;
 
 public class Fraction {
 
 	int numerator;
 	int denominator;
+
+	public void setNumerator(int numerator) {
+		this.numerator = numerator;
+	}
+
+	public void setDenominator(int denominator) {
+		this.denominator = denominator;
+	}
 	
 	public Fraction(int numerator, int denominator) {
 		this.numerator = numerator;
@@ -23,44 +29,46 @@ public class Fraction {
 	}
 	
 	public Fraction add(Fraction f) {
-		int num = (f.getDenominator() * numerator) + (denominator * f.getNumerator());
-		int denom = f.getDenominator() * denominator;
-		return new Fraction(num, denom);
+		setNumerator((f.getDenominator() * numerator) + (denominator * f.getNumerator()));
+		setDenominator(f.getDenominator() * denominator);
+		return this;
 	}
 	
 	public Fraction subtract(Fraction f) {
-		int num = (f.getDenominator() * numerator) - (denominator * f.getNumerator());
-		int denom = f.getDenominator() * denominator;
-		return new Fraction(num, denom);
+		setNumerator((f.getDenominator() * numerator) - (denominator * f.getNumerator()));
+		setDenominator(f.getDenominator() * denominator);
+		return this;
 	}
 	
 	public Fraction multiply(Fraction f) {
-		int num = numerator * f.numerator;
-		int denom = f.denominator * denominator;
-		return new Fraction(num, denom);
+		setNumerator(numerator * f.numerator);
+		setDenominator(f.denominator * denominator);
+		return this;
 	}
 
 	public Fraction divide(Fraction f) {
-		int num = numerator * f.denominator;
-		int denom = denominator * f.numerator;
-		return new Fraction(num, denom);
+		setNumerator(numerator * f.denominator);
+		setDenominator(denominator * f.numerator);
+		return this;
 	}
 	
 	public Fraction pow(int i) {
-		int num = (int) Math.pow(numerator, i);
-		int denom = (int) Math.pow(denominator, i);
-		return new Fraction(num, denom);		
+		setNumerator((int) Math.pow(numerator, i));
+		setDenominator((int) Math.pow(denominator, i));
+		return this;
 	}
 	
 	public Fraction simplify() {
 		int divisor = Utils.gcd(numerator, denominator);
-		return new Fraction(numerator/divisor, denominator/divisor);
+		setNumerator(numerator/divisor);
+		setDenominator(denominator/divisor);
+		return this;
 	}
 	
 	public Fraction flip() {
-		int num = denominator;
-		int denom = numerator;
-		return new Fraction(num, denom);
+		setNumerator(denominator);
+		setDenominator(numerator);
+		return this;
 	}
 	
 	@Override
