@@ -1,61 +1,65 @@
 package io.github.Skepter.Problems;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import io.github.Skepter.ForeignUtils.SieveWithBitset;
 import io.github.Skepter.Utils.Incomplete;
 import io.github.Skepter.Utils.RT;
 import io.github.Skepter.Utils.Utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Problem046 extends RT implements Incomplete {
 
-	/*It was proposed by Christian Goldbach that every odd composite number 
-	 * can be written as the sum of a prime and twice a square.
-
-	9 = 7 + 2Ã—1^2
-	15 = 7 + 2Ã—2^2
-	21 = 3 + 2Ã—3^2
-	25 = 7 + 2Ã—3^2
-	27 = 19 + 2Ã—2^2
-	33 = 31 + 2Ã—1^2
-
-	It turns out that the conjecture was false.
-
-	What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?*/
+	/*
+	 * It was proposed by Christian Goldbach that every odd composite number can
+	 * be written as the sum of a prime and twice a square.
+	 * 
+	 * 9 = 7 + 2×12 15 = 7 + 2×22 21 = 3 + 2×32 25 = 7 + 2×32 27 = 19 + 2×22 33
+	 * = 31 + 2×12
+	 * 
+	 * It turns out that the conjecture was false.
+	 * 
+	 * What is the smallest odd composite that cannot be written as the sum of a
+	 * prime and twice a square?
+	 * 
+	 * Program took 120 milliseconds
+	 */
 	public static void main(final String[] args) {
-		/* Just go up to a million for testing sake */
-		int max = 1000000;
-		int exponentMax = 100;
-
-		List<Integer> list = new ArrayList<Integer>();
-		List<Integer> otherList = new ArrayList<Integer>();
-
-		for (int i = 3; i < max; i += 2) {
-			otherList.add(i);
-			System.out.println(i + "/" + max);
-			for (int e = 1; e < exponentMax; e++) {
-				int possiblePrime = i - twiceSquare(e);
-				if (possiblePrime < 0) {
-					break;
-				}
-				if (Utils.isPrime(possiblePrime) && (possiblePrime + twiceSquare(e) == i)) {
-					//					System.out.println(i + " = " + possiblePrime + " + 2x" + e + "^2");
-					list.add(i);
-					continue;
-				} else {
-					if (!list.contains(i)) {
-						//						System.out.println(i + " DOES NOT EQUAL " + possiblePrime + " + 2x" + e + "^2");
-						//break mainForLoop;
+		int max = 100000;
+		// http://stackoverflow.com/a/32552348/4779071
+		// Contains for a HashSet is O(1) compared to O(n) for a list, therefore
+		// you should never use a list if you often need to run contains.
+		Set<Integer> squares = computeSquares(max);
+		Set<Integer> primeSet = Utils.convertListToSet(SieveWithBitset.sieveOfEratosthenes(max));
+		List<Integer> primeList = SieveWithBitset.sieveOfEratosthenes(max);
+		for (int i = 3; i <= max; i+=2) {
+			if (!primeSet.contains(i)) {
+				boolean satisfy = false;
+				checkifSuitsConjecture:
+				for(int prime : primeList) {
+					if(prime < i) {
+						if(squares.contains(((i - prime)/2)) && i == prime + 2*((i - prime)/2)) {
+							satisfy = true;
+//							System.out.println(i + " = " + prime + " + 2*" + ((i - prime)/2));
+							break checkifSuitsConjecture;
+						}
 					}
+				}
+				if(!satisfy) {
+					System.out.println(i);
+					break;
 				}
 			}
 		}
-		if (list.removeAll(otherList))
-			;
 		uptime();
 	}
 
-	private static int twiceSquare(int i) {
-		return 2 * (i * i);
+	public static Set<Integer> computeSquares(int max) {
+		Set<Integer> squares = new HashSet<Integer>();
+		for(int i = 0; i <= max; i++) {
+			squares.add(i*i);
+		}
+		return squares;
 	}
 }

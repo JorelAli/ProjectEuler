@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -187,11 +186,17 @@ public class Utils {
 	 */
 	public static <T> List<T> convertSetToList(Set<T> set) {
 		List<T> list = new ArrayList<T>();
-		Iterator<T> it = set.iterator();
-		while (it.hasNext()) {
-			list.add(it.next());
-		}
+		list.addAll(set);
 		return list;
+	}
+	
+	/**
+	 * Converts a List<> into a Set<>
+	 */
+	public static <T> Set<T> convertListToSet(List<T> list) {
+		Set<T> set = new HashSet<T>();
+		set.addAll(list);
+		return set;
 	}
 
 	/**
