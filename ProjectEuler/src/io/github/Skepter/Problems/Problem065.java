@@ -16,6 +16,10 @@ public class Problem065 extends RT {
 	
 	/* https://projecteuler.net/problem=65 */
 	public static void main(final String[] args) {
+		
+		
+		System.out.println(Utils.gcd(102123123124103262L, 10381159127932L));
+		
 		/*
 		 * Find the numerical value of 100th convergence. Multiply by numbers
 		 * until you get an integer to get the numerator
@@ -31,12 +35,12 @@ public class Problem065 extends RT {
 			list.add(1);
 		}
 //		Utils.printListSingleLine(list);
-		BigDecimal hTerm = getNumerator(BigDecimal.valueOf(2D).add(BigDecimal.ONE.divide(denominator(BigDecimal.valueOf((long) list.get(0))), 1000, RoundingMode.HALF_DOWN)));
+		//BigDecimal hTerm = getNumerator(BigDecimal.valueOf(2D).add(BigDecimal.ONE.divide(denominator(BigDecimal.valueOf((long) list.get(0))), 1000, RoundingMode.HALF_DOWN)));
 //		double hundredthTerm = getNumerator(2D + 1D/denominator(list.get(0)));
 //		System.out.println(BigDecimal.valueOf(hundredthTerm).toString());
 //		System.out.println(Utils.sumOfDigits(BigDecimal.valueOf(hundredthTerm).toString()));
 		
-		System.out.println(hTerm.longValueExact());
+		//System.out.println(hTerm.longValueExact());
 		//System.out.println(Utils.sumOfDigits(hTerm.toString()));
 		
 		uptime();

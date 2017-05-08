@@ -1,4 +1,6 @@
-package io.github.Skepter.Utils;
+package io.github.Skepter.Fractions;
+
+import io.github.Skepter.Utils.Utils;
 
 public class BigFraction {
 
