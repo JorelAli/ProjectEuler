@@ -12,6 +12,8 @@ public class Problem052 extends RT {
 	 * 
 	 * Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x,
 	 * contain the same digits.
+	 * 
+	 * Program took 114 milliseconds
 	 */
 	public static void main(final String[] args) {
 		for (int i = 1;; i++) {
