@@ -1,9 +1,9 @@
 package io.github.Skepter.Problems;
-import io.github.Skepter.ForeignUtils.SieveWithBitset;
-import io.github.Skepter.Utils.RT;
-
 import java.math.BigInteger;
 import java.util.List;
+
+import io.github.Skepter.ForeignUtils.SieveWithBitset;
+import io.github.Skepter.Utils.RT;
 
 public class Problem010 extends RT {
 

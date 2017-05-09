@@ -325,6 +325,7 @@ public class Utils {
 	 * Returns the phi function
 	 * https://en.wikipedia.org/wiki/Euler%27s_totient_function
 	 */
+	@Deprecated
 	public static int phi(int a) {
 		int count = 0;
 		for(int i = 1; i <= a; i++) {
@@ -333,6 +334,27 @@ public class Utils {
 			}
 		}
 		return count;
+	}
+	
+	/**
+	 * Checks if a string is a permutation of another string
+	 * isPermutation("hello", "hlloe") is true.
+	 */
+	public static boolean isPermutation(String a, String b) {
+		char[] aArr = a.toCharArray();
+		char[] bArr = b.toCharArray();
+		
+		Arrays.sort(aArr);
+		Arrays.sort(bArr);
+		return Arrays.equals(aArr, bArr);
+	}
+	
+	/**
+	 * Checks if an integer is a permutation of another integer
+	 * isPermutation("1234", "4132") is true.
+	 */
+	public static boolean isPermutation(int a, int b) {
+		return isPermutation(String.valueOf(a), String.valueOf(b));
 	}
 
 }
