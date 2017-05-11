@@ -12,8 +12,8 @@ public class Problem069 extends RT {
 		int m = 1000000;
 		LoadingBar bar = new LoadingBar("Problem 69",m);
 		for(int i = 1; i <= m; i++) {
-			if(i/Utils.phi(i) > max) {
-				max = i/Utils.phi(i);
+			if(i/Utils.totient(i) > max) {
+				max = i/Utils.totient(i);
 			}
 			bar.updateBar(i);
 		}

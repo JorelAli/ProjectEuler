@@ -322,11 +322,11 @@ public class Utils {
 	}
 	
 	/**
-	 * Returns the phi function
+	 * Returns the totient function
 	 * https://en.wikipedia.org/wiki/Euler%27s_totient_function
 	 */
 	@Deprecated
-	public static int phi(int a) {
+	public static int totient(int a) {
 		int count = 0;
 		for(int i = 1; i <= a; i++) {
 			if(a % (gcd(a, i) == 1 ? a+1 : gcd(a, i)) != 0) {
