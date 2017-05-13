@@ -25,8 +25,20 @@ public class Utils {
 	public static long sumOfDigits(final String s) {
 		long count = 0;
 		for (int i = 0; i < s.length(); i++) {
-			if(s.charAt(i) != '.')
+			if (s.charAt(i) != '.')
 				count += Long.parseLong(String.valueOf(s.charAt(i)));
+		}
+		return count;
+	}
+	
+	/**
+	 * Returns the sum of digits of a number
+	 */
+	public static int sumOfDigits(final int input) {
+		int count = 0;
+		String s = String.valueOf(input);
+		for (int i = 0; i < s.length(); i++) {
+			count += Integer.parseInt(String.valueOf(s.charAt(i)));
 		}
 		return count;
 	}
@@ -191,7 +203,7 @@ public class Utils {
 		list.addAll(set);
 		return list;
 	}
-	
+
 	/**
 	 * Converts a List<> into a Set<>
 	 */
@@ -276,8 +288,7 @@ public class Utils {
 	}
 
 	/**
-	 * Gets prime factors of a number
-	 * input cannot be less than or equal to 0
+	 * Gets prime factors of a number input cannot be less than or equal to 0
 	 */
 	public static List<Integer> getPrimeFactors(int input, List<Integer> primes) {
 		List<Integer> factors = new ArrayList<Integer>();
@@ -289,10 +300,10 @@ public class Utils {
 		}
 		return factors;
 	}
-	
+
 	/**
-	 * Gets prime factor set of a number (List has no repeated factors)
-	 * input cannot be less than or equal to 0
+	 * Gets prime factor set of a number (List has no repeated factors) input
+	 * cannot be less than or equal to 0
 	 */
 	public static Set<Integer> getPrimeFactorSet(int input, List<Integer> primes) {
 		Set<Integer> factors = new HashSet<Integer>();
@@ -304,23 +315,21 @@ public class Utils {
 		}
 		return factors;
 	}
-	
+
 	/**
-	 * Returns the greatest common divisor between a and b.
-	 * gcd(8, 12) = 4
+	 * Returns the greatest common divisor between a and b. gcd(8, 12) = 4
 	 */
 	public static int gcd(int a, int b) {
 		return b == 0 ? a : gcd(b, a % b);
 	}
 
 	/**
-	 * Returns the greatest common divisor between a and b.
-	 * gcd(8, 12) = 4
+	 * Returns the greatest common divisor between a and b. gcd(8, 12) = 4
 	 */
 	public static long gcd(long a, long b) {
 		return b == 0 ? a : gcd(b, a % b);
 	}
-	
+
 	/**
 	 * Returns the totient function
 	 * https://en.wikipedia.org/wiki/Euler%27s_totient_function
@@ -328,14 +337,14 @@ public class Utils {
 	@Deprecated
 	public static int totient(int a) {
 		int count = 0;
-		for(int i = 1; i <= a; i++) {
-			if(a % (gcd(a, i) == 1 ? a+1 : gcd(a, i)) != 0) {
+		for (int i = 1; i <= a; i++) {
+			if (a % (gcd(a, i) == 1 ? a + 1 : gcd(a, i)) != 0) {
 				count++;
 			}
 		}
 		return count;
 	}
-	
+
 	/**
 	 * Checks if a string is a permutation of another string
 	 * isPermutation("hello", "hlloe") is true.
@@ -343,18 +352,32 @@ public class Utils {
 	public static boolean isPermutation(String a, String b) {
 		char[] aArr = a.toCharArray();
 		char[] bArr = b.toCharArray();
-		
+
 		Arrays.sort(aArr);
 		Arrays.sort(bArr);
 		return Arrays.equals(aArr, bArr);
 	}
-	
+
 	/**
 	 * Checks if an integer is a permutation of another integer
 	 * isPermutation("1234", "4132") is true.
 	 */
 	public static boolean isPermutation(int a, int b) {
 		return isPermutation(String.valueOf(a), String.valueOf(b));
+	}
+
+	/**
+	 * Returns ln(a^b), where ^ represents power and ln is the natural logarithm
+	 */
+	public static double ln(int a, int b) {
+		return b * Math.log(a);
+	}
+	
+	/**
+	 * Returns if a number is an integer
+	 */
+	public static boolean isInteger(double d) {
+		return(d % 1 == 0);
 	}
 
 }
