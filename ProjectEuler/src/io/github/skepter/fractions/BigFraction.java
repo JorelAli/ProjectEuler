@@ -6,8 +6,8 @@ import io.github.skepter.utils.Utils;
 
 public class BigFraction {
 
-	long numerator;
-	long denominator;
+	private long numerator;
+	private long denominator;
 
 	public void setNumerator(long numerator) {
 		this.numerator = numerator;
@@ -81,6 +81,13 @@ public class BigFraction {
 	@Override
 	public String toString() {
 		return numerator + "/" + denominator;
+	}
+	
+	public boolean equals(BigFraction f) {
+		BigFraction a = this.simplify();
+		BigFraction b = f.simplify();
+		
+		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
 	}
 	
 }

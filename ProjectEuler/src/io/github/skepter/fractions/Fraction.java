@@ -6,8 +6,8 @@ import io.github.skepter.utils.Utils;
 
 public class Fraction {
 
-	int numerator;
-	int denominator;
+	private int numerator;
+	private int denominator;
 
 	public void setNumerator(int numerator) {
 		this.numerator = numerator;
@@ -85,6 +85,13 @@ public class Fraction {
 	@Override
 	public String toString() {
 		return numerator + "/" + denominator;
+	}
+	
+	public boolean equals(Fraction f) {
+		Fraction a = this.simplify();
+		Fraction b = f.simplify();
+		
+		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
 	}
 	
 }

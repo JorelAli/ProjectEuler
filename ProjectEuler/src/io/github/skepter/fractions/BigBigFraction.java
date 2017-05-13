@@ -4,8 +4,8 @@ import java.math.BigInteger;
 
 public class BigBigFraction {
 
-	BigInteger numerator;
-	BigInteger denominator;
+	private BigInteger numerator;
+	private BigInteger denominator;
 	
 	public BigBigFraction(BigInteger numerator, BigInteger denominator) {
 		this.numerator = numerator;
@@ -73,6 +73,13 @@ public class BigBigFraction {
 	@Override
 	public String toString() {
 		return numerator.toString() + "/" + denominator.toString();
+	}
+	
+	public boolean equals(BigBigFraction f) {
+		BigBigFraction a = this.simplify();
+		BigBigFraction b = f.simplify();
+		
+		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
 	}
 	
 }
