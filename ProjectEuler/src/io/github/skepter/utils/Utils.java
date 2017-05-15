@@ -2,6 +2,7 @@ package io.github.skepter.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.ArrayList;
@@ -378,6 +379,10 @@ public class Utils {
 	 */
 	public static boolean isInteger(double d) {
 		return(d % 1 == 0);
+	}
+	
+	public static boolean isInteger(BigDecimal bd) {
+		return bd.signum() == 0 || bd.scale() <= 0 || bd.stripTrailingZeros().scale() <= 0;
 	}
 
 }

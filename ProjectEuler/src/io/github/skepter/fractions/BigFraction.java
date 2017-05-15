@@ -90,4 +90,7 @@ public class BigFraction {
 		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
 	}
 	
+	public static BigFraction valueOf(long i) {
+		return new BigFraction(i, 1);
+	}
 }

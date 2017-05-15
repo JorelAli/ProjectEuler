@@ -82,4 +82,12 @@ public class BigBigFraction {
 		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
 	}
 	
+	public static BigBigFraction valueOf(long i) {
+		return new BigBigFraction(BigInteger.valueOf(i), BigInteger.ONE);
+	}
+	
+	public static BigBigFraction valueOf(BigInteger i) {
+		return new BigBigFraction(i, BigInteger.ONE);
+	}
+	
 }

@@ -19,7 +19,6 @@ public class Problem119 extends RT {
 					}
 				}
 			}
-			
 		}
 
 		uptime();

@@ -94,4 +94,8 @@ public class Fraction {
 		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
 	}
 	
+	public static Fraction valueOf(int i) {
+		return new Fraction(i, 1);
+	}
+	
 }
