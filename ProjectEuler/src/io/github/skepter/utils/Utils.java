@@ -381,8 +381,18 @@ public class Utils {
 		return(d % 1 == 0);
 	}
 	
+	/**
+	 * Checks if a big decimal is an integer
+	 */
 	public static boolean isInteger(BigDecimal bd) {
 		return bd.signum() == 0 || bd.scale() <= 0 || bd.stripTrailingZeros().scale() <= 0;
+	}
+	
+	/**
+	 * Converts a base 10 number to another base
+	 */
+	public static int convertBase(int i, int base) {
+		return Integer.parseInt(Integer.toString(i, base));
 	}
 
 }
