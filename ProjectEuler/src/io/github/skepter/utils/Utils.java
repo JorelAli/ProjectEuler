@@ -1,7 +1,10 @@
 package io.github.skepter.utils;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.net.URL;
@@ -449,6 +452,17 @@ public class Utils {
 				count *= i;
 			}
 			return count;
+		}
+	}
+	
+	/**
+	 * Changes the output of System.out.println(). Put this at the top of your code.
+	 */
+	public static void outputToFile(String fileName) {
+		try {
+			System.setOut(new PrintStream(new FileOutputStream(fileName)));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 	
