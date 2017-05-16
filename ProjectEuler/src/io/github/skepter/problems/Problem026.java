@@ -4,9 +4,9 @@ import java.math.BigInteger;
 import java.util.Set;
 
 import io.github.skepter.foreignutils.SieveWithBitset;
-import io.github.skepter.fractions.BigBigFraction;
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
+import io.github.skepter.utils.fractions.BigBigFraction;
 
 public class Problem026 extends RT {
 

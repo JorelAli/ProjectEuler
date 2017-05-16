@@ -1,4 +1,4 @@
-package io.github.skepter.fractions;
+package io.github.skepter.utils.fractions;
 
 import java.math.BigInteger;
 

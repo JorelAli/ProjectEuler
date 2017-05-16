@@ -2,8 +2,8 @@ package io.github.skepter.problems;
 
 import java.math.BigInteger;
 
-import io.github.skepter.fractions.BigBigFraction;
 import io.github.skepter.utils.RT;
+import io.github.skepter.utils.fractions.BigBigFraction;
 
 public class Problem057 extends RT {
 

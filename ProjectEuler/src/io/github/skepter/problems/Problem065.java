@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import io.github.skepter.fractions.BigBigFraction;
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
+import io.github.skepter.utils.fractions.BigBigFraction;
 
 public class Problem065 extends RT {
 
