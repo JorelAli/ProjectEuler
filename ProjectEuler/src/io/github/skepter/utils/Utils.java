@@ -83,7 +83,7 @@ public class Utils {
 	}
 
 	/**
-	 * Gets the reverse of an integer
+	 * Gets the reverse of an integer: 1234 turns into 4321
 	 */
 	public static int getReverse(final int i) {
 		final String str = String.valueOf(i);
