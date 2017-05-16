@@ -195,6 +195,15 @@ public class Utils {
 		}
 		return ret;
 	}
+	
+	
+//	/**
+//	 * Performs the combinations function (nCr)
+//	 */
+//	public static int combinations(final int n, final int r) {
+//		return factorial(n) / (factorial(r) * factorial(n - r));
+//	}
+
 
 	/**
 	 * Converts a Set<> into a List<>
@@ -409,4 +418,38 @@ public class Utils {
 		return Long.toString(i, base);
 	}
 
+	/**
+	 * Calculates the factorial of a number
+	 */
+	public static int factorial(int input) {
+		if(input == 0) {
+			return 1;
+		} else if(input < 0) {
+			throw new ArithmeticException("Cannot calculate factorial for negative number: " + input);
+		} else { 
+			int count = 1;
+			for(int i = 1; i <= input; i++) {
+				count *= i;
+			}
+			return count;
+		}
+	}
+	
+	/**
+	 * Calculates the factorial of a number
+	 */
+	public static long factorial(long input) {
+		if(input == 0) {
+			return 1L;
+		} else if(input < 0) {
+			throw new ArithmeticException("Cannot calculate factorial for negative number: " + input);
+		} else { 
+			long count = 1;
+			for(long i = 1; i <= input; i++) {
+				count *= i;
+			}
+			return count;
+		}
+	}
+	
 }

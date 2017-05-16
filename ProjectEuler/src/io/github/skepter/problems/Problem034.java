@@ -1,6 +1,7 @@
 package io.github.skepter.problems;
 
 import io.github.skepter.utils.RT;
+import io.github.skepter.utils.Utils;
 
 public class Problem034 extends RT {
 
@@ -23,7 +24,7 @@ public class Problem034 extends RT {
     public static long sumOfDigitsFactorialisedness(long input) {
         long count = 0L;
         for(long digit : splitDigits(input)) {
-            count += factorial(digit);
+            count += Utils.factorial(digit);
         }
         return count;
     }
@@ -38,14 +39,6 @@ public class Problem034 extends RT {
             count++;
         }
         return array;
-    }
-    
-    public static long factorial(long input) {
-        long count = 1L;
-        for(int i = 1; i <= input; i++) {
-            count *= i;
-        }
-        return count;     
     }
     
 }

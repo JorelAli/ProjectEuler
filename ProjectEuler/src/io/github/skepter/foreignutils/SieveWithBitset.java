@@ -3,6 +3,9 @@ package io.github.skepter.foreignutils;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
+import java.util.Set;
+
+import io.github.skepter.utils.Utils;
 
 /*
  * https://gist.github.com/rmfbarker/6314416
@@ -25,6 +28,10 @@ public class SieveWithBitset {
 		sieve.set((k - 3) / 2);
 	}
 
+	public static Set<Integer> getPrimes(final int max) {
+		return Utils.convertListToSet(sieveOfEratosthenes(max));
+	}
+	
 	public static List<Integer> sieveOfEratosthenes(final int max) {
 		final SieveWithBitset sieve = new SieveWithBitset(max + 1); // +1 to include max itself
 		for (int i = 3; (i * i) <= max; i += 2) {
