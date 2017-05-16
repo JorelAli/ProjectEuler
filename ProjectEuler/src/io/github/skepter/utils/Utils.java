@@ -394,5 +394,19 @@ public class Utils {
 	public static int convertBase(int i, int base) {
 		return Integer.parseInt(Integer.toString(i, base));
 	}
+	
+	/**
+	 * Converts a base 10 number to another base
+	 */
+	public static long convertBase(long i, int base) {
+		return Long.parseLong(Long.toString(i, base));
+	}
+	
+	/**
+	 * Converts a base 10 number to another base
+	 */
+	public static String convertBaseToString(long i, int base) {
+		return Long.toString(i, base);
+	}
 
 }
