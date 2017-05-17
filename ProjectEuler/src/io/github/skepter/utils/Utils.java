@@ -363,6 +363,15 @@ public class Utils {
 	}
 
 	/**
+	 * Checks if an integer is a permutation of another integer
+	 * isPermutation("1234", "4132") is true.
+	 */
+	public static boolean isPermutation(long a, long b) {
+		return isPermutation(String.valueOf(a), String.valueOf(b));
+	}
+
+	
+	/**
 	 * Returns ln(a^b), where ^ represents power and ln is the natural logarithm
 	 */
 	public static double ln(int a, int b) {
