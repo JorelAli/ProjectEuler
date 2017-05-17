@@ -18,9 +18,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import io.github.skepter.foreignutils.SieveWithBitset;
-import io.github.skepter.problems.Problem037;
-
 public class Utils {
 
 	/**
@@ -102,20 +99,6 @@ public class Utils {
 		if (reversedString.equals(str))
 			return true;
 		return false;
-	}
-
-	/**
-	 * Checks if a number is prime<br>
-	 * If using this function multiple times, consider extracting it and using
-	 * the function once
-	 * 
-	 * @see Problem037
-	 */
-	public static boolean isPrime(int i) {
-		if (i <= 0) {
-			return false;
-		}
-		return SieveWithBitset.sieveOfEratosthenes(i).contains(i);
 	}
 
 	/**
@@ -464,6 +447,14 @@ public class Utils {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Returns the number of digits in a number to the power of another<br>
+	 * So 4^5 = 1024, so length = 4
+	 */
+	public static int lengthOfNumber(int base, int power) {
+		return (int) (Math.floor(power * Math.log10(base)) + 1);
 	}
 	
 }

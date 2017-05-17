@@ -7,7 +7,9 @@ import java.util.Set;
 
 import io.github.skepter.utils.Utils;
 
-/*
+/* Uses a BitSet to calculate the SieveOfEratosthenes.
+ * This is used to generate a list of prime numbers up to a maximum value
+ * 
  * https://gist.github.com/rmfbarker/6314416
  * http://stackoverflow.com/a/32417991
  */
