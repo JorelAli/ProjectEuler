@@ -313,6 +313,10 @@ public class Utils {
 	}
 
 	/**
+	 * Synonyms for the GCD include the greatest common factor (GCF), the
+	 * highest common factor (HCF), the highest common divisor (HCD), and the
+	 * greatest common measure (GCM)<br><br>
+	 *  
 	 * Returns the greatest common divisor between a and b. gcd(8, 12) = 4
 	 */
 	public static int gcd(int a, int b) {
@@ -320,6 +324,10 @@ public class Utils {
 	}
 
 	/**
+	 * Synonyms for the GCD include the greatest common factor (GCF), the
+	 * highest common factor (HCF), the highest common divisor (HCD), and the
+	 * greatest common measure (GCM)<br><br>
+	 *  
 	 * Returns the greatest common divisor between a and b. gcd(8, 12) = 4
 	 */
 	public static long gcd(long a, long b) {

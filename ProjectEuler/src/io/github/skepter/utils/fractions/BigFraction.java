@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 import io.github.skepter.utils.Utils;
 
-public class BigFraction {
+public class BigFraction implements Comparable<BigFraction> {
 
 	private long numerator;
 	private long denominator;
@@ -92,5 +92,23 @@ public class BigFraction {
 	
 	public static BigFraction valueOf(long i) {
 		return new BigFraction(i, 1);
+	}
+	
+	public BigFraction copy() {
+		return new BigFraction(getNumerator(), getDenominator());
+	}
+
+	@Override
+	public int compareTo(BigFraction o) {
+		BigFraction a = this.copy();
+		if(this.equals(o)) {
+			return 0;
+		}
+		BigFraction divided = a.divide(o);
+		if(divided.getNumerator() > divided.getDenominator()) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 }

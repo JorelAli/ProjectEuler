@@ -2,7 +2,7 @@ package io.github.skepter.utils.fractions;
 
 import java.math.BigInteger;
 
-public class BigBigFraction {
+public class BigBigFraction implements Comparable<BigBigFraction> {
 
 	private BigInteger numerator;
 	private BigInteger denominator;
@@ -88,6 +88,24 @@ public class BigBigFraction {
 	
 	public static BigBigFraction valueOf(BigInteger i) {
 		return new BigBigFraction(i, BigInteger.ONE);
+	}
+	
+	public BigBigFraction copy() {
+		return new BigBigFraction(getNumerator(), getDenominator());
+	}
+
+	@Override
+	public int compareTo(BigBigFraction o) {
+		BigBigFraction a = this.copy();
+		if(this.equals(o)) {
+			return 0;
+		}
+		BigBigFraction divided = a.divide(o);
+		if(divided.getNumerator().compareTo(divided.getDenominator()) >= 1) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 	
 }

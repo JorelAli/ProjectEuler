@@ -67,6 +67,14 @@ public class Fraction implements Comparable<Fraction> {
 		return this;
 	}
 	
+	public boolean canBeSimplified() {
+		int divisor = Utils.gcd(numerator, denominator);
+		Fraction f = this.copy();
+		f.setNumerator(numerator/divisor);
+		f.setDenominator(denominator/divisor);
+		return !this.equals(f);
+	}
+	
 	public Fraction flip() {
 		int temp = numerator;
 		setNumerator(denominator);
@@ -88,6 +96,10 @@ public class Fraction implements Comparable<Fraction> {
 	}
 	
 	public boolean equals(Fraction f) {
+		return (f.getNumerator() == getNumerator() && f.getDenominator() == getDenominator());
+	}
+	
+	public boolean isEquivalent(Fraction f) {
 		Fraction a = this.simplify();
 		Fraction b = f.simplify();
 		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
@@ -96,16 +108,26 @@ public class Fraction implements Comparable<Fraction> {
 	public static Fraction valueOf(int i) {
 		return new Fraction(i, 1);
 	}
+	
+	/*
+	 * Makes a copy of this fraction. This is different to "this" fraction
+	 */
+	public Fraction copy() {
+		return new Fraction(getNumerator(), getDenominator());
+	}
 
 	@Override
 	public int compareTo(Fraction o) {
-		if(this.equals(o)) {
+		Fraction a = this.copy();
+		if(this.isEquivalent(o)) {
 			return 0;
 		}
-		double v1 = (double) simplify().getNumerator() / (double) simplify().getDenominator() ;
-		double v2 = (double) o.simplify().getNumerator() / (double) o.simplify().getDenominator();
-		
-		return 0;
+		Fraction divided = a.divide(o);
+		if(divided.getNumerator() > divided.getDenominator()) {
+			return 1;
+		} else {
+			return -1;
+		}
 	}
 	
 }
