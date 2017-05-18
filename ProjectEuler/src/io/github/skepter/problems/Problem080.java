@@ -1,7 +1,6 @@
 package io.github.skepter.problems;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
@@ -31,29 +30,11 @@ public class Problem080 extends RT {
 				continue;
 			}
 			
-			String val = squareRootNewtonRaphson(BigDecimal.valueOf(i), BigDecimal.valueOf(Math.sqrt(i)), 1000, 150).toString();
+			String val = Utils.nRootNewtonRaphson(BigDecimal.valueOf(i), BigDecimal.valueOf(Math.sqrt(i)), 2, 1000, 151).toString();
 			//https://projecteuler.chat/viewtopic.php?t=1198 Includes the first digit.
 			count += Utils.sumOfDigits(val.substring(0,101));
 		}
 		System.out.println(count);
 		uptime();
-	}
-
-	// https://en.wikipedia.org/wiki/Newton's_method#Examples
-	/*
-	 * x0 is the inital estimate. Choose 10 if uncertain
-	 * x is the value to find the square root for
-	 * iterations indicates how many iterations to perform the NewtonRaphson method.
-	 */
-	public static BigDecimal squareRootNewtonRaphson(BigDecimal x, BigDecimal x0, int iterations, int precision) {
-		iterations--;
-		if(iterations == 0) {
-			return x0;
-		} else {
-			BigDecimal numerator = x0.multiply(x0).subtract(x);
-			BigDecimal denominator = x0.multiply(BigDecimal.valueOf(2));
-			BigDecimal x1 = x0.subtract(numerator.divide(denominator, precision, RoundingMode.HALF_DOWN));
-			return squareRootNewtonRaphson(x, x1, iterations, precision);
-		}
 	}
 }

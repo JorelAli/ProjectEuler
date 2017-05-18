@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -472,6 +473,37 @@ public class Utils {
 	 */
 	public static int lengthOfNumber(int base, int power) {
 		return (int) (Math.floor(power * Math.log10(base)) + 1);
+	}
+	
+	/**
+	 * Calculates the n-root of a number and gives it to a precise value
+	 * (precision) using the Newton-Raphson method for approximation.
+	 * 
+	 * @See https://en.wikipedia.org/wiki/Newton's_method#Examples
+	 * @param x
+	 *            is the value to find the n root for.
+	 * @param x0
+	 *            is the initial estimate.
+	 * @param root
+	 *            is the root to find. For example, n = 2 gives the square root
+	 *            and n = 3 gives the cube root.
+	 * @param iterations
+	 *            indicates how many iterations to perform the NewtonRaphson
+	 *            method.
+	 * @param precision
+	 *            is the number of decimal places to be precise. (Generally, use
+	 *            precision + 1 to get a desired precision)
+	 */
+	public static BigDecimal nRootNewtonRaphson(BigDecimal x, BigDecimal x0, int root, int iterations, int precision) {
+		iterations--;
+		if (iterations == 0) {
+			return x0;
+		} else {
+			BigDecimal numerator = x0.pow(root).subtract(x);
+			BigDecimal denominator = x0.multiply(BigDecimal.valueOf(root));
+			BigDecimal x1 = x0.subtract(numerator.divide(denominator, precision, RoundingMode.HALF_DOWN));
+			return nRootNewtonRaphson(x, x1, root, iterations, precision);
+		}
 	}
 	
 }
