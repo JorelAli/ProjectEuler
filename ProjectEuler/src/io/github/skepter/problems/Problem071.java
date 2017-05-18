@@ -26,29 +26,33 @@ public class Problem071 extends RT {
 //		fractions.forEach(a -> System.out.println(a.toString()));
 		
 		
-//		//List<Fraction> fractions = new ArrayList<Fraction>();
+		List<Fraction> fractions = new ArrayList<Fraction>();
 //		List<Double> fractions = new ArrayList<Double>();
-//		int max = 1000000;
+		int max = 10000;
 //		LoadingBar bar = new LoadingBar("Problem 71", max);
-//		for(int d = 1; d <= max; d++) {
-//			for(int n = 1; n < d; n++) {
+		for(int d = 1; d <= max; d++) {
+			for(int n = 1; n < d; n++) {
+				Fraction fraction = new Fraction(n,d);
+				if(!fraction.canBeSimplified()) {
+					fractions.add(fraction);
+				}
 //				//if(Utils.gcd(n, d) == 1) {
 //				System.out.println(n);
 //					fractions.add((double) n/ (double) d);
 //					//fractions.add(new Fraction(n,d));
 //				//}
-//			}
+			}
 //			bar.updateBar(d);
-//		}
+		}
 //		System.out.println("Fractions generated");
 ////		Collections.sort(fractions);
 //		System.out.println("Fractions sorted");
-//		for (int i = 0; i < fractions.size(); i++) {
-//			Fraction fraction = fractions.get(i);
-//			if(fraction.getNumerator() == 3 && fraction.getDenominator() == 7) {
-//				System.out.println(fractions.get(i-1).getNumerator());
-//			}
-//		}
+		for (int i = 0; i < fractions.size(); i++) {
+			Fraction fraction = fractions.get(i);
+			if(fraction.getNumerator() == 3 && fraction.getDenominator() == 7) {
+				System.out.println(fractions.get(i-1).getNumerator());
+			}
+		}
 		//System.out.println(fractions.get(fractions.indexOf(new Fraction(3,7))).getNumerator());
 		//fractions.forEach(a -> System.out.println(a.toString()));
 		
