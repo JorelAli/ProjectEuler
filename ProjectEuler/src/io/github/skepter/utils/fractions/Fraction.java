@@ -4,7 +4,7 @@ import java.math.BigInteger;
 
 import io.github.skepter.utils.Utils;
 
-public class Fraction {
+public class Fraction implements Comparable<Fraction> {
 
 	private int numerator;
 	private int denominator;
@@ -90,12 +90,22 @@ public class Fraction {
 	public boolean equals(Fraction f) {
 		Fraction a = this.simplify();
 		Fraction b = f.simplify();
-		
 		return (a.getNumerator() == b.getNumerator() && a.getDenominator() == b.getDenominator());
 	}
 	
 	public static Fraction valueOf(int i) {
 		return new Fraction(i, 1);
+	}
+
+	@Override
+	public int compareTo(Fraction o) {
+		if(this.equals(o)) {
+			return 0;
+		}
+		double v1 = (double) simplify().getNumerator() / (double) simplify().getDenominator() ;
+		double v2 = (double) o.simplify().getNumerator() / (double) o.simplify().getDenominator();
+		
+		return 0;
 	}
 	
 }
