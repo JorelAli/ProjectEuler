@@ -27,6 +27,7 @@ public class Problem094 extends RT {
 		int max = 333333333;
 		LoadingBar bar = new LoadingBar("Problem 94", max);
 		for (int i = 2; i <= max; i++) {
+			//1, 1, 2 is not a triangle.
 			if (hasIntegralArea(i, i + 1)) {
 				count += (3 * i) + 1;
 			} 
@@ -45,12 +46,16 @@ public class Problem094 extends RT {
 	 * where a is the same as b, and c is the odd one out (i + 1 or i - 1)
 	 */
 	private static boolean hasIntegralArea(double a, double c) {
-		return getArea(a, c) % 1 == 0;
+		double area = getArea(a, c);
+		return (int) area == area;
+	//	return getArea(a, c) % 1 == 0;
 	}
 	
-	private static double getArea(double a, double c) {
-		double d = c / 2D;
-		double area = Math.sqrt((a * a) - (d * d)) * 0.5D * c;
+	private static double getArea(double hypotenuse, double base) {
+		double halfBase = base / 2D;
+		double height = Math.sqrt((hypotenuse * hypotenuse) - (halfBase * halfBase));
+		double area = base * height * 0.5D;
 		return area;
 	}
+
 }
