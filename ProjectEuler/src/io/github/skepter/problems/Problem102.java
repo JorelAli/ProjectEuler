@@ -26,6 +26,9 @@ public class Problem102 extends RT {
 	}
 	
 	/* https://projecteuler.net/problem=102
+	 * https://www.desmos.com/calculator/3zs5msyta2
+	 * 
+	 * Uses Barycentric coordinate method
 	 * Program took 118 milliseconds */
 	public static void main(final String[] args) {
 		
