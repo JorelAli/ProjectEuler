@@ -25,13 +25,14 @@ public class Problem102 extends RT {
 //		}
 	}
 	
-	/**/
+	/* https://projecteuler.net/problem=102
+	 * Program took 118 milliseconds */
 	public static void main(final String[] args) {
 		
 		Coordinates a = new Coordinates(-340, 495);
 		Coordinates b = new Coordinates(-153, -910);
 		Coordinates c = new Coordinates(-835, -947);
-		assert containsOrigin(a, b, c);
+		//assert containsOrigin(a, b, c);
 		
 //		//two negative, one positive
 //		System.out.println("a . b " + a.dotProduct(b));
@@ -84,12 +85,15 @@ public class Problem102 extends RT {
 	}
 	
 	public static boolean containsOrigin(Coordinates a, Coordinates b, Coordinates c) {
-		System.out.println(solveA(a, b, c) + solveB(a, b, c) + solveC(a, b, c));
+		//System.out.println(solveA(a, b, c) + solveB(a, b, c) + solveC(a, b, c));
 		if(solveA(a, b, c) > 1 || solveB(a, b, c) > 1 || solveC(a, b, c) > 1) {
 			return false;
-		} else {
-			return true;
 		}
+		if(solveA(a, b, c) < 0 || solveB(a, b, c) < 0 || solveC(a, b, c) < 0) {
+			return false;
+		}
+		return true;
+		
 	}
 	
 	public static double solveA(Coordinates c1, Coordinates c2, Coordinates c3) {
