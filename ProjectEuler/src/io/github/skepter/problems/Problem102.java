@@ -48,6 +48,26 @@ public class Problem102 extends RT {
 		
 		//https://en.wikipedia.org/wiki/Barycentric_coordinate_system#Conversion_between_barycentric_and_Cartesian_coordinates
 		
+		/*
+		 * A(x1 - x3) + B(x2 - x3) + x3 - 0 = 0
+		 * A(y1 - y3) + B(y2 - y3) + y3 - 0 = 0
+		 */
+		
+		
 		uptime();
+	}
+	
+	public double solveA(Coordinates c1, Coordinates c2, Coordinates c3) {
+		//x == y == 0
+		double top = (c2.y - c3.y) * (0 - c3.x) + (c3.x - c2.x) * (0 - c3.y);
+		double bottom = (c2.y - c3.y) * (c1.x - c3.x) + (c3.x - c2.x) * (c1.y - c3.y);
+		return top / bottom;
+	}
+	
+	public double solveB(Coordinates c1, Coordinates c2, Coordinates c3) {
+		//x == y == 0
+		double top = (c3.y - c1.y) * (0 - c3.x) + (c1.x - c3.x) * (0 - c3.y);
+		double bottom = (c2.y - c3.y) * (c1.x - c3.x) + (c3.x - c2.x) * (c1.y - c3.y);
+		return top / bottom;
 	}
 }
