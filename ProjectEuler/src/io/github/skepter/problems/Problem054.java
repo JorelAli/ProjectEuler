@@ -3,7 +3,6 @@ package io.github.skepter.problems;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
@@ -14,9 +13,9 @@ public class Problem054 extends RT {
 	public static void main(final String[] args) {
 		Utils.readFromFile("p054_poker.txt");
 		
-		Card[] cards = new Card[] {new Card("2H"), new Card("2D"), new Card("4C"), new Card("2S"), new Card("3D")};
-		new Hand(cards).isFourOfAKind();
-		System.out.println();
+		Card[] cards = new Card[] {new Card("2H"), new Card("2D"), new Card("2C"), new Card("5S"), new Card("4D")};
+		
+		System.out.println(new Hand(cards).isThreeOfAKind());
 		
 		uptime();
 	}
@@ -58,9 +57,27 @@ public class Problem054 extends RT {
 			return maxCard;
 		}
 		
+		public boolean isFullHouse() {
+			if(isThreeOfAKind()) {
+				boolean three = numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 3).count() > 0;
+				boolean two = numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 2).count() > 0;
+				return(three && two);
+			} else {
+				return false;
+			}
+		}
+		
+		public boolean isThreeOfAKind() {
+			if(isFourOfAKind()) {
+				return false;
+			}
+			boolean three = numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 3).count() > 0;
+			boolean two = numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 2).count() > 0;
+			return(three && !two);
+		}
+		
 		public boolean isFourOfAKind() {
-			List<Integer> results = numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 4).collect(Collectors.toList());
-			return !results.isEmpty();
+			return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 4).count() > 0;
 		}
 		
 		public boolean isFlush() {
