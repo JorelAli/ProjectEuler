@@ -1,5 +1,10 @@
 package io.github.skepter.problems;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
 
@@ -8,6 +13,11 @@ public class Problem054 extends RT {
 	/**/
 	public static void main(final String[] args) {
 		Utils.readFromFile("p054_poker.txt");
+		
+		Card[] cards = new Card[] {new Card("2H"), new Card("2D"), new Card("4C"), new Card("2S"), new Card("3D")};
+		new Hand(cards).isFourOfAKind();
+		System.out.println();
+		
 		uptime();
 	}
 	
@@ -15,24 +25,74 @@ public class Problem054 extends RT {
 		HEARTS, DIAMONDS, CLUBS, SPADES;
 	}
 	
-	class Hand {
+	static class Hand {
 		
 		public Card[] cards;
+		public int sumOfNumericalValues = 0;
+		public int[] numericalValuesSorted;
+		public List<Integer> numericalValuesSortedList;
 		
 		public Hand(Card[] cards) {
 			this.cards = cards;
+			
+			for(Card card : cards) {
+				sumOfNumericalValues += card.numericalValue;
+			}
+			
+			List<Integer> sortedCardValues = new ArrayList<Integer>();
+			for(Card card : cards) {
+				sortedCardValues.add(card.numericalValue);
+			}
+			Collections.sort(sortedCardValues);
+			numericalValuesSortedList = sortedCardValues;
+			numericalValuesSorted = sortedCardValues.stream().mapToInt((Integer i) -> i).toArray();
 		}
 		
 		public Card getHighestCard() {
+			Card maxCard = Card.nullCard();
 			for(Card card : cards) {
-				
+				if(card.numericalValue > maxCard.numericalValue) {
+					maxCard = card;
+				}
 			}
-			return null;
+			return maxCard;
+		}
+		
+		public boolean isFourOfAKind() {
+			List<Integer> results = numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 4).collect(Collectors.toList());
+			return !results.isEmpty();
+		}
+		
+		public boolean isFlush() {
+			boolean flush = true;
+			Suit cardSuit = cards[0].suit;
+			for(Card card : cards) {
+				if(card.suit != cardSuit) {
+					flush = false;
+				}
+			}
+			return flush;
+		}
+		
+		public boolean isStraight() {
+			Card highestCard = getHighestCard();
+			int highVal = highestCard.numericalValue;
+			int straightValue = highVal + (highVal - 1) + (highVal - 2) + (highVal - 3) + (highVal - 4);
+								
+			return sumOfNumericalValues == straightValue;
+		}
+		
+		public boolean isStraightFlush() {
+			return isStraight() && isFlush();
+		}
+		
+		public boolean isRoyalFlush() {
+			return isStraightFlush() && (sumOfNumericalValues == 60); //10 + 11 + 12 + 13 + 14;
 		}
 		
 	}
 	
-	class Card {
+	static class Card {
 	
 		//e.g. 2, 3, ... 10, J, Q, K, A
 		char card; 
@@ -41,6 +101,32 @@ public class Problem054 extends RT {
 		int numericalValue;
 		
 		Suit suit;
+		
+		public static Card nullCard() {
+			Card nullCard = new Card();
+			nullCard.card = '0';
+			nullCard.numericalValue = 0;
+			nullCard.suit = Suit.SPADES;
+			return nullCard;
+		}
+		
+		@Override
+		public String toString() {
+			switch(suit) {
+				case CLUBS:
+					return card + "C";
+				case DIAMONDS:
+					return card + "D";
+				case HEARTS:
+					return card + "H";
+				case SPADES:
+					return card + "S";
+				default:
+					return card + "";
+			}
+		}
+		
+		private Card() { }
 		
 		public Card(String str) {
 			card = str.toCharArray()[0];
