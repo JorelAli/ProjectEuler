@@ -12,11 +12,33 @@ public class Problem054 extends RT {
 
 	/**/
 	public static void main(final String[] args) {
-		Utils.readFromFile("p054_poker.txt");
+		List<String> list = Utils.readFromFile("p054_poker.txt");
+		int count = 0;
+		for(String str : list) {
+			String[] cards = str.split(" ");
+			Hand player1 = new Hand(new Card[] {new Card(cards[0]), new Card(cards[1]), new Card(cards[2]), new Card(cards[3]), new Card(cards[4])});
+			Hand player2 = new Hand(new Card[] {new Card(cards[5]), new Card(cards[6]), new Card(cards[7]), new Card(cards[8]), new Card(cards[9])});
+//			System.out.println(str);
+//			System.out.println(player1.getNumericalResult());
+//			System.out.println(player2.getNumericalResult());
+			if(player1.getNumericalResult() > player2.getNumericalResult()) {
+				count++;
+			}
+			if(player1.getNumericalResult() == player2.getNumericalResult()) {
+				
+				if(player1.getHighestCard().numericalValue > player2.getHighestCard().numericalValue) {
+					count++;
+				}
+				//System.out.println(str);
+				//System.out.println(player1.getNumericalResult());
+			}
+		}
 		
-		Card[] cards = new Card[] {new Card("5H"), new Card("2D"), new Card("3C"), new Card("3S"), new Card("4D")};
+		System.out.println(count);
 		
-		System.out.println(new Hand(cards).isPair());
+//		Card[] cards = new Card[] {new Card("5H"), new Card("2D"), new Card("3C"), new Card("3S"), new Card("4D")};
+		
+//		System.out.println(new Hand(cards).isPair());
 		
 		uptime();
 	}
@@ -46,6 +68,41 @@ public class Problem054 extends RT {
 			Collections.sort(sortedCardValues);
 			numericalValuesSortedList = sortedCardValues;
 			numericalValuesSorted = sortedCardValues.stream().mapToInt((Integer i) -> i).toArray();
+		}
+		
+		/**
+		 * Calculates some kind of number to determine the winner. The higher the number, the higher your chances of winning
+		 * @return
+		 */
+		public int getNumericalResult() {
+			if(isRoyalFlush()) {
+				return 100;
+			}
+			if(isStraightFlush()) {
+				return 99;
+			}
+			if(isFourOfAKind()) {
+				return 98;
+			}
+			if(isFullHouse()) {
+				return 97;
+			}
+			if(isFlush()) {
+				return 96;
+			}
+			if(isStraight()) {
+				return 95;
+			}
+			if(isThreeOfAKind()) {
+				return 94;
+			}
+			if(isTwoPairs()) {
+				return 93;
+			}
+			if(isPair()) {
+				return 92;
+			}
+			return getHighestCard().numericalValue;
 		}
 		
 		public Card getHighestCard() {
