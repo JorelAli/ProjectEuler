@@ -16,7 +16,7 @@ public class Problem054 extends RT {
 		
 		Card[] cards = new Card[] {new Card("5H"), new Card("2D"), new Card("3C"), new Card("3S"), new Card("4D")};
 		
-		System.out.println(new Hand(cards).isTwoPairs());
+		System.out.println(new Hand(cards).isPair());
 		
 		uptime();
 	}
@@ -58,11 +58,20 @@ public class Problem054 extends RT {
 			return maxCard;
 		}
 		
+		public boolean isPair() {
+			if(!isTwoPairs()) {
+				return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 2).collect(Collectors.toSet()).size() == 1;
+			} else {
+				return false;
+			}
+		}
+		
 		public boolean isTwoPairs() {
 			if(!isFullHouse()) {
 				return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 2).collect(Collectors.toSet()).size() == 2;
+			} else {
+				return false;
 			}
-			return false;
 		}
 		
 		public boolean isFullHouse() {
