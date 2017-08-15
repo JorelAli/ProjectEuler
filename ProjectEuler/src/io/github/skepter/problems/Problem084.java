@@ -1,9 +1,9 @@
 package io.github.skepter.problems;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 import io.github.skepter.utils.RT;
@@ -11,7 +11,7 @@ import io.github.skepter.utils.RT;
 public class Problem084 extends RT {
 
 	final static int DICE_SIZE = 6;
-	final static int TRIALS = 1000000;
+	final static int TRIALS = 10000000;
 	
 	static int doublesMade = 0;
 	static int currentSquare = 0;
@@ -41,12 +41,18 @@ public class Problem084 extends RT {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
 		for(Entry<Integer, Integer> entry : squareLandCount.entrySet()) {
-			System.out.println(entry.getKey() + ": " + entry.getValue());
+			//System.out.println(entry.getKey() + ": " + entry.getValue());
 			list.add(entry.getValue());
 		}
-		Collections.sort(list);
-		for(int i : list.subList(list.size() - 3, list.size()))
-			System.out.println(i);
+		
+		TreeMap<Integer, Integer> reverse = new TreeMap<Integer, Integer>();
+		for(Entry<Integer, Integer> entry : squareLandCount.entrySet()){
+			reverse.put(entry.getValue(), entry.getKey());
+		}
+		
+		for(int key : reverse.keySet()) {
+			System.out.println(key + ": " + reverse.get(key));
+		}
 		
 		uptime();
 	}
