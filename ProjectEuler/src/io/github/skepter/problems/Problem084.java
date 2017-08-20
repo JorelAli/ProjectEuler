@@ -2,10 +2,9 @@ package io.github.skepter.problems;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map.Entry;
-import java.util.TreeMap;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 import io.github.skepter.utils.RT;
@@ -21,13 +20,14 @@ public class Problem084 extends RT {
 	static LinkedList<Integer> cc = new LinkedList<Integer>();
 	static LinkedList<Integer> ch = new LinkedList<Integer>();	
 	
-	static HashMap<Integer, Integer> squareLandCount = new HashMap<Integer, Integer>();
+	static int[] squareLandCountArr = new int[40];
+	//static HashMap<Integer, Integer> squareLandCount = new HashMap<Integer, Integer>();
 	
 	/* https://projecteuler.net/problem=84 
 	 * What are the top 3 most likely squares to land on in a game of monopoly
 	 * if you used two 4 sided dice instead of two 6 sided dice? 
 	 * 
-	 * Program took 570 milliseconds */
+	 * Program took 331 milliseconds */
 	public static void main(final String[] args) {
 		
 		for(int i = 1; i <= 16; i++) {
@@ -52,21 +52,35 @@ public class Problem084 extends RT {
 			endTurn();
 		}
 		
+		
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		
-		for(Entry<Integer, Integer> entry : squareLandCount.entrySet()) {
-			//System.out.println(entry.getKey() + ": " + entry.getValue());
-			list.add(entry.getValue());
+		SortedSet<Integer> set = new TreeSet<Integer>();
+		for(int i = 0; i < 40; i++) {
+			list.add(squareLandCountArr[i]);
+			set.add(squareLandCountArr[i]);
 		}
 		
-		TreeMap<Integer, Integer> reverse = new TreeMap<Integer, Integer>();
-		for(Entry<Integer, Integer> entry : squareLandCount.entrySet()){
-			reverse.put(entry.getValue(), entry.getKey());
+		String str = "";
+		for(int i = 0; i < 3; i++) {
+			str = str + list.indexOf(set.last());
+			set.remove(set.last());
 		}
+		System.out.println(str);
 		
-		for(int key : reverse.keySet()) {
-			System.out.println(key + ": " + reverse.get(key));
-		}
+		
+//		for(Entry<Integer, Integer> entry : squareLandCount.entrySet()) {
+//			//System.out.println(entry.getKey() + ": " + entry.getValue());
+//			list.add(entry.getValue());
+//		}
+//		
+//		TreeMap<Integer, Integer> reverse = new TreeMap<Integer, Integer>();
+//		for(Entry<Integer, Integer> entry : squareLandCount.entrySet()){
+//			reverse.put(entry.getValue(), entry.getKey());
+//		}
+//		
+//		for(int key : reverse.keySet()) {
+//			System.out.println(key + ": " + reverse.get(key));
+//		}
 		
 		uptime();
 	}
@@ -200,7 +214,8 @@ public class Problem084 extends RT {
 	}
 	
 	public static void endTurn() {
-		squareLandCount.put(currentSquare, squareLandCount.getOrDefault(currentSquare, 0) + 1);
+		squareLandCountArr[currentSquare] = squareLandCountArr[currentSquare] + 1;
+//		squareLandCount.put(currentSquare, squareLandCount.getOrDefault(currentSquare, 0) + 1);
 		//add current square to square land count
 	}
 	
