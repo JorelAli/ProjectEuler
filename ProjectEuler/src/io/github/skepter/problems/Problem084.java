@@ -1,7 +1,9 @@
 package io.github.skepter.problems;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -15,7 +17,9 @@ public class Problem084 extends RT {
 	
 	static int doublesMade = 0;
 	static int currentSquare = 0;
-		
+	
+	static LinkedList<Integer> cc = new LinkedList<Integer>();
+	static LinkedList<Integer> ch = new LinkedList<Integer>();	
 	
 	static HashMap<Integer, Integer> squareLandCount = new HashMap<Integer, Integer>();
 	
@@ -24,15 +28,23 @@ public class Problem084 extends RT {
 	 * if you used two 4 sided dice instead of two 6 sided dice? */
 	public static void main(final String[] args) {
 		
+		for(int i = 1; i <= 16; i++) {
+			cc.add(i);
+			ch.add(i);
+		}
+		
+		Collections.shuffle(cc);
+		Collections.shuffle(ch);
+				
 		for(int i = 0; i < TRIALS; i++) {
 			rollDice();
-			if(currentSquare == 2 || currentSquare == 17 || currentSquare == 33) {
-				doCommunityChest(); //do community chest
-			} else if(currentSquare == 30) {
-				currentSquare = 10; //go to jail
-			} else if(currentSquare == 7 || currentSquare == 22 || currentSquare == 36) {
-				doChance();
-			}
+//			if(currentSquare == 2 || currentSquare == 17 || currentSquare == 33) {
+//				doCommunityChest(); //do community chest
+//			} else if(currentSquare == 30) {
+//				currentSquare = 10; //go to jail
+//			} else if(currentSquare == 7 || currentSquare == 22 || currentSquare == 36) {
+//				doChance();
+//			}
 			
 			//System.out.println("new current square is " + currentSquare);
 			endTurn();
@@ -82,13 +94,45 @@ public class Problem084 extends RT {
 		}
 		
 		if(doubleMade) {
+			endTurn();
+			//endTurn();
+			//handle some kind of end turn here
 			rollDice();
+		} else {
+			doublesMade = 0;
 		}
 		
+		if(currentSquare == 7 || currentSquare == 22 || currentSquare == 36) {
+			doChance();
+		}
+		
+		if(currentSquare == 2 || currentSquare == 17 || currentSquare == 33) {
+			doCommunityChest(); //do community chest
+		} else if(currentSquare == 30) {
+			currentSquare = 10; //go to jail
+		}  		
+	}
+	
+	/*
+	 * Picks up the next card and puts it to the bottom of the pile of cards
+	 */
+	public static int pickCommunityChest() {
+		int result = cc.pop();
+		cc.offer(result);
+		return result;
+	}
+	
+	/*
+	 * Picks up the next card and puts it to the bottom of the pile of cards
+	 */
+	public static int pickChance() {
+		int result = ch.pop();
+		ch.offer(result);
+		return result;
 	}
 	
 	public static void doChance() {
-		int val = ThreadLocalRandom.current().nextInt(1, 17);
+		int val = pickChance();
 		switch(val) {
 			case 1:
 				currentSquare = 0;
@@ -128,7 +172,14 @@ public class Problem084 extends RT {
 				}
 				break;
 			case 10:
-				currentSquare -= 3;
+				if(currentSquare == 7) {
+					currentSquare = 4;
+				} else if(currentSquare == 22) {
+					currentSquare = 19;
+				} else if(currentSquare == 36) {
+					currentSquare = 33;
+				}
+				//currentSquare -= 3;
 				break;
 			default:
 				return;
@@ -136,7 +187,7 @@ public class Problem084 extends RT {
 	}
 	
 	public static void doCommunityChest() {
-		int val = ThreadLocalRandom.current().nextInt(1, 17);
+		int val = pickCommunityChest();
 		if(val == 1) {
 			currentSquare = 0;
 		} else if(val == 2) {
