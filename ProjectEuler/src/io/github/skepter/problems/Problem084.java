@@ -12,7 +12,7 @@ import io.github.skepter.utils.RT;
 
 public class Problem084 extends RT {
 
-	final static int DICE_SIZE = 6;
+	final static int DICE_SIZE = 4;
 	final static int TRIALS = 10000000;
 	
 	static int doublesMade = 0;
@@ -25,7 +25,9 @@ public class Problem084 extends RT {
 	
 	/* https://projecteuler.net/problem=84 
 	 * What are the top 3 most likely squares to land on in a game of monopoly
-	 * if you used two 4 sided dice instead of two 6 sided dice? */
+	 * if you used two 4 sided dice instead of two 6 sided dice? 
+	 * 
+	 * Program took 570 milliseconds */
 	public static void main(final String[] args) {
 		
 		for(int i = 1; i <= 16; i++) {
