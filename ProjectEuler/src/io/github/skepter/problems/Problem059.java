@@ -1,6 +1,5 @@
 package io.github.skepter.problems;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,8 +13,22 @@ import io.github.skepter.utils.Utils;
 
 public class Problem059 extends RT {
 
-	public static boolean isLetter(int character) {
-		return (character >= 65 && character <= 90) || (character >= 97 && character <= 122); 
+	public static void produceResult() {
+		String str = "(The Gospel of John, chapter 1) 1 In the beginning the Word already existed. He was with God, and he was God. 2 He was in the beginning with God. 3 He created everything there is. Nothing exists that he didn't make. 4 Life itself was in him, and this life gives light to everyone. 5 The light shines through the darkness, and the darkness can never extinguish it. 6 God sent John the Baptist 7 to tell everyone about the light so that everyone might believe because of his testimony. 8 John himself was not the light; he was only a witness to the light. 9 The one who is the true light, who gives light to everyone, was going to come into the world. 10 But although the world was made through him, the world didn't recognize him when he came. 11 Even in his own land and among his own people, he was not accepted. 12 But to all who believed him and accepted him, he gave the right to become children of God. 13 They are reborn! This is not a physical birth resulting from human passion or plan, this rebirth comes from God.14 So the Word became human and lived here on earth among us. He was full of unfailing love and faithfulness. And we have seen his glory, the glory of the only Son of the Father.";
+		int i = 0;
+		for(byte b : str.getBytes()) {
+			i += b;
+		}
+		System.out.println(i);
+	}
+	
+	/*
+	 * Let's say that an English character is something that you'd normally find in a 
+	 * piece of text, a book or something. So this includes both upper and lower
+	 * case characters, as well as stuff like numbers, symbols etc.
+	 */
+	public static boolean isEnglishCharacter(int character) {
+		return character > 31 && character < 127;//(character >= 65 && character <= 90) || (character >= 97 && character <= 122); 
 	}
 	
 	/*
@@ -32,7 +45,6 @@ public class Problem059 extends RT {
 	 * the message and find the sum of the ASCII values in the original text
 	 */
 	public static void main(final String[] args) throws Exception {
-		assert ((5 ^ 6) == 3);
 		Utils.outputToFile("problem59OUT.txt");
 		
 		String[] arr = Utils.readFromFile("p059_cipher.txt").get(0).split(",");
@@ -50,7 +62,7 @@ public class Problem059 extends RT {
 		 * for the encryption key. The result when xored must be a letter (either upper or lower case)
 		 */
 		
-		//Lists containing the possible 1st, 2nd and 3rd character
+		//Lists containing the possible 1st, 2nd and 3rd character (as ASCII decimal)
 		Set<Integer> chars1 = new HashSet<Integer>();
 		Set<Integer> chars2 = new HashSet<Integer>();
 		Set<Integer> chars3 = new HashSet<Integer>();
@@ -75,52 +87,61 @@ public class Problem059 extends RT {
 		}
 		
 		Utils.printListSingleLine(arr1);
+		Utils.printListSingleLine(arr2);
+		Utils.printListSingleLine(arr3);
 		
-		for(int i = 0; i < 128; i++) {
-			if(i >= 65 && i <= 90) {
+		for(int possibleKeyCharacter = 0; possibleKeyCharacter < 128; possibleKeyCharacter++) {
+			
+			//Ignore uppercase characters
+			if(possibleKeyCharacter >= 65 && possibleKeyCharacter <= 90) {
 				continue;
 			}
-			//First letter
-			boolean isLetter = false;
+			
+			//First character
+			boolean isLetter = true;
+			
+			
 			for(int c : arr1) {
-				if(isLetter(c ^ i)) {
-					isLetter = true;
-				} else {
-					isLetter = false;
-				}
-			}
-			if(isLetter) {
-				chars1.add(i);
-			}
+				if(!isEnglishCharacter(c ^ possibleKeyCharacter)) {
+					//System.out.println("NOT possible value for character 1, when i=" + possibleKeyCharacter + " and c=" + c);
 
-			//Second letter
-			isLetter = false;
-			for(int c : arr2) {
-				if(isLetter(c ^ i)) {
-					isLetter = true;
-				} else {
 					isLetter = false;
+					break;
 				}
+//				else {
+//					System.out.println("    possible value for character 1, when i=" + possibleKeyCharacter + " and c=" + c);
+//				}
 			}
 			if(isLetter) {
-				chars2.add(i);
+				chars1.add(possibleKeyCharacter);
 			}
 			
-			//Third letter
-			isLetter = false;
-			for(int c : arr3) {
-				if(isLetter(c ^ i)) {
-					isLetter = true;
-				} else {
+			//Second character
+			isLetter = true;
+			for(int c : arr2) {
+				if(!isEnglishCharacter(c ^ possibleKeyCharacter)) {
 					isLetter = false;
+					break;
 				}
 			}
 			if(isLetter) {
-				chars3.add(i);
+				chars2.add(possibleKeyCharacter);
+			}
+			
+			//Third character
+			isLetter = true;
+			for(int c : arr3) {
+				if(!isEnglishCharacter(c ^ possibleKeyCharacter)) {
+					isLetter = false;
+					break;
+				}
+			}
+			if(isLetter) {
+				chars3.add(possibleKeyCharacter);
 			}
 		}
 		
-		//Number of permutations (30720)
+		//Number of permutations
 		System.out.println(chars1.size() * chars2.size() * chars3.size());
 		
 		Utils.printListSingleLine(chars1);
@@ -145,12 +166,24 @@ public class Problem059 extends RT {
 							throw new Exception("This shouldn't occur");
 						}
 					}
-					System.out.println(Arrays.deepToString(arr));
+					
+					//Print array as text
+					StringBuilder builder = new StringBuilder();
+					for(String str : arr) {
+						builder.append(str);
+					}
+					System.out.println(builder.toString());
 				}
 			}
 		}
 		
+		/*
+		 * After searching the output file (problem59OUT.txt), I discovered on line 620, it was the only line with "Regular English"
+		 */
 		
+		produceResult();
+		
+		//See previous attempts below
 		
 		
 		
