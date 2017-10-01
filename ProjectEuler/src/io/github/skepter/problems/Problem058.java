@@ -16,7 +16,7 @@ public class Problem058 extends RT {
 	 */
 	public static void main(final String[] args) {
 
-		Set<Integer> primes = SieveWithBitset.getPrimes(500000000);
+		Set<Integer> primes = SieveWithBitset.getPrimes(10);
 		System.out.println("Primes generated");
 
 		// int gridSize = 7;
@@ -39,6 +39,8 @@ public class Problem058 extends RT {
 				}
 			}
 
+			System.out.println("gridSize: " + gridSize + ", ratio: " + (((double) primeCount / (double) count) * 100));
+			
 			// System.out.println("Grid size: " + gridSize + " - " + (double)
 			// primeCount / (double) count);
 			if ((double) primeCount / (double) count < 0.1) {

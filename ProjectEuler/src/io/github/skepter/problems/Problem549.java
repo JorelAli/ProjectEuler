@@ -29,16 +29,20 @@ public class Problem549 extends RT {
 		uptime();
 	}
 	
+	
+	
 	public static long S(long n) {
 		int count = 0;
-		for(int i = 2; i <= n; i++)
-			count += s(i);
+		for(int i = 2; i <= n; i++) {
+			long val = s(i);
+			count += val;
+		}
 		return count;
 	}
 	
 	public static long s(long n) {
 		return s.computeIfAbsent(n, (key) -> {
-			for(long m = 0;; m++)
+			for(long m = 2;; m++)
 				if(Utils.factorial(m) % key == 0)
 					return m;
 		});
