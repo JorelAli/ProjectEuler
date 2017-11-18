@@ -40,7 +40,7 @@ public class Utils {
 		int count = 0;
 		String s = String.valueOf(input);
 		for (int i = 0; i < s.length(); i++) {
-			count += Integer.parseInt(String.valueOf(s.charAt(i)));
+			count += Integer.parseInt(Character.toString(s.charAt(i)));
 		}
 		return count;
 	}
@@ -503,6 +503,37 @@ public class Utils {
 			BigDecimal denominator = x0.multiply(BigDecimal.valueOf(root));
 			BigDecimal x1 = x0.subtract(numerator.divide(denominator, precision, RoundingMode.HALF_DOWN));
 			return nRootNewtonRaphson(x, x1, root, iterations, precision);
+		}
+	}
+	
+	/**
+	 * Converts a number to its respective array:
+	 * 1234 = [1, 2, 3, 4]
+	 * 
+	 * @param i The value to convert to array
+	 * @param length If length is -1, it will create an array of length of the number.
+	 * @param filler If length is used (i.e. not -1), it will fill remaining indexes with the filler number
+	 * <br>
+	 * For example, toArray(12345, 7, -1) will return [-1, -1, 1, 2, 3, 4, 5]
+	 *	
+	 */
+	public static int[] toArray(int i, int length, int filler) {
+//		System.out.println("Converting " + i + " to an array of length " + length + " with filler " + filler);
+		if(length == -1) { 
+			int[] arr = new int[String.valueOf(i).length()];
+			int index = 0;
+			for(char c : String.valueOf(i).toCharArray()) {
+				arr[index++] = Integer.parseInt(Character.toString(c));
+			}
+			return arr;
+		} else {
+			int[] arr = new int[length];
+			int loop = 0;
+			for(; loop < length - String.valueOf(i).length(); loop++) {
+				arr[loop] = filler;
+			}
+			System.arraycopy(toArray(i, -1, 0), 0, arr, loop, String.valueOf(i).length());
+			return arr;
 		}
 	}
 	
