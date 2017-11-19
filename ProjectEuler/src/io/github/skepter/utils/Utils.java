@@ -335,48 +335,64 @@ public class Utils {
 		return b == 0 ? a : gcd(b, a % b);
 	}
 
-	static Map<Integer, Integer> totientMap = new HashMap<>();
-	
-	public static int totientCache(int a, Set<Integer> primes) {
-		if(totientMap.containsKey(a)) {
-			return totientMap.get(a);
-		}
-		int result = totient(a, primes);
-		totientMap.put(a, result);
-		return result;
-	}
-	
 	/**
-	 * Returns the totient function
-	 * https://en.wikipedia.org/wiki/Euler%27s_totient_function
+	 * Computes Euler's Totient function
+	 * @param n The number to compute
+	 * @param primes A list of primes to help with computation
+	 * @return Euler's Totient function
 	 */
-	public static int totient(int a, Set<Integer> primes) {
-		
-		if(a == 2 || a == 1) {
-			return 1;
+	public static int totient(int n, List<Integer> primes) {
+		double count = 1;
+		for(int i : Utils.getPrimeFactorSet(n, primes)) {
+			count *= (1D - 1D / (double) i);
 		}
-		
-		//φ(nm) = φ(n)φ(m) IFF one of them is prime
-		for(int prime : primes) {
-			if(a % prime == 0 && gcd(a, prime) == 1) {
-				a /= prime;
-				return oldTotient(prime) * totientCache(a, primes);
-			}
-		}
-		
-		return oldTotient(a);
+		return (int) (count * n);
 	}
 	
-	@Deprecated
-	public static int oldTotient(int a) {
-		int count = 0;
-		for (int i = 1; i <= a; i++) {
-			if (a % (gcd(a, i) == 1 ? a + 1 : gcd(a, i)) != 0) {
-				count++;
-			}
-		}
-		return count;
-	}
+	//Old totient functions, no longer used anymore (due to being slow/not working)
+//	static Map<Integer, Integer> totientMap = new HashMap<>();
+//	
+//	public static int totientCache(int a, Set<Integer> primes) {
+//		if(totientMap.containsKey(a)) {
+//			return totientMap.get(a);
+//		}
+//		int result = totient(a, primes);
+//		totientMap.put(a, result);
+//		return result;
+//	}
+//	
+//	/**
+//	 * Returns the totient function
+//	 * https://en.wikipedia.org/wiki/Euler%27s_totient_function
+//	 */
+//	@Deprecated
+//	public static int totient(int a, Set<Integer> primes) {
+//		
+//		if(a == 2 || a == 1) {
+//			return 1;
+//		}
+//		
+//		//φ(nm) = φ(n)φ(m) IFF one of them is prime
+//		for(int prime : primes) {
+//			if(a % prime == 0 && gcd(a, prime) == 1) {
+//				a /= prime;
+//				return oldTotient(prime) * totientCache(a, primes);
+//			}
+//		}
+//		
+//		return oldTotient(a);
+//	}
+//	
+//	@Deprecated
+//	public static int oldTotient(int a) {
+//		int count = 0;
+//		for (int i = 1; i <= a; i++) {
+//			if (a % (gcd(a, i) == 1 ? a + 1 : gcd(a, i)) != 0) {
+//				count++;
+//			}
+//		}
+//		return count;
+//	}
 
 	/**
 	 * Checks if a string is a permutation of another string
