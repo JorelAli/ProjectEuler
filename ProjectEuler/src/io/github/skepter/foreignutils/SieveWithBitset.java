@@ -30,10 +30,16 @@ public class SieveWithBitset {
 		sieve.set((k - 3) / 2);
 	}
 
+	/**
+	 * @return A set of integers of the prime numbers 
+	 */
 	public static Set<Integer> getPrimes(final int max) {
 		return Utils.convertListToSet(sieveOfEratosthenes(max));
 	}
 	
+	/**
+	 * @return A list of integers of the prime numbers 
+	 */
 	public static List<Integer> sieveOfEratosthenes(final int max) {
 		final SieveWithBitset sieve = new SieveWithBitset(max + 1); // +1 to include max itself
 		for (int i = 3; (i * i) <= max; i += 2) {

@@ -335,12 +335,40 @@ public class Utils {
 		return b == 0 ? a : gcd(b, a % b);
 	}
 
+	static Map<Integer, Integer> totientMap = new HashMap<>();
+	
+	public static int totientCache(int a, Set<Integer> primes) {
+		if(totientMap.containsKey(a)) {
+			return totientMap.get(a);
+		}
+		int result = totient(a, primes);
+		totientMap.put(a, result);
+		return result;
+	}
+	
 	/**
 	 * Returns the totient function
 	 * https://en.wikipedia.org/wiki/Euler%27s_totient_function
 	 */
+	public static int totient(int a, Set<Integer> primes) {
+		
+		if(a == 2 || a == 1) {
+			return 1;
+		}
+		
+		//φ(nm) = φ(n)φ(m) IFF one of them is prime
+		for(int prime : primes) {
+			if(a % prime == 0 && gcd(a, prime) == 1) {
+				a /= prime;
+				return oldTotient(prime) * totientCache(a, primes);
+			}
+		}
+		
+		return oldTotient(a);
+	}
+	
 	@Deprecated
-	public static int totient(int a) {
+	public static int oldTotient(int a) {
 		int count = 0;
 		for (int i = 1; i <= a; i++) {
 			if (a % (gcd(a, i) == 1 ? a + 1 : gcd(a, i)) != 0) {
@@ -535,6 +563,14 @@ public class Utils {
 			System.arraycopy(toArray(i, -1, 0), 0, arr, loop, String.valueOf(i).length());
 			return arr;
 		}
+	}
+	
+	public static boolean isPrime(int i, int certainty) {
+		return BigInteger.valueOf(i).isProbablePrime(certainty);
+	}
+	
+	public static boolean isPrime(int i) {
+		return isPrime(i, 20);
 	}
 	
 }
