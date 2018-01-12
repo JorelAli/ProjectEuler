@@ -21,12 +21,16 @@ public class SieveWithBitset {
 	}
 
 	public boolean isComposite(final int k) {
-		assert (k >= 3) && ((k % 2) == 1);
+		if (((k >= 3) && ((k % 2) == 1)) == false) {
+			throw new AssertionError();
+		}
 		return sieve.get((k - 3) / 2);
 	}
 
 	public void setComposite(final int k) {
-		assert (k >= 3) && ((k % 2) == 1);
+		if((k >= 3) && ((k % 2) == 1) == false) {
+			throw new AssertionError();
+		}
 		sieve.set((k - 3) / 2);
 	}
 

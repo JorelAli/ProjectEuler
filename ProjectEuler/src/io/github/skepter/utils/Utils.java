@@ -342,6 +342,9 @@ public class Utils {
 	 * @return Euler's Totient function
 	 */
 	public static int totient(int n, List<Integer> primes) {
+		if(n <= 0) {
+			throw new IllegalArgumentException("input cannot be less than or equal to 0");
+		}
 		double count = 1;
 		for(int i : Utils.getPrimeFactorSet(n, primes)) {
 			count *= (1D - 1D / (double) i);
@@ -585,6 +588,13 @@ public class Utils {
 		return BigInteger.valueOf(i).isProbablePrime(certainty);
 	}
 	
+	/**
+	 * Checks if a number is prime. Can confirm that it can determine numbers <
+	 * 982,451,653 (the 50th million prime) accurately
+	 * 
+	 * @param i The number to check if prime
+	 * @return True is prime, False if not prime
+	 */
 	public static boolean isPrime(int i) {
 		return isPrime(i, 20);
 	}

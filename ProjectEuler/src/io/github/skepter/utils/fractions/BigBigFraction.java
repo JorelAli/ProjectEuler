@@ -1,5 +1,6 @@
 package io.github.skepter.utils.fractions;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class BigBigFraction implements Comparable<BigBigFraction> {
@@ -88,6 +89,18 @@ public class BigBigFraction implements Comparable<BigBigFraction> {
 	
 	public static BigBigFraction valueOf(BigInteger i) {
 		return new BigBigFraction(i, BigInteger.ONE);
+	}
+	
+	public static BigBigFraction valueOf(BigDecimal i) {
+		// Get decimal places: https://stackoverflow.com/a/4592016/4779071
+		String string = i.stripTrailingZeros().toPlainString();
+		int index = string.indexOf(".");
+		int decimalPlaces = index < 0 ? 0 : string.length() - index - 1;
+		
+		int multiplicand = 10 * decimalPlaces;
+		BigInteger numerator = new BigInteger(i.multiply(BigDecimal.valueOf(multiplicand)).toString().replace(".0", ""));
+		
+		return new BigBigFraction(numerator, BigInteger.valueOf(multiplicand));
 	}
 	
 	public BigBigFraction copy() {
