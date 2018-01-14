@@ -34,6 +34,12 @@ public class Utils {
 		return count;
 	}
 	
+	public static void assert_(boolean b) {
+		if(!b) {
+			throw new AssertionError();
+		}
+	}
+	
 	/**
 	 * Returns the sum of digits of a number
 	 */
