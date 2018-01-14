@@ -2,6 +2,7 @@ package io.github.skepter.problems;
 
 import io.github.skepter.utils.LoadingBar;
 import io.github.skepter.utils.RT;
+import io.github.skepter.utils.Utils;
 
 public class Problem094 extends RT {
 
@@ -20,18 +21,21 @@ public class Problem094 extends RT {
 	 * billion (1,000,000,000).
 	 */
 	public static void main(final String[] args) {
-		assert getArea(5, 6) == 12.0D;
-		assert hasIntegralArea(5, 6);
+		
+		Utils.assert_(getArea(5, 6) == 12.0D);
+		Utils.assert_(hasIntegralArea(5, 6));
+		
+		Utils.assert_(isActuallyATriangle(1, 1, 2) == false);
 		
 		long count = 0L;
-		int max = 333333333;
+		int max = 333_333_333;//191856
 		LoadingBar bar = new LoadingBar("Problem 94", max);
 		for (int i = 2; i <= max; i++) {
 			//1, 1, 2 is not a triangle.
-			if (hasIntegralArea(i, i + 1)) {
+			if (hasIntegralArea(i, i + 1) && isActuallyATriangle(i, i, i + 1)) {
 				count += (3 * i) + 1;
 			} 
-			if (hasIntegralArea(i, i - 1)) {
+			if (hasIntegralArea(i, i - 1) && isActuallyATriangle(i, i, i - 1)) {
 				count += (3 * i) - 1;
 			}
 			bar.updateBar(i);
@@ -56,6 +60,18 @@ public class Problem094 extends RT {
 		double height = Math.sqrt((hypotenuse * hypotenuse) - (halfBase * halfBase));
 		double area = base * height * 0.5D;
 		return area;
+	}
+	
+	/**
+	 * Checks if 3 numbers actually produce a valid triangle:
+	 * https://stackoverflow.com/a/19835249/4779071
+	 * @param a
+	 * @param b
+	 * @param c
+	 * @return
+	 */
+	private static boolean isActuallyATriangle(double a, double b, double c) {
+		return (((a + b) > c) && ((a + c) > b) && ((b + c) > a));
 	}
 
 }
