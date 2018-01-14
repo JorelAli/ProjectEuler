@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Utils {
 
@@ -49,11 +50,16 @@ public class Utils {
 	 * Returns a list of the digits of a number
 	 */
 	public static List<Integer> digits(int value) {
+		return Arrays.stream(digitsArr(value)).boxed().collect(Collectors.toList());
+	}
+	
+	/**
+	 * Returns an array of the digits of a number
+	 */
+	public static int[] digitsArr(int value) {
 		String s = String.valueOf(value);
-		List<Integer> list = new ArrayList<Integer>();
-		for (int i = 0; i < s.length(); i++)
-			list.add(Integer.parseInt(String.valueOf(s.charAt(i))));
-		return list;
+		// 0 ASCII = 48
+		return s.chars().boxed().mapToInt(i -> i - 48).toArray();
 	}
 
 	/**
@@ -115,15 +121,6 @@ public class Utils {
 	 */
 	public static void printListSingleLine(final Collection<?> list) {
 		System.out.println(Arrays.toString(list.toArray()).toString());
-	}
-
-	/**
-	 * Prints an array
-	 */
-	public static void printArray(Object[] input) {
-		for (Object item : input) {
-			System.out.println(item);
-		}
 	}
 
 	/**

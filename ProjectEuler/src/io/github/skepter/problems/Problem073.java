@@ -55,7 +55,7 @@ public class Problem073 extends RT {
 	
 	public static void main(final String[] args) {
 		System.out.println(length(12000));
-		farey(12000);
+		//farey(12000);
 		//double max = 0;
 //		for(int d = 1; d <= 12000; d++) {
 //			System.out.println(Utils.totient(d, primes));

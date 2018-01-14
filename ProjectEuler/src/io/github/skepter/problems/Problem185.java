@@ -1,5 +1,7 @@
 package io.github.skepter.problems;
 
+import java.util.Arrays;
+
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
 
@@ -69,7 +71,7 @@ public class Problem185 extends RT {
 			}
 			arr[i] = String.copyValueOf(newArr);
 		}
-		Utils.printArray(arr);
+		System.out.println(Arrays.toString(arr));
 		uptime();
 	}
 }
