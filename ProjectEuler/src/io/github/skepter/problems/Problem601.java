@@ -3,6 +3,7 @@ package io.github.skepter.problems;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.github.skepter.utils.LoadingBar;
 import io.github.skepter.utils.RT;
 
 public class Problem601 extends RT {
@@ -27,16 +28,19 @@ public class Problem601 extends RT {
 		System.out.println(P(3, 14));
 		System.out.println(P(6, 10000000));
 		System.out.println(P(6, 10000000));
+		
+		
 
 		
 		
-//		LoadingBar bar = new LoadingBar("Problem 601", 31);
-//		long count = 0;
-//		for(int i = 1; i <= 31; i++) {
-//			count += P(i, (long) Math.pow(4, i));
-//			bar.updateBar(i);
-//		}
-//		System.out.println(count);
+		LoadingBar bar = new LoadingBar("Problem 601", 31);
+		long count = 0;
+		for(int i = 1; i <= 31; i++) {
+			count += P(i, (long) Math.pow(4, i));
+			bar.updateBar(i);
+			bar.updateTitle(i);
+		}
+		System.out.println(count);
 		
 		uptime();
 	}
@@ -53,6 +57,10 @@ public class Problem601 extends RT {
 	}
 	
 	public static long streak(long n) {
+		//If even, the streak is 1. (Odd numbers are not divisible by 2)
+		if(n % 2 == 0) {
+			return 1;
+		}
 		return streak.computeIfAbsent(n, val -> {
 			long count = 0;
 			int counterThing = 1;
