@@ -12,6 +12,7 @@ public class LoadingBar {
 	private JFrame frame;
 	private JProgressBar progressBar;
 	private int max;
+	private String title;
 
 	/**
 	 * Create the application.
@@ -23,6 +24,7 @@ public class LoadingBar {
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+		this.title = title;
 		this.max = max;
 		initialize(title);
 	}
@@ -45,6 +47,10 @@ public class LoadingBar {
 	
 	public void updateBar(int i) {
 		progressBar.setValue(i);
+	}
+	
+	public void updateTitle(Object info) {
+		frame.setTitle(title + " - " + String.valueOf(info));
 	}
 
 }
