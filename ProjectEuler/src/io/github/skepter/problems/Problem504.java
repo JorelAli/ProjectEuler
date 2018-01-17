@@ -20,7 +20,9 @@ public class Problem504 extends RT {
 	 * How many quadrilaterals ABCD strictly contain a square number of lattice
 	 * points for m = 100?
 	 * 
-	 * Okay, status update: After some maths, this is going to take ages (hours)
+	 * 3615253
+		Program took 10 minutes, 52 seconds, 065 milliseconds
+
 	 */
 	public static void main(final String[] args) {
 		/*
