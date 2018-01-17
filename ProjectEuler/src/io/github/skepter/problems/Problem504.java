@@ -31,7 +31,7 @@ public class Problem504 extends RT {
 		Utils.assert_(new Quad(1, 1, 1, 1).contains(0, 0));
 		
 		
-		int m = 100;
+		int m = 4;
 		LoadingBar bar = new LoadingBar("Problem 504", m);
 		int square = 0;
 		for(int a = 1; a <= m; a++) {
@@ -75,6 +75,13 @@ public class Problem504 extends RT {
 			this.c = c;
 			this.d = d;
 		}
+		
+		/*
+		 * https://en.wikipedia.org/wiki/Pick%27s_theorem
+		 * Using Pick's theorem, rearrange to find i?
+		 */
+		
+		
 		
 		public boolean contains(float x, float y) {
 			return satisfiesAB(x, y) && satisfiesBC(x, y) && satisfiesCD(x, y) && satisfiesDA(x, y);
