@@ -1,5 +1,6 @@
 package io.github.skepter.problems;
 
+import io.github.skepter.utils.LoadingBar;
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
 
@@ -18,6 +19,8 @@ public class Problem504 extends RT {
 	 * 
 	 * How many quadrilaterals ABCD strictly contain a square number of lattice
 	 * points for m = 100?
+	 * 
+	 * Okay, status update: After some maths, this is going to take ages (hours)
 	 */
 	public static void main(final String[] args) {
 		/*
@@ -27,9 +30,12 @@ public class Problem504 extends RT {
 		
 		Utils.assert_(new Quad(1, 1, 1, 1).contains(0, 0));
 		
-		int m = 4;
+		
+		int m = 100;
+		LoadingBar bar = new LoadingBar("Problem 504", m);
 		int square = 0;
 		for(int a = 1; a <= m; a++) {
+			bar.updateBar(a);
 			for(int b = 1; b <= m; b++) {
 				for(int c = 1; c <= m; c++) {
 					for(int d = 1; d <= m; d++) {
@@ -52,6 +58,7 @@ public class Problem504 extends RT {
 			}
 		}
 		System.out.println(square);
+		//Utils.assert_(square == 42);
 		
 		uptime();
 	}
@@ -60,36 +67,36 @@ public class Problem504 extends RT {
 	//https://www.desmos.com/calculator/4gldcisifb
 	static class Quad {
 		
-		private double a, b, c, d;
+		private float a, b, c, d;
 		
-		public Quad(double a, double b, double c, double d) {
+		public Quad(float a, float b, float c, float d) {
 			this.a = a;
 			this.b = b;
 			this.c = c;
 			this.d = d;
 		}
 		
-		public boolean contains(double x, double y) {
+		public boolean contains(float x, float y) {
 			return satisfiesAB(x, y) && satisfiesBC(x, y) && satisfiesCD(x, y) && satisfiesDA(x, y);
 		}
 		
 		//Purple line
-		private boolean satisfiesAB(double x, double y) {
+		private boolean satisfiesAB(float x, float y) {
 			return y < (-b / a) * x + b;
 		}
 		
 		//Red line		
-		private boolean satisfiesBC(double x, double y) {
+		private boolean satisfiesBC(float x, float y) {
 			return y < (b / c) * x + b;
 		}
 		
 		//Black line
-		private boolean satisfiesCD(double x, double y) {
+		private boolean satisfiesCD(float x, float y) {
 			return y > (d / -c) * x - d;
 		}
 		
 		//Green line
-		private boolean satisfiesDA(double x, double y) {
+		private boolean satisfiesDA(float x, float y) {
 			return y > (d / a) * x - d;
 		}
 	}
