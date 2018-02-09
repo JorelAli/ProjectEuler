@@ -315,6 +315,23 @@ public class Utils {
 		}
 		return factors;
 	}
+	
+	/**
+	 * Gets prime factor set of a number (List has no repeated factors) input
+	 * cannot be less than or equal to 0
+	 * Gives numbers in the form:
+	 * <n, number of times n appears>
+	 */
+	public static Map<Integer, Integer> getPrimeFactorMap(int input, List<Integer> primes) {
+		Map<Integer, Integer> factors = new HashMap<Integer, Integer>();
+		for (int i : primes) {
+			while (input % i == 0) {
+				factors.put(i, factors.getOrDefault(i, 0) + 1);
+				input /= i;
+			}
+		}
+		return factors;
+	}
 
 	/**
 	 * Synonyms for the GCD include the greatest common factor (GCF), the
