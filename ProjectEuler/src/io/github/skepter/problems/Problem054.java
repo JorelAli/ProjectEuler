@@ -10,7 +10,7 @@ import io.github.skepter.utils.Utils;
 
 public class Problem054 extends RT {
 
-	/**/
+	/*Need to beat 358*/
 	public static void main(final String[] args) {
 		List<String> list = Utils.readFromFile("p054_poker.txt");
 		int count = 0;
@@ -73,35 +73,44 @@ public class Problem054 extends RT {
 		/**
 		 * Calculates some kind of number to determine the winner. The higher the number, the higher your chances of winning
 		 * @return
+		 * 
+		 * Each "option" has a "separation" of 100 points
 		 */
 		public int getNumericalResult() {
 			if(isRoyalFlush()) {
-				return 100;
+				//Basically instant win.
+				return 900;
 			}
 			if(isStraightFlush()) {
-				return 99;
+				return 800;
 			}
 			if(isFourOfAKind()) {
-				return 98;
+				return 700 + fourOfAKindValue();
 			}
+			//evalu
 			if(isFullHouse()) {
-				return 97;
+				return 600;
 			}
 			if(isFlush()) {
-				return 96;
+				return 500;
 			}
+			//blah..
 			if(isStraight()) {
-				return 95;
+				return 400;
 			}
+			//See below
 			if(isThreeOfAKind()) {
-				return 94;
+				return 300 + threeOfAKindValue();
 			}
+			//See below
 			if(isTwoPairs()) {
-				return 93;
+				return 200 + twoPairValue();
 			}
+			//What if player 2s pair > player 1s pair?
 			if(isPair()) {
-				return 92;
+				return 100 + pairValue();
 			}
+			//If highest card, then what about second highest (etc.)
 			return getHighestCard().numericalValue;
 		}
 		
@@ -123,11 +132,28 @@ public class Problem054 extends RT {
 			}
 		}
 		
+		//Return value of the pair (so a pair of 2s would return 2)
+		public int pairValue() {
+			if(isPair()) {
+				return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 2).collect(Collectors.toList()).get(0);
+			} else {
+				return -1;
+			}
+		}
+		
 		public boolean isTwoPairs() {
 			if(!isFullHouse()) {
 				return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 2).collect(Collectors.toSet()).size() == 2;
 			} else {
 				return false;
+			}
+		}
+		
+		public int twoPairValue() {
+			if(isTwoPairs()) {
+				return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 2).collect(Collectors.toList()).get(0);
+			} else {
+				return -1;
 			}
 		}
 		
@@ -150,8 +176,24 @@ public class Problem054 extends RT {
 			return(three && !two);
 		}
 		
+		public int threeOfAKindValue() {
+			if(!isFullHouse() && isThreeOfAKind()) {
+				return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 3).collect(Collectors.toList()).get(0); 
+			} else {
+				return -1;
+			}
+		}
+		
 		public boolean isFourOfAKind() {
 			return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 4).count() > 0;
+		}
+		
+		public int fourOfAKindValue() {
+			if(isFourOfAKind()) {
+				return numericalValuesSortedList.stream().filter(i -> Collections.frequency(numericalValuesSortedList, i) == 4).collect(Collectors.toList()).get(0);
+			} else {
+				return -1;
+			}
 		}
 		
 		public boolean isFlush() {
