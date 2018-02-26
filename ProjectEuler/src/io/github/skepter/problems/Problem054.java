@@ -10,7 +10,10 @@ import io.github.skepter.utils.Utils;
 
 public class Problem054 extends RT {
 
-	/*Need to beat 358*/
+	/* https://projecteuler.net/problem=54
+	 * 
+	 * How many games does player 1 win from the given file (p054_poker.txt)?
+	 * Program took 211 milliseconds */
 	public static void main(final String[] args) {
 		List<String> list = Utils.readFromFile("p054_poker.txt");
 		int count = 0;
