@@ -1,6 +1,8 @@
 package io.github.skepter.problems;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import io.github.skepter.utils.RT;
@@ -29,10 +31,18 @@ public class Problem074 extends RT {
 	
 	How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
 		
-		Program took 16 seconds, 720 milliseconds
+		Program took 01 seconds, 532 milliseconds
+
 		
 	*/
+	
+	static int[] factorial;
+	
 	public static void main(final String[] args) {
+		factorial = new int[] {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
+		
+		//System.out.println(factorialSum(169));
+		
 		int count = 0;
 		for(int i = 1; i < 1000000; i++) {
 			if(chain(i) == 60) {
@@ -44,11 +54,11 @@ public class Problem074 extends RT {
 	}
 	
 	//Calculates the length of the chain of repeating factorial sums
-	public static long chain(long input) {
+	public static int chain(int input) {
 		
-		Set<Long> sequence = new HashSet<>();
+		Set<Integer> sequence = new HashSet<>();
 		sequence.add(input);
-		long facSum = factorialSum(input);
+		int facSum = factorialSum(input);
 		while(!sequence.contains(facSum)) {
 			sequence.add(facSum);
 			facSum = factorialSum(facSum);
@@ -57,8 +67,15 @@ public class Problem074 extends RT {
 		return sequence.size();
 	}
 	
-	public static long factorialSum(long input) {
-		return Utils.digits(input).stream().mapToLong(Utils::factorial).sum();
+	//Factorial values will only be from 0 to 9, so we can just use an array to store those values
+	public static int factorialSum(int input) {
+		int count = 0;
+		while(input > 0) {
+			int index = input % 10;
+			input /= 10;
+			count += factorial[index];
+		}
+		return count;
 	}
 	
 	
