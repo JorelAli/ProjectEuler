@@ -1,5 +1,8 @@
 package io.github.skepter.problems;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
 
@@ -10,9 +13,46 @@ public class Problem064 extends RT {
 		//System.out.println(new SqrtNumber(23).getLowestRoot());
 		
 		//create sequence a0, a1...
-		new ComboNumberFraction(new ComboNumber(new SqrtNumber(23), 0), 1).getExpansion().inverse().getExpansion().inverse().getExpansion().inverse().getExpansion().inverse().getExpansion().inverse().getExpansion();//;
+		//new ComboNumberFraction(new ComboNumber(new SqrtNumber(23), 0), 1).getExpansion().fraction.inverse().getExpansion().fraction.inverse().getExpansion().fraction.inverse().getExpansion().fraction.inverse().getExpansion().fraction.inverse().getExpansion();//;
+		
+//		ComboNumberFraction fraction = new ComboNumberFraction(new ComboNumber(new SqrtNumber(23), 0), 1); 
+//		for(int i = 0; i < 10; i++) {
+//			ExpansionFractionObject result = fraction.getExpansion();
+//			System.out.println(result.expansion);
+//			fraction = result.fraction.inverse();
+//		}
+		
+		for(int i = 2; i <= 10000; i++) {
+			if(!Utils.isInteger(Math.sqrt(i)))
+				getExpansion(i, 20);
+		}
+		
+		//Program takes 116 milliseconds
+		//System.out.println(getExpansion(23, 50));
 		
 		uptime();
+	}
+	
+	public static List<Integer> getExpansion(int integer, int listLength) {
+		List<Integer> list = new ArrayList<>();
+		ComboNumberFraction fraction = new ComboNumberFraction(new ComboNumber(new SqrtNumber(integer), 0), 1);
+		for(int i = 0; i < listLength; i++) {
+			ExpansionFractionObject result = fraction.getExpansion();
+			list.add(result.expansion);
+			fraction = result.fraction.inverse();
+		}
+		return list;
+	}
+}
+
+class ExpansionFractionObject {
+	
+	ComboNumberFraction fraction;
+	int expansion;
+	
+	public ExpansionFractionObject(ComboNumberFraction fraction, int expansion) {
+		this.fraction = fraction;
+		this.expansion = expansion;
 	}
 }
 
@@ -27,15 +67,15 @@ class ComboNumberFraction {
 	}
 	
 	//finds mixed fraction form of a combonumberfraction
-	public ComboNumberFraction getExpansion() {
+	public ExpansionFractionObject getExpansion() {
 		int expansionNumber = 0;
 		while(numerator.value() > denominator) {
 			numerator.integer = numerator.integer - denominator;
 			expansionNumber++;
 		}
 		
-		System.out.println(expansionNumber + " + " + numerator + "/" + denominator);
-		return new ComboNumberFraction(numerator, denominator);
+		//System.out.println(expansionNumber + " + " + numerator + "/" + denominator);
+		return new ExpansionFractionObject(new ComboNumberFraction(numerator, denominator), expansionNumber);
 	}
 	
 	public ComboNumberFraction inverse() {
