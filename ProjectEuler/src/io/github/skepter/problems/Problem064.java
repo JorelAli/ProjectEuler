@@ -25,15 +25,25 @@ public class Problem064 extends RT {
 //		}
 		
 		
-		System.out.println(lengthSize(2));
+		//System.out.println(lengthSize(2));
 		
 		//System.out.println(length("242424242424242424242424", "242424242424242424242424"));
 		
+		System.out.println(lengthSize(7));
+		
+		
+//		int count = 0;
+//		
 //		for(int i = 2; i <= 13; i++) {
 //			if(!Utils.isInteger(Math.sqrt(i))) {
-//				System.out.println(i + ": " + getLength(getExpansion(i, 50)));
+//				System.out.println(i + ": " + lengthSize(i));
+//				if((lengthSize(i) & 1) == 1) {
+//					count++;
+//				}
 //			}
 //		}
+//		
+//		System.out.println(count);
 		
 		//Program takes 116 milliseconds
 		//System.out.println(getExpansion(23, 50));
@@ -54,6 +64,7 @@ public class Problem064 extends RT {
 	
 	public static int lengthSize(int integer) {
 		String result = getLength(getExpansion(integer, 50));
+		System.out.println(result);
 		return length(result, result).length();
 	}
 	
@@ -68,8 +79,13 @@ public class Problem064 extends RT {
 		while (matcher.find()) {
 			String repeatedStr = matcher.group(1);
 			
-			if(sequence.contains(repeatedStr)) {
-				return length(repeatedStr, repeatedStr);
+			if(previousSequence.contains(repeatedStr)) {
+				
+				if(!previousSequence.replace(repeatedStr, "").equals("")) {
+					return previousSequence;
+				}
+				
+				return length(previousSequence, repeatedStr);
 			} else {
 				return repeatedStr;
 			}
