@@ -29,21 +29,27 @@ public class Problem064 extends RT {
 		
 		//System.out.println(length("242424242424242424242424", "242424242424242424242424"));
 		
-		System.out.println(lengthSize(7));
+//		System.out.println(lengthSize(7));
+		
+		//System.out.println(lengthSize(7614));
 		
 		
-//		int count = 0;
-//		
-//		for(int i = 2; i <= 13; i++) {
-//			if(!Utils.isInteger(Math.sqrt(i))) {
-//				System.out.println(i + ": " + lengthSize(i));
-//				if((lengthSize(i) & 1) == 1) {
-//					count++;
-//				}
-//			}
-//		}
-//		
-//		System.out.println(count);
+		System.out.println(lengthSize(8644));
+		
+		int count = 0;
+		
+		
+		
+		for(int i = 2; i <= 10000; i++) {
+			if(!Utils.isInteger(Math.sqrt(i))) {
+				System.out.println(i + ": " + lengthSize(i));
+				if((lengthSize(i) & 1) == 1) {
+					count++;
+				}
+			}
+		}
+		
+		System.out.println(count);
 		
 		//Program takes 116 milliseconds
 		//System.out.println(getExpansion(23, 50));
@@ -63,8 +69,8 @@ public class Problem064 extends RT {
 	}
 	
 	public static int lengthSize(int integer) {
-		String result = getLength(getExpansion(integer, 50));
-		System.out.println(result);
+		String result = getLength(getExpansion(integer, 1000));
+		//System.out.println(result);
 		return length(result, result).length();
 	}
 	
@@ -81,7 +87,7 @@ public class Problem064 extends RT {
 			
 			if(previousSequence.contains(repeatedStr)) {
 				
-				if(!previousSequence.replace(repeatedStr, "").equals("")) {
+				if(!previousSequence.replace(repeatedStr, "").equals("") && Utils.isInteger(((double) previousSequence.length() / (double) repeatedStr.length()))) {
 					return previousSequence;
 				}
 				
