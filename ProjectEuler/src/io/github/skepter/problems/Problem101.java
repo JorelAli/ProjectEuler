@@ -29,7 +29,8 @@ public class Problem101 extends RT {
 //			System.out.println(tenDegPoly(i));
 		
 		
-		System.out.println(analyseSequence(Arrays.asList(new Integer[] {1, 8, 27})));
+		System.out.println(analyseSequence(Arrays.asList(new Integer[] {1, 8, 27, 64})));
+		//output: 6n^2−11n+6
 		
 		
 		uptime();
@@ -48,7 +49,7 @@ public class Problem101 extends RT {
 	}
 	
 	public static String analyseSequence(List<Integer> sequence, String currentSequence) {
-		String output = "";
+		String output = currentSequence;
 		
 		
 		//Determine the polynomial degree by the length of the sequence
@@ -56,11 +57,11 @@ public class Problem101 extends RT {
 		
 		if(polynomialDegree == 1) {
 			int n = (sequence.get(1) - sequence.get(0));
-			output = n + "n";
+			output = n + "n ";
 			
 			int lastTerm = sequence.get(0) - n;
 			//Basically the base case.
-			output = output + lastTerm;
+			output = output + (lastTerm >= 0 ? "+" : "-") + lastTerm;
 		} else {
 			//recursion recursion recursion!
 			
@@ -74,6 +75,12 @@ public class Problem101 extends RT {
 					differences.add(tempSequence.get(i + 1) - tempSequence.get(i));
 				}
 				
+				//If all of the differences are the same...
+				//https://stackoverflow.com/a/29288616
+				if(differences.stream().distinct().limit(2).count() <= 1 && differences.size() != 1) {
+					return analyseSequence(sequence.subList(0, 2), output);
+				}
+				
 				if(differences.size() != 1) {
 					tempSequence = new ArrayList<>(differences);
 					differences = new ArrayList<>();
@@ -82,13 +89,23 @@ public class Problem101 extends RT {
 				}
 			}
 			int firstTerm = differences.get(0) / Utils.factorial(polynomialDegree);
-			System.out.println(firstTerm + "n^" + polynomialDegree);
+			output = output + firstTerm + "n^" + polynomialDegree;
+			System.out.println(output);
+			
+			//Generate the next sequence
+			
+			List<Integer> tempSequence2 = new ArrayList<>();
+			for(int i = 0; i < sequence.size(); i++) {
+				tempSequence2.add(sequence.get(i) - (firstTerm * (int) Math.pow((i + 1), polynomialDegree) ));
+			}
+			
+			//recursive step
+			
+			return analyseSequence(tempSequence2, output + " ");
+			
 			
 		}
 		
-		
-		
-		
-		return currentSequence + output;
+		return output;
 	}
 }
