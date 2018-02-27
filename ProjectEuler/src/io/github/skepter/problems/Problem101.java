@@ -48,8 +48,8 @@ public class Problem101 extends RT {
 		return analyseSequence(sequence, "");
 	}
 	
-	public static String analyseSequence(List<Integer> sequence, String currentSequence) {
-		String output = currentSequence;
+	public static String analyseSequence(List<Integer> sequence, String oldOutput) {
+		String output = oldOutput;
 		
 		
 		//Determine the polynomial degree by the length of the sequence
@@ -57,7 +57,7 @@ public class Problem101 extends RT {
 		
 		if(polynomialDegree == 1) {
 			int n = (sequence.get(1) - sequence.get(0));
-			output = n + "n ";
+			output = output + n + "n ";
 			
 			int lastTerm = sequence.get(0) - n;
 			//Basically the base case.
@@ -90,7 +90,6 @@ public class Problem101 extends RT {
 			}
 			int firstTerm = differences.get(0) / Utils.factorial(polynomialDegree);
 			output = output + firstTerm + "n^" + polynomialDegree;
-			System.out.println(output);
 			
 			//Generate the next sequence
 			
