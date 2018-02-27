@@ -59,7 +59,7 @@ public class Problem064 extends RT {
 	
 	/**
 	 * Repeatedly reduces the length from the getLength() function recursively to get
-	 * the smallest repeating length
+	 * the smallest repeating length from the recurring sequence (recurrence)
 	 */
 	public static String length(String sequence, String previousSequence) {
 		String regex = "(\\d+)\\1";
