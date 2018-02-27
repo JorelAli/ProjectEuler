@@ -2,6 +2,8 @@ package io.github.skepter.problems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.github.skepter.utils.RT;
 import io.github.skepter.utils.Utils;
@@ -22,10 +24,16 @@ public class Problem064 extends RT {
 //			fraction = result.fraction.inverse();
 //		}
 		
-		for(int i = 2; i <= 10000; i++) {
-			if(!Utils.isInteger(Math.sqrt(i)))
-				getExpansion(i, 20);
-		}
+		
+		System.out.println(lengthSize(2));
+		
+		//System.out.println(length("242424242424242424242424", "242424242424242424242424"));
+		
+//		for(int i = 2; i <= 13; i++) {
+//			if(!Utils.isInteger(Math.sqrt(i))) {
+//				System.out.println(i + ": " + getLength(getExpansion(i, 50)));
+//			}
+//		}
 		
 		//Program takes 116 milliseconds
 		//System.out.println(getExpansion(23, 50));
@@ -42,6 +50,55 @@ public class Problem064 extends RT {
 			fraction = result.fraction.inverse();
 		}
 		return list;
+	}
+	
+	public static int lengthSize(int integer) {
+		String result = getLength(getExpansion(integer, 50));
+		return length(result, result).length();
+	}
+	
+	/**
+	 * Repeatedly reduces the length from the getLength() function recursively to get
+	 * the smallest repeating length
+	 */
+	public static String length(String sequence, String previousSequence) {
+		String regex = "(\\d+)\\1";
+		Pattern patt = Pattern.compile(regex);
+		Matcher matcher = patt.matcher(sequence);
+		while (matcher.find()) {
+			String repeatedStr = matcher.group(1);
+			
+			if(sequence.contains(repeatedStr)) {
+				return length(repeatedStr, repeatedStr);
+			} else {
+				return repeatedStr;
+			}
+		}
+		return sequence;
+	}
+	
+	/**
+	 * Matches a sequence
+	 * https://stackoverflow.com/a/28851457
+	 * @param expansion
+	 * @return
+	 */
+	public static String getLength(List<Integer> expansion) {
+		
+		//Don't need first element
+		expansion.remove(0);
+		
+		StringBuilder builder = new StringBuilder();
+		
+		expansion.forEach(builder::append);
+		
+		String regex = "(\\d+)\\1";
+		Pattern patt = Pattern.compile(regex);
+		Matcher matcher = patt.matcher(builder.toString());
+		while (matcher.find()) {
+			return matcher.group(1);
+		}
+		return null;
 	}
 }
 
