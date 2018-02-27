@@ -1,7 +1,9 @@
 package io.github.skepter.problems;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,7 +13,10 @@ import io.github.skepter.utils.Utils;
 public class Problem064 extends RT {
 
 	/* https://projecteuler.net/problem=64 
-	 * Checks: https://oeis.org/A013943/list */
+	 * Checks: https://oeis.org/A013943/list
+	 * 
+	 * Program took 248 milliseconds
+	 *  */
 	public static void main(final String[] args) {
 		//System.out.println(new SqrtNumber(23).getLowestRoot());
 		
@@ -34,8 +39,21 @@ public class Problem064 extends RT {
 		
 		//System.out.println(lengthSize(7614));
 		
-		System.out.println(lengthSize(13));
+		//System.out.println(getExpansion(13, 1000));
 				
+		
+		int count = 0;
+		for(int i = 2; i <= 10000; i++) {
+			if(!Utils.isInteger(Math.sqrt(i))) {
+				
+				if(getExpansion(i, 1000) % 2 == 1) {
+					count++;
+				}
+			}
+		}
+		
+		System.out.println(count);
+		
 //		int count = 0;
 //		int max = 0;
 //		
@@ -62,25 +80,36 @@ public class Problem064 extends RT {
 		uptime();
 	}
 	
-	public static List<Integer> getExpansion(int integer, int listLength) {
+	public static int getExpansion(int integer, int listLength) {
 		List<Integer> list = new ArrayList<>();
+		Set<String> continuedFractionSet = new HashSet<>();
 		ComboNumberFraction fraction = new ComboNumberFraction(new ComboNumber(new SqrtNumber(integer), 0), 1);
 		for(int i = 0; i < listLength; i++) {
 			ExpansionFractionObject result = fraction.getExpansion();
+			
+			//set of strings because each continued fraction is unique.
+			//If there is a similar continued fraction, then we've entered a recurrence
+			String resultString = result.expansion + ": " + result.fraction.numerator + " / " + result.fraction.denominator;
+			
 			//create a sequence of expansion results
-			System.out.println(result.expansion + ": " + result.fraction.numerator + " / " + result.fraction.denominator);
+			if(!continuedFractionSet.contains(resultString)) {
+				continuedFractionSet.add(resultString);
+			} else {
+				break;
+			}
+			//System.out.println(result.expansion + ": " + result.fraction.numerator + " / " + result.fraction.denominator);
 			list.add(result.expansion);
 			fraction = result.fraction.inverse();
 		}
-		return list;
+		return continuedFractionSet.size() - 1;
 	}
 	
-	public static int lengthSize(int integer) {
-		String result = getLength(getExpansion(integer, 1000));
-		//System.out.println(result);
-		return length(result, result).length();
-	}
-	
+//	public static int lengthSize(int integer) {
+//		//String result = getLength(getExpansion(integer, 1000));
+//		//System.out.println(result);
+//		//return length(result, result).length();
+//	}
+//	
 	/**
 	 * Repeatedly reduces the length from the getLength() function recursively to get
 	 * the smallest repeating length from the recurring sequence (recurrence)
@@ -106,29 +135,29 @@ public class Problem064 extends RT {
 		return sequence;
 	}
 	
-	/**
-	 * Matches a sequence
-	 * https://stackoverflow.com/a/28851457
-	 * @param expansion
-	 * @return
-	 */
-	public static String getLength(List<Integer> expansion) {
-		
-		//Don't need first element
-		expansion.remove(0);
-		
-		StringBuilder builder = new StringBuilder();
-		
-		expansion.forEach(builder::append);
-		
-		String regex = "(\\d+)\\1";
-		Pattern patt = Pattern.compile(regex);
-		Matcher matcher = patt.matcher(builder.toString());
-		while (matcher.find()) {
-			return matcher.group(1);
-		}
-		return null;
-	}
+//	/**
+//	 * Matches a sequence
+//	 * https://stackoverflow.com/a/28851457
+//	 * @param expansion
+//	 * @return
+//	 */
+//	public static String getLength(List<Integer> expansion) {
+//		
+//		//Don't need first element
+//		expansion.remove(0);
+//		
+//		StringBuilder builder = new StringBuilder();
+//		
+//		expansion.forEach(builder::append);
+//		
+//		String regex = "(\\d+)\\1";
+//		Pattern patt = Pattern.compile(regex);
+//		Matcher matcher = patt.matcher(builder.toString());
+//		while (matcher.find()) {
+//			return matcher.group(1);
+//		}
+//		return null;
+//	}
 }
 
 class ExpansionFractionObject {
