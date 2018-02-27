@@ -1,12 +1,9 @@
 package io.github.skepter.problems;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import io.github.skepter.utils.RT;
-import io.github.skepter.utils.Utils;
 
 public class Problem074 extends RT {
 
