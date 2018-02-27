@@ -60,6 +60,19 @@ public class Utils {
 	}
 	
 	/**
+	 * Returns a list of the digits of a number
+	 */
+	public static List<Long> digits(long value) {
+		return Arrays.stream(digitsArr(value)).boxed().collect(Collectors.toList());
+	}
+
+	public static long[] digitsArr(long input) {
+		String s = String.valueOf(input);
+		// 0 ASCII = 48
+		return s.chars().boxed().mapToLong(i -> i - 48).toArray();
+	}
+	
+	/**
 	 * Returns an array of the digits of a number
 	 */
 	public static int[] digitsArr(int value) {
