@@ -10,10 +10,7 @@ public class Problem064 extends RT {
 		//System.out.println(new SqrtNumber(23).getLowestRoot());
 		
 		//create sequence a0, a1...
-		new ComboNumberFraction(new ComboNumber(new SqrtNumber(23), 0), 1).getExpansion();
-		
-		new ComboNumberFraction(new ComboNumber(new SqrtNumber(23), -4), 1).getExpansion();
-		
+		new ComboNumberFraction(new ComboNumber(new SqrtNumber(23), 0), 1).getExpansion().inverse().getExpansion().inverse().getExpansion().inverse().getExpansion().inverse().getExpansion().inverse().getExpansion();//;
 		
 		uptime();
 	}
@@ -30,15 +27,26 @@ class ComboNumberFraction {
 	}
 	
 	//finds mixed fraction form of a combonumberfraction
-	public void getExpansion() {
+	public ComboNumberFraction getExpansion() {
 		int expansionNumber = 0;
 		while(numerator.value() > denominator) {
 			numerator.integer = numerator.integer - denominator;
 			expansionNumber++;
 		}
-		System.out.println(expansionNumber);
 		
-		System.out.println("result: (sqrt(" + numerator.sqrt.number + ")" + numerator.integer +")/" + denominator);
+		System.out.println(expansionNumber + " + " + numerator + "/" + denominator);
+		return new ComboNumberFraction(numerator, denominator);
+	}
+	
+	public ComboNumberFraction inverse() {
+		int multiplier = this.denominator;
+		ComboNumber numerator = new ComboNumber(this.numerator.sqrt, -this.numerator.integer);
+		int denominator = this.numerator.sqrt.number - (this.numerator.integer * this.numerator.integer);
+		
+		//ASSUME perfectly divides:
+		denominator = denominator / multiplier;
+		
+		return new ComboNumberFraction(numerator, denominator);
 	}
 }
 
@@ -61,6 +69,11 @@ class ComboNumber {
 	
 	public double value() {
 		return sqrt.doubleValue() + integer;
+	}
+	
+	@Override
+	public String toString() {
+		return sqrt.toString() + (integer >= 0 ? "+ " + integer : integer);
 	}
 }
 
@@ -124,6 +137,11 @@ class SqrtNumber extends Number implements Comparable<Number> {
 	@Override
 	public int compareTo(Number o) {
 		return new Double(value).compareTo(o.doubleValue());
+	}
+	
+	@Override
+	public String toString() {
+		return "sqrt(" + number + ")";
 	}
 	
 }
