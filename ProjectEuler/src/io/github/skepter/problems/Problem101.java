@@ -1,6 +1,7 @@
 package io.github.skepter.problems;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import io.github.skepter.utils.RT;
@@ -28,12 +29,14 @@ public class Problem101 extends RT {
 
 		 */
 		
-		List<Integer> seq = new ArrayList<>();
-		for(int i = 1; i <= 10; i++) {
-			seq.add(tenDegPoly(i));
-			//System.out.println(seq);
-			System.out.println(analyseSequence(new ArrayList<>(seq)));
-		}
+		System.out.println(analyseSequence(Arrays.asList(new Integer[] {16, 78, 254, 634, 1332})));
+		
+//		List<Integer> seq = new ArrayList<>();
+//		for(int i = 1; i <= 10; i++) {
+//			seq.add(tenDegPoly(i));
+//			//System.out.println(seq);
+//			System.out.println(analyseSequence(new ArrayList<>(seq)));
+//		}
 		
 		//System.out.println(analyseSequence(Arrays.asList(new Integer[] {1, 683, 44287})));
 		//output: 6n^2−11n+6
@@ -50,6 +53,12 @@ public class Problem101 extends RT {
 		return (int) Math.pow(i, pow);
 	}
 	
+	/**
+	 * WILL ONLY ACCURATELY DETERMINE SEQUENCE IF:
+	 * Number of elements in the list = Polynomial degree + 1
+	 * @param sequence
+	 * @return
+	 */
 	public static String analyseSequence(List<Integer> sequence) {
 		if(sequence.size() == 1) {
 			return String.valueOf(sequence.get(0));
@@ -65,7 +74,7 @@ public class Problem101 extends RT {
 		
 		if(polynomialDegree == 1) {
 			int n = (sequence.get(1) - sequence.get(0));
-			output = output + n + "n ";
+			output = output + (n >= 0 ? "+" : "") + n + "n ";
 			
 			int lastTerm = sequence.get(0) - n;
 			//Basically the base case.
@@ -97,7 +106,7 @@ public class Problem101 extends RT {
 				}
 			}
 			int firstTerm = differences.get(0) / Utils.factorial(polynomialDegree);
-			output = output + firstTerm + "n^" + polynomialDegree;
+			output = output + (firstTerm >= 0 ? "+" : "") + firstTerm + "n^" + polynomialDegree;
 			
 			//Generate the next sequence
 			
