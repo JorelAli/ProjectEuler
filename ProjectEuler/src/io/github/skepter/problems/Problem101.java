@@ -29,7 +29,10 @@ public class Problem101 extends RT {
 
 		 */
 		
-		System.out.println(analyseSequence(Arrays.asList(new Integer[] {16, 78, 254, 634, 1332})));
+		List<Integer> sequence = analyseSequence(Arrays.asList(new Integer[] {16, 78, 254, 634, 1332}));
+		System.out.println(sequence);
+		System.out.println(sequenceToString(sequence));
+		System.out.println(evaluateSequence(sequence, 4));
 		
 //		List<Integer> seq = new ArrayList<>();
 //		for(int i = 1; i <= 10; i++) {
@@ -53,32 +56,51 @@ public class Problem101 extends RT {
 		return (int) Math.pow(i, pow);
 	}
 	
+	public static String sequenceToString(List<Integer> sequence) {
+		String result = "";
+		for(int i = 0; i < sequence.size(); i++) {
+			result = result + (sequence.get(i) > 0 ? "+ " : "") + sequence.get(i) + "x^" + (sequence.size() - i - 1) + " ";
+		}
+		return result;
+	}
+	
+	public static long evaluateSequence(List<Integer> sequence, int n) {
+		long result = 0;
+		for(int i = 0; i < sequence.size(); i++) {
+			result += sequence.get(i) * Math.pow(n, sequence.size() - i - 1);
+		}
+		return result;
+		
+	}
+	
 	/**
 	 * WILL ONLY ACCURATELY DETERMINE SEQUENCE IF:
 	 * Number of elements in the list = Polynomial degree + 1
 	 * @param sequence
 	 * @return
 	 */
-	public static String analyseSequence(List<Integer> sequence) {
+	public static List<Integer> analyseSequence(List<Integer> sequence) {
 		if(sequence.size() == 1) {
-			return String.valueOf(sequence.get(0));
+			return sequence;
 		}
-		return analyseSequence(sequence, "");
+		return analyseSequence(sequence, new ArrayList<>());
 	}
 	
-	public static String analyseSequence(List<Integer> sequence, String oldOutput) {
-		String output = oldOutput;
+	public static List<Integer> analyseSequence(List<Integer> sequence, List<Integer> oldOutput) {
+		List<Integer> output = oldOutput;
 				
 		//Determine the polynomial degree by the length of the sequence
 		int polynomialDegree = sequence.size() - 1;
 		
 		if(polynomialDegree == 1) {
 			int n = (sequence.get(1) - sequence.get(0));
-			output = output + (n >= 0 ? "+" : "") + n + "n ";
+			//output = output + (n >= 0 ? "+" : "") + n + "n ";
+			output.add(n);
 			
 			int lastTerm = sequence.get(0) - n;
 			//Basically the base case.
-			output = output + (lastTerm >= 0 ? "+" : "") + lastTerm;
+			//output = output + (lastTerm >= 0 ? "+" : "") + lastTerm;
+			output.add(lastTerm);
 		} else {
 			//recursion recursion recursion!
 			
@@ -106,7 +128,8 @@ public class Problem101 extends RT {
 				}
 			}
 			int firstTerm = differences.get(0) / Utils.factorial(polynomialDegree);
-			output = output + (firstTerm >= 0 ? "+" : "") + firstTerm + "n^" + polynomialDegree;
+			//output = output + (firstTerm >= 0 ? "+" : "") + firstTerm + "n^" + polynomialDegree;
+			output.add(firstTerm);
 			
 			//Generate the next sequence
 			
@@ -117,9 +140,7 @@ public class Problem101 extends RT {
 			
 			//recursive step
 			
-			return analyseSequence(tempSequence2, output + " ");
-			
-			
+			return analyseSequence(tempSequence2, output);
 		}
 		
 		return output;
