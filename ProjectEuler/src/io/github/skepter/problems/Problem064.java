@@ -36,25 +36,25 @@ public class Problem064 extends RT {
 		
 		System.out.println(lengthSize(13));
 				
-		int count = 0;
-		int max = 0;
-		
-		
-		
-		for(int i = 2; i <= 10000; i++) {
-			if(!Utils.isInteger(Math.sqrt(i))) {
-				int lengthSize = lengthSize(i);
-				System.out.println(i + ": " + lengthSize);
-				if((lengthSize & 1) == 1) {
-					if(lengthSize > max)
-						max = lengthSize;
-					count++;
-				}
-			}
-		}
-		
-		System.out.println(count);
-		System.out.println(max);
+//		int count = 0;
+//		int max = 0;
+//		
+//		
+//		
+//		for(int i = 2; i <= 10000; i++) {
+//			if(!Utils.isInteger(Math.sqrt(i))) {
+//				int lengthSize = lengthSize(i);
+//				System.out.println(i + ": " + lengthSize);
+//				if((lengthSize & 1) == 1) {
+//					if(lengthSize > max)
+//						max = lengthSize;
+//					count++;
+//				}
+//			}
+//		}
+//		
+//		System.out.println(count);
+//		System.out.println(max);
 		
 		//Program takes 116 milliseconds
 		//System.out.println(getExpansion(23, 50));
@@ -67,6 +67,8 @@ public class Problem064 extends RT {
 		ComboNumberFraction fraction = new ComboNumberFraction(new ComboNumber(new SqrtNumber(integer), 0), 1);
 		for(int i = 0; i < listLength; i++) {
 			ExpansionFractionObject result = fraction.getExpansion();
+			//create a sequence of expansion results
+			System.out.println(result.expansion + ": " + result.fraction.numerator + " / " + result.fraction.denominator);
 			list.add(result.expansion);
 			fraction = result.fraction.inverse();
 		}
