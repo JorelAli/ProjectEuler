@@ -10,7 +10,8 @@ import io.github.skepter.utils.Utils;
 
 public class Problem064 extends RT {
 
-	/* https://projecteuler.net/problem=64 */
+	/* https://projecteuler.net/problem=64 
+	 * Checks: https://oeis.org/A013943/list */
 	public static void main(final String[] args) {
 		//System.out.println(new SqrtNumber(23).getLowestRoot());
 		
@@ -33,23 +34,27 @@ public class Problem064 extends RT {
 		
 		//System.out.println(lengthSize(7614));
 		
-		
-		System.out.println(lengthSize(8644));
-		
+		System.out.println(lengthSize(13));
+				
 		int count = 0;
+		int max = 0;
 		
 		
 		
 		for(int i = 2; i <= 10000; i++) {
 			if(!Utils.isInteger(Math.sqrt(i))) {
-				System.out.println(i + ": " + lengthSize(i));
-				if((lengthSize(i) & 1) == 1) {
+				int lengthSize = lengthSize(i);
+				System.out.println(i + ": " + lengthSize);
+				if((lengthSize & 1) == 1) {
+					if(lengthSize > max)
+						max = lengthSize;
 					count++;
 				}
 			}
 		}
 		
 		System.out.println(count);
+		System.out.println(max);
 		
 		//Program takes 116 milliseconds
 		//System.out.println(getExpansion(23, 50));
@@ -87,7 +92,7 @@ public class Problem064 extends RT {
 			
 			if(previousSequence.contains(repeatedStr)) {
 				
-				if(!previousSequence.replace(repeatedStr, "").equals("") && Utils.isInteger(((double) previousSequence.length() / (double) repeatedStr.length()))) {
+				if(!previousSequence.replaceAll(repeatedStr, "").equals("") && Utils.isInteger(((double) previousSequence.length() / (double) repeatedStr.length()))) {
 					return previousSequence;
 				}
 				
