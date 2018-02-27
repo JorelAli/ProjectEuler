@@ -1,7 +1,6 @@
 package io.github.skepter.problems;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import io.github.skepter.utils.RT;
@@ -23,13 +22,20 @@ public class Problem101 extends RT {
 			954437177
 			1798805207
 			1238392738
+			
+			[1, 683, 44287, 838861, 8138021, 51828151, 247165843, 954437177, 1798805207, 1238392738]
+			[1, 683, 44287, 838861, 8138021, 51828151, 247165843, 954437177, 1798805207]
+
 		 */
 		
-//		for(int i = 1; i <= 10; i++)
-//			System.out.println(tenDegPoly(i));
+		List<Integer> seq = new ArrayList<>();
+		for(int i = 1; i <= 10; i++) {
+			seq.add(tenDegPoly(i));
+			//System.out.println(seq);
+			System.out.println(analyseSequence(new ArrayList<>(seq)));
+		}
 		
-		
-		System.out.println(analyseSequence(Arrays.asList(new Integer[] {1, 8, 27, 64})));
+		//System.out.println(analyseSequence(Arrays.asList(new Integer[] {1, 683, 44287})));
 		//output: 6n^2−11n+6
 		
 		
@@ -45,13 +51,15 @@ public class Problem101 extends RT {
 	}
 	
 	public static String analyseSequence(List<Integer> sequence) {
+		if(sequence.size() == 1) {
+			return String.valueOf(sequence.get(0));
+		}
 		return analyseSequence(sequence, "");
 	}
 	
 	public static String analyseSequence(List<Integer> sequence, String oldOutput) {
 		String output = oldOutput;
-		
-		
+				
 		//Determine the polynomial degree by the length of the sequence
 		int polynomialDegree = sequence.size() - 1;
 		
@@ -61,7 +69,7 @@ public class Problem101 extends RT {
 			
 			int lastTerm = sequence.get(0) - n;
 			//Basically the base case.
-			output = output + (lastTerm >= 0 ? "+" : "-") + lastTerm;
+			output = output + (lastTerm >= 0 ? "+" : "") + lastTerm;
 		} else {
 			//recursion recursion recursion!
 			
@@ -94,7 +102,7 @@ public class Problem101 extends RT {
 			//Generate the next sequence
 			
 			List<Integer> tempSequence2 = new ArrayList<>();
-			for(int i = 0; i < sequence.size(); i++) {
+			for(int i = 0; i < sequence.size() - 1; i++) {
 				tempSequence2.add(sequence.get(i) - (firstTerm * (int) Math.pow((i + 1), polynomialDegree) ));
 			}
 			
