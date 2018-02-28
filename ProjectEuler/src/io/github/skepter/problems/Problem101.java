@@ -1,6 +1,5 @@
 package io.github.skepter.problems;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -36,15 +35,23 @@ public class Problem101 extends RT {
 		System.out.println(evaluateSequence(sequence, 4));
 		System.out.println();
 		
+		long count = 0;
+		
 		List<Long> seq = new ArrayList<>();
+		//Has trouble with i = 9 and i = 10
 		for(int i = 1; i <= 10; i++) {
 			seq.add(tenDegPoly(i));
 			//System.out.println(seq);
 			System.out.println(sequenceToString(analyseSequence(new ArrayList<>(seq))));
-			System.out.print(seq + " ");
+//			System.out.print(seq + " ");
+			
+			//Value should NOT be negative!
 			System.out.println(evaluateSequence(analyseSequence(new ArrayList<>(seq)), i + 1));
+			count += evaluateSequence(analyseSequence(new ArrayList<>(seq)), i + 1);
 		}
 				
+		System.out.println(count);
+		
 		//System.out.println(analyseSequence(Arrays.asList(new Integer[] {1, 683, 44287})));
 		//output: 6n^2−11n+6
 		
@@ -68,10 +75,10 @@ public class Problem101 extends RT {
 		return result;
 	}
 	
-	public static BigInteger evaluateSequence(List<Long> sequence, long n) {
-		BigInteger result = BigInteger.ZERO;
+	public static long evaluateSequence(List<Long> sequence, long n) {
+		long result = 0;
 		for(int i = 0; i < sequence.size(); i++) {
-			result = result.add(BigInteger.valueOf(sequence.get(i) * pow(n, sequence.size() - i - 1)));
+			result += (sequence.get(i) * pow(n, sequence.size() - i - 1));
 		}
 		return result;
 		
