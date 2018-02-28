@@ -27,6 +27,8 @@ public class Problem101 extends RT {
 			[1, 683, 44287, 838861, 8138021, 51828151, 247165843, 954437177, 1798805207, 1238392738]
 			[1, 683, 44287, 838861, 8138021, 51828151, 247165843, 954437177, 1798805207]
 
+			Program took 133 milliseconds
+
 		 */
 		
 		List<Long> sequence = analyseSequence(Arrays.asList(new Long[] {16L, 78L, 254L, 634L, 1332L}));
@@ -41,13 +43,17 @@ public class Problem101 extends RT {
 		//Has trouble with i = 9 and i = 10
 		for(int i = 1; i <= 10; i++) {
 			seq.add(tenDegPoly(i));
+			
+			System.out.println("Preparing to analyse " + String.valueOf(seq));
+			
 			//System.out.println(seq);
-			System.out.println(sequenceToString(analyseSequence(new ArrayList<>(seq))));
+			System.out.println("Resulting sequence: " + sequenceToString(analyseSequence(new ArrayList<>(seq))));
 //			System.out.print(seq + " ");
 			
 			//Value should NOT be negative!
-			System.out.println(evaluateSequence(analyseSequence(new ArrayList<>(seq)), i + 1));
+			System.out.println("Prediction of next term: " + evaluateSequence(analyseSequence(new ArrayList<>(seq)), i + 1));
 			count += evaluateSequence(analyseSequence(new ArrayList<>(seq)), i + 1);
+			System.out.println();
 		}
 				
 		System.out.println(count);
@@ -64,7 +70,7 @@ public class Problem101 extends RT {
 	}
 	
 	public static long pow(long i, long pow) {
-		return (int) Math.pow(i, pow);
+		return (long) Math.pow(i, pow);
 	}
 	
 	public static String sequenceToString(List<Long> sequence) {
