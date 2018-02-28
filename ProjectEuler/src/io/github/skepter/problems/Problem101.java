@@ -1,5 +1,6 @@
 package io.github.skepter.problems;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,18 +30,21 @@ public class Problem101 extends RT {
 
 		 */
 		
-		List<Integer> sequence = analyseSequence(Arrays.asList(new Integer[] {16, 78, 254, 634, 1332}));
+		List<Long> sequence = analyseSequence(Arrays.asList(new Long[] {16L, 78L, 254L, 634L, 1332L}));
 		System.out.println(sequence);
 		System.out.println(sequenceToString(sequence));
 		System.out.println(evaluateSequence(sequence, 4));
+		System.out.println();
 		
-//		List<Integer> seq = new ArrayList<>();
-//		for(int i = 1; i <= 10; i++) {
-//			seq.add(tenDegPoly(i));
-//			//System.out.println(seq);
-//			System.out.println(analyseSequence(new ArrayList<>(seq)));
-//		}
-		
+		List<Long> seq = new ArrayList<>();
+		for(int i = 1; i <= 10; i++) {
+			seq.add(tenDegPoly(i));
+			//System.out.println(seq);
+			System.out.println(sequenceToString(analyseSequence(new ArrayList<>(seq))));
+			System.out.print(seq + " ");
+			System.out.println(evaluateSequence(analyseSequence(new ArrayList<>(seq)), i + 1));
+		}
+				
 		//System.out.println(analyseSequence(Arrays.asList(new Integer[] {1, 683, 44287})));
 		//output: 6n^2−11n+6
 		
@@ -48,15 +52,15 @@ public class Problem101 extends RT {
 		uptime();
 	}
 	
-	public static int tenDegPoly(int n) {
+	public static long tenDegPoly(int n) {
 		return 1 - n + pow(n, 2) - pow(n, 3) + pow(n, 4) - pow(n, 5) + pow(n, 6) - pow(n, 7) + pow(n, 8) - pow(n, 9) + pow(n, 10);
 	}
 	
-	public static int pow(int i, int pow) {
+	public static long pow(long i, long pow) {
 		return (int) Math.pow(i, pow);
 	}
 	
-	public static String sequenceToString(List<Integer> sequence) {
+	public static String sequenceToString(List<Long> sequence) {
 		String result = "";
 		for(int i = 0; i < sequence.size(); i++) {
 			result = result + (sequence.get(i) > 0 ? "+ " : "") + sequence.get(i) + "x^" + (sequence.size() - i - 1) + " ";
@@ -64,10 +68,10 @@ public class Problem101 extends RT {
 		return result;
 	}
 	
-	public static long evaluateSequence(List<Integer> sequence, int n) {
-		long result = 0;
+	public static BigInteger evaluateSequence(List<Long> sequence, long n) {
+		BigInteger result = BigInteger.ZERO;
 		for(int i = 0; i < sequence.size(); i++) {
-			result += sequence.get(i) * Math.pow(n, sequence.size() - i - 1);
+			result = result.add(BigInteger.valueOf(sequence.get(i) * pow(n, sequence.size() - i - 1)));
 		}
 		return result;
 		
@@ -79,25 +83,25 @@ public class Problem101 extends RT {
 	 * @param sequence
 	 * @return
 	 */
-	public static List<Integer> analyseSequence(List<Integer> sequence) {
+	public static List<Long> analyseSequence(List<Long> sequence) {
 		if(sequence.size() == 1) {
 			return sequence;
 		}
 		return analyseSequence(sequence, new ArrayList<>());
 	}
 	
-	public static List<Integer> analyseSequence(List<Integer> sequence, List<Integer> oldOutput) {
-		List<Integer> output = oldOutput;
+	public static List<Long> analyseSequence(List<Long> sequence, List<Long> oldOutput) {
+		List<Long> output = oldOutput;
 				
 		//Determine the polynomial degree by the length of the sequence
-		int polynomialDegree = sequence.size() - 1;
+		long polynomialDegree = sequence.size() - 1;
 		
 		if(polynomialDegree == 1) {
-			int n = (sequence.get(1) - sequence.get(0));
+			long n = (sequence.get(1) - sequence.get(0));
 			//output = output + (n >= 0 ? "+" : "") + n + "n ";
 			output.add(n);
 			
-			int lastTerm = sequence.get(0) - n;
+			long lastTerm = sequence.get(0) - n;
 			//Basically the base case.
 			//output = output + (lastTerm >= 0 ? "+" : "") + lastTerm;
 			output.add(lastTerm);
@@ -106,8 +110,8 @@ public class Problem101 extends RT {
 			
 			//Find the final "recursive difference" (at the bottom of differences)
 					
-			List<Integer> tempSequence = new ArrayList<>(sequence);
-			List<Integer> differences = new ArrayList<>();
+			List<Long> tempSequence = new ArrayList<>(sequence);
+			List<Long> differences = new ArrayList<>();
 			
 			while(true) {
 				for (int i = 0; i < tempSequence.size() - 1; i++) {
@@ -127,15 +131,15 @@ public class Problem101 extends RT {
 					break;
 				}
 			}
-			int firstTerm = differences.get(0) / Utils.factorial(polynomialDegree);
+			long firstTerm = differences.get(0) / Utils.factorial(polynomialDegree);
 			//output = output + (firstTerm >= 0 ? "+" : "") + firstTerm + "n^" + polynomialDegree;
 			output.add(firstTerm);
 			
 			//Generate the next sequence
 			
-			List<Integer> tempSequence2 = new ArrayList<>();
+			List<Long> tempSequence2 = new ArrayList<>();
 			for(int i = 0; i < sequence.size() - 1; i++) {
-				tempSequence2.add(sequence.get(i) - (firstTerm * (int) Math.pow((i + 1), polynomialDegree) ));
+				tempSequence2.add(sequence.get(i) - (firstTerm * pow((i + 1), polynomialDegree) ));
 			}
 			
 			//recursive step
