@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.github.skepter.foreignutils.SieveWithBitset;
 import io.github.skepter.utils.RT;
-import io.github.skepter.utils.Utils;
 
 public class Problem500 extends RT {
 
@@ -16,14 +14,42 @@ public class Problem500 extends RT {
 	 * https://www.desmos.com/calculator/pkeexjjmay
 	 */
 	public static void main(final String[] args) {
-		int CONST = 300;
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(CONST);
+		//System.out.println(BigInteger.valueOf(2).modPow(BigInteger.valueOf(2).pow(500500).subtract(BigInteger.ONE), BigInteger.valueOf(500500507))); //339969113
+		
+//		int CONST = 50000;
+//		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(CONST);
+//		
+//		for(int i = 2; i <= 2500; i++)
+//			System.out.println(i + ": " + getDivisors(i, primes));
+		
+//		System.out.println(primes.size());
+//		System.out.println("Primes generated");
+		
+//		BigInteger number = BigInteger.ONE;
+//		
+//		int count = 0;
+//		
+//		for(int i = 2; count <= 500500 ; i++) {
+//			if(BigInteger.valueOf(i).isProbablePrime(1)) {
+//				//System.out.println(i);
+//				number = number.multiply(BigInteger.valueOf(i));
+//				count++;
+//			}
+//		}
+//		System.out.println("done");
+//		System.out.println(number.mod(BigInteger.valueOf(500500507)));
+		
+//		Utils.printMap(getPrimeFactorTable(120, primes));
+		
+	//	System.out.println(BigInteger.valueOf(2).pow(500500).mod(BigInteger.valueOf(500500507))); //339969113
+		
+		
 
 		//System.out.println(BigInteger.valueOf(2).pow(500500 - 1).subtract(BigInteger.ONE).mod(BigInteger.valueOf(500500507)));
 
-		Utils.printMap(getPrimeFactorTable(BigInteger.valueOf(2).pow(500500 - 200).subtract(BigInteger.ONE), primes));
+		//Utils.printMap(getPrimeFactorTable(BigInteger.valueOf(2).pow(500500 - 200).subtract(BigInteger.ONE), primes));
 		
-		System.out.println(BigInteger.valueOf(2).pow(500500).subtract(BigInteger.valueOf(16)).multiply(BigInteger.valueOf(30)).add(BigInteger.valueOf(120)).mod(BigInteger.valueOf(500500507)));
+		//System.out.println(BigInteger.valueOf(2).pow(500500).subtract(BigInteger.valueOf(16)).multiply(BigInteger.valueOf(30)).add(BigInteger.valueOf(120)).mod(BigInteger.valueOf(500500507)));
 		
 		
 		//System.out.println(getDivisors(355308955, primes));
@@ -41,7 +67,7 @@ public class Problem500 extends RT {
 		
 		//Utils.printMap(getPrimeFactorTable(240, primes));
 		
-		//getDivisors(4200, SieveWithBitset.sieveOfEratosthenes(4200));
+		//System.out.println(getDivisors(4200, SieveWithBitset.sieveOfEratosthenes(4200)));
 		uptime();
 	}
 	
