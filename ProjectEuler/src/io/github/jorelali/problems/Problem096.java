@@ -72,6 +72,7 @@ public class Problem096 extends RT {
 						} else {
 							//Continue looping through values 1-9
 							valid = false;
+							puzzle[row][col] = 0;
 						}
 					}
 					
@@ -91,21 +92,47 @@ public class Problem096 extends RT {
 							 */
 							
 							//Set current value back to 0
-							puzzle[row][col] = 0;
-							vis.update(puzzle);
+//							puzzle[row][col] = 0;
+//							vis.update(puzzle);
 							//Get last square and "go back" in our loop to said square.
 							Point lastSquare = completedSquares.pop();
 							row = lastSquare.x;
 							col = lastSquare.y;
 							
-							//Gotta 
-							puzzle[row][col] = puzzle[row][col] + 1;
+							if(puzzle[row][col] == 9) {
+								puzzle[row][col] = 0;
+								vis.update(puzzle);
+								
+								Point lastSquare2 = completedSquares.pop();
+								row = lastSquare2.x;
+								col = lastSquare2.y;
+							} else {
+								puzzle[row][col] = puzzle[row][col] + 1;
+							}
+							
+							
+//							//Gotta increment
+//							puzzle[row][col] = puzzle[row][col] + 1; //TODO check for row/col == 10
+//							if(puzzle[row][col] == 10) {
+//								puzzle[row][col] = 0;
+//								
+//								//go back AGAIN
+//								vis.update(puzzle);
+//								//Get last square and "go back" in our loop to said square.
+//								
+//								Point lastSquare2 = completedSquares.pop();
+//								row = lastSquare2.x;
+//								col = lastSquare2.y;
+//								
+//							}
+							
+//							if(isValid(puzzle)) {
+//								completedSquares.push(new Point(row, col));
+//							}
+							
 							//Gotta check if this is valid now.
 							vis.update(puzzle);
-						} while(puzzle[row][col] == 9);
-						
-						
-						
+						} while(!isValid(puzzle));
 					}
 				}
 			}
