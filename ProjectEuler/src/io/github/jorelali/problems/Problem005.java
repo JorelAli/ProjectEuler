@@ -13,7 +13,7 @@ public class Problem005 extends RT{
 	 * 580ms
 	 */
 	public static void main(final String[] args) {
-		for (int i = 1; i < Integer.MAX_VALUE; i++)
+		for (int i = 2520; ; i++)
 			if(check(i)) {
 				System.out.println(i);
 				break;
