@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import io.github.jorelali.utils.RT;
+import io.github.jorelali.utils.Utils;
 
 public class Problem004 extends RT{
 
@@ -19,18 +20,10 @@ public class Problem004 extends RT{
 		final List<Integer> list = new ArrayList<Integer>();
 		for (int i = 100; i <= 999; i++)
 			for (int j = 100; j <= 999; j++)
-				if (isPalindrome(i * j))
+				if (Utils.isPalindrome(i * j))
 					list.add(i * j);
 		Collections.sort(list);
 		System.out.println(list.get(list.size() - 1));
 		uptime();
-	}
-
-	static boolean isPalindrome(final int i) {
-		final String str = String.valueOf(i);
-		final String reversedString = new StringBuilder(str).reverse().toString();
-		if (reversedString.equals(str))
-			return true;
-		return false;
 	}
 }
