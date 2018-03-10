@@ -1,8 +1,7 @@
 package io.github.jorelali.problems;
 
-import java.math.BigInteger;
-
 import io.github.jorelali.utils.RT;
+import io.github.jorelali.utils.Utils;
 
 public class Problem015 extends RT {
 
@@ -15,17 +14,12 @@ public class Problem015 extends RT {
 
 	/*
 	 * Solution = 40C20
+	 * 40 = 2 x 20 (right and down)
+	 * 
+	 * Program took 086 milliseconds
 	 */
 	public static void main(final String[] args) {
-		System.out.println(combinations(40, 20));
+		System.out.println(Utils.combinations(40, 20));
 		uptime();
-	}
-
-	static BigInteger combinations(final int N, final int r) {
-		BigInteger ret = BigInteger.ONE;
-		for (int k = 0; k < r; k++) {
-			ret = ret.multiply(BigInteger.valueOf(N - k)).divide(BigInteger.valueOf(k + 1));
-		}
-		return ret;
 	}
 }
