@@ -41,7 +41,38 @@ public class Problem096 extends RT {
 		//Solving each puzzle
 		//Starting with first puzzle for testing
 		int[][] puzzle = sudokuPuzzles.get(0);
-		
+		for(int row = 0; row < 9; row++) {
+			for(int col = 0; col < 9; col++) {
+				if(puzzle[row][col] == 0) {
+					
+					boolean valid = true;
+					
+					for(int val = 1; val <= 9; val++) {
+						puzzle[row][col] = val;
+						//We found a number that works, let's continue then.
+						if(isValid(puzzle)) {
+							valid = true;
+							break;
+						} else {
+							//Continue looping through values 1-9
+							valid = false;
+						}
+					}
+					
+					//After trying numbers 1-9, it fails. Therefore we need
+					//to backtrack to the last value which we chose was
+					//deemed valid. IF that value (after many attempts, say)
+					//is 9, then we backtrack EVEN FURTHER to the previous one before that.
+					//Don't forget to set all previous values to 0
+					
+					//Say we have a stack 
+					if(valid == false) {
+						//eh, you trieded
+						System.out.println("gotta backtrack");
+					}
+				}
+			}
+		}
 		uptime();
 	}
 	
