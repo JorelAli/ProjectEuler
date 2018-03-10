@@ -1,8 +1,7 @@
 package io.github.jorelali.problems;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import io.github.jorelali.utils.RT;
 import io.github.jorelali.utils.Utils;
@@ -17,13 +16,12 @@ public class Problem004 extends RT{
 	 * 220ms
 	 */
 	public static void main(final String[] args) {
-		final List<Integer> list = new ArrayList<Integer>();
+		SortedSet<Integer> list = new TreeSet<>();
 		for (int i = 100; i <= 999; i++)
 			for (int j = 100; j <= 999; j++)
 				if (Utils.isPalindrome(i * j))
 					list.add(i * j);
-		Collections.sort(list);
-		System.out.println(list.get(list.size() - 1));
+		System.out.println(list.last());
 		uptime();
 	}
 }
