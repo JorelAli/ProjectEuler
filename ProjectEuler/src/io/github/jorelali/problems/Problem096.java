@@ -1,13 +1,16 @@
 package io.github.jorelali.problems;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 import io.github.jorelali.utils.RT;
 import io.github.jorelali.utils.Utils;
+import io.github.jorelali.utils.Visualiser;
 
 public class Problem096 extends RT {
 
@@ -41,6 +44,19 @@ public class Problem096 extends RT {
 		//Solving each puzzle
 		//Starting with first puzzle for testing
 		int[][] puzzle = sudokuPuzzles.get(0);
+		solvePuzzle(puzzle);
+		uptime();
+	}
+	
+	public static void solvePuzzle(int[][] puzzle) {
+		
+		Visualiser vis = new Visualiser(puzzle, 9, "ye");
+		
+		
+		//Storage of tiles in a stack so we can backtrack as necessary
+		Stack<Point> completedSquares = new Stack<>();
+		
+		
 		for(int row = 0; row < 9; row++) {
 			for(int col = 0; col < 9; col++) {
 				if(puzzle[row][col] == 0) {
@@ -59,22 +75,43 @@ public class Problem096 extends RT {
 						}
 					}
 					
-					//After trying numbers 1-9, it fails. Therefore we need
-					//to backtrack to the last value which we chose was
-					//deemed valid. IF that value (after many attempts, say)
-					//is 9, then we backtrack EVEN FURTHER to the previous one before that.
-					//Don't forget to set all previous values to 0
+					vis.update(puzzle);
 					
-					//Say we have a stack 
-					if(valid == false) {
-						//eh, you trieded
-						System.out.println("gotta backtrack");
+					if(valid) {
+						completedSquares.push(new Point(row, col));
+					} else {
+						System.out.println("Gotta backtrack");
+						
+						do {
+							/*
+							 * Time to backtrack:
+							 * > Gotta set the current value back to 0
+							 * > Go back to the last current value
+							 * > Woop de doo~
+							 */
+							
+							//Set current value back to 0
+							puzzle[row][col] = 0;
+							vis.update(puzzle);
+							//Get last square and "go back" in our loop to said square.
+							Point lastSquare = completedSquares.pop();
+							row = lastSquare.x;
+							col = lastSquare.y;
+							
+							//Gotta 
+							puzzle[row][col] = puzzle[row][col] + 1;
+							//Gotta check if this is valid now.
+							vis.update(puzzle);
+						} while(puzzle[row][col] == 9);
+						
+						
+						
 					}
 				}
 			}
 		}
-		uptime();
 	}
+	
 	
 	/**
 	 * Checks if a sudoku puzzle is valid (i.e. it doesn't have
