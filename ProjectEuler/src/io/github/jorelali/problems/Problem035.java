@@ -24,7 +24,7 @@ public class Problem035 extends RT{
 	public static void main(final String[] args) {
 		//		for(int i : getCircleNumbers(12345))
 		//			System.out.println(i);
-		final List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(1000000);
+		final List<Integer> primes = SieveWithBitset.getPrimes(1000000);
 		final Set<Integer> set = new HashSet<Integer>();
 		for (final int i : primes)
 			//System.out.println(i);

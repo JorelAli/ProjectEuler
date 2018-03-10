@@ -2,10 +2,9 @@ package io.github.jorelali.foreignutils;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import io.github.jorelali.utils.Utils;
 
 /* Uses a BitSet to calculate the SieveOfEratosthenes.
  * This is used to generate a list of prime numbers up to a maximum value
@@ -35,16 +34,31 @@ public class SieveWithBitset {
 	}
 
 	/**
-	 * @return A set of integers of the prime numbers 
+	 * @return A set of integers of the prime numbers <= max
 	 */
-	public static Set<Integer> getPrimes(final int max) {
-		return Utils.convertListToSet(sieveOfEratosthenes(max));
+	public static Set<Integer> getPrimesAsSet(final int max) {
+		final SieveWithBitset sieve = new SieveWithBitset(max + 1); // +1 to include max itself
+		for (int i = 3; (i * i) <= max; i += 2) {
+			if (sieve.isComposite(i))
+				continue;
+
+			// We increment by 2*i to skip even multiples of i
+			for (int multiple_i = i * i; multiple_i <= max; multiple_i += 2 * i)
+				sieve.setComposite(multiple_i);
+		}
+
+		final Set<Integer> primes = new HashSet<Integer>();
+		primes.add(2);
+		for (int i = 3; i <= max; i += 2)
+			if (!sieve.isComposite(i))
+				primes.add(i);
+		return primes;
 	}
 	
 	/**
-	 * @return A list of integers of the prime numbers 
+	 * @return A list of integers of the prime numbers <= max
 	 */
-	public static List<Integer> sieveOfEratosthenes(final int max) {
+	public static List<Integer> getPrimes(final int max) {
 		final SieveWithBitset sieve = new SieveWithBitset(max + 1); // +1 to include max itself
 		for (int i = 3; (i * i) <= max; i += 2) {
 			if (sieve.isComposite(i))

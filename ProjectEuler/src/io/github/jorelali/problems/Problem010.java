@@ -39,7 +39,7 @@ public class Problem010 extends RT {
 //	}
 	
 	public static void main(final String[] args) {
-		final List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(20000000);
+		final List<Integer> primes = SieveWithBitset.getPrimes(20000000);
 		BigInteger bi = BigInteger.ZERO;
 		for(final int i : primes)
 			bi = bi.add(new BigInteger(String.valueOf(i)));

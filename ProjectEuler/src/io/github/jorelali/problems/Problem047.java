@@ -32,7 +32,7 @@ public class Problem047 extends RT {
 	 */
 	public static void main(final String[] args) {
 		int max = 500000;
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(max);
+		List<Integer> primes = SieveWithBitset.getPrimes(max);
 		LoadingBar bar = new LoadingBar("Problem 47", max);
 		for(int i = 1; i <= max; i++) {
 			Set<Integer> i1 = Utils.getPrimeFactorSet(i, primes);

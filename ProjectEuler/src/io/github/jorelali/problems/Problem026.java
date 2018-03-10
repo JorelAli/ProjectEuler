@@ -23,7 +23,7 @@ public class Problem026 extends RT {
 		int maxLength = 0;
 		int maxValue = 0;
 
-		Set<Integer> primes = Utils.convertListToSet(SieveWithBitset.sieveOfEratosthenes(1000));
+		Set<Integer> primes = Utils.convertListToSet(SieveWithBitset.getPrimes(1000));
 		primes.remove(2);
 		primes.remove(5);
 		for (int i = 1; i < 1000; i++) {

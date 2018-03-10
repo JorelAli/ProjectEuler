@@ -12,7 +12,7 @@ public class Problem050 extends RT {
 	 * 93337ms
 	 * */
 	public static void main(final String[] args) {
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(1000000);
+		List<Integer> primes = SieveWithBitset.getPrimes(1000000);
 		
 		//maximise sumOfPrimes(a) - sumOfPrimes(b);
 		
@@ -51,7 +51,7 @@ public class Problem050 extends RT {
 	}
 	
 	public static int sumOfPrimes(int max) {
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(max);
+		List<Integer> primes = SieveWithBitset.getPrimes(max);
 		int count = 0;
 		for(int i : primes){
 			count += i;

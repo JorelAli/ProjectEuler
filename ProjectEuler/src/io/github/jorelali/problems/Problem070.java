@@ -10,7 +10,7 @@ public class Problem070 extends RT {
 
 	/**/
 	public static void main(final String[] args) {
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(10000000);
+		List<Integer> primes = SieveWithBitset.getPrimes(10000000);
 		System.out.println("Primes generated");
 		for(int i = 1; ; i++) {
 			System.out.println(i + ", " + Utils.totient(i, primes));

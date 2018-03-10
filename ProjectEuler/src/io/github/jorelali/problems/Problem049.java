@@ -27,7 +27,7 @@ public class Problem049 extends RT {
 	 * Program took 831 milliseconds
 	 */
 	public static void main(final String[] args) {
-		Set<Integer> set = Utils.convertListToSet(SieveWithBitset.sieveOfEratosthenes(9999));
+		Set<Integer> set = Utils.convertListToSet(SieveWithBitset.getPrimes(9999));
 		for (int i = 1000; i <= 9999; i++) {
 			if (set.contains(i)) {
 				for (int j = 1; j <= 9999; j++) {

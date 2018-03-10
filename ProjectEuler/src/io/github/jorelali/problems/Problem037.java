@@ -28,7 +28,7 @@ public class Problem037 extends RT {
 	
 	public static void main(final String[] args) {
 		
-		allPrimes = SieveWithBitset.sieveOfEratosthenes(MAX);
+		allPrimes = SieveWithBitset.getPrimes(MAX);
 		
 		List<Integer> primes = new ArrayList<Integer>();
 		for(int i = 10; i <= MAX; i++) {

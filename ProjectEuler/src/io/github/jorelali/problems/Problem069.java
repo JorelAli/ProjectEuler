@@ -33,7 +33,7 @@ public class Problem069 extends RT {
 		 * The pattern lies between the prime numbers.
 		 */
 		
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(50);
+		List<Integer> primes = SieveWithBitset.getPrimes(50);
 		loop:
 		for(int i = 0; i < primes.size(); i++) {
 			int n = 1;

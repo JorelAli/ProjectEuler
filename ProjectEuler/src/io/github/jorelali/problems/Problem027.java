@@ -38,10 +38,10 @@ public class Problem027 extends RT {
 	public static Set<Integer> primes = new HashSet<Integer>();
 	
 	public static void main(final String[] args) {
-		primes.addAll(SieveWithBitset.sieveOfEratosthenes(1000000));
+		primes.addAll(SieveWithBitset.getPrimes(1000000));
 		
 		//Primes under 1000 for coefficient of b
-		List<Integer> primesUnder1000 = SieveWithBitset.sieveOfEratosthenes(1000);
+		List<Integer> primesUnder1000 = SieveWithBitset.getPrimes(1000);
 
 		//Looping through values of B
 		

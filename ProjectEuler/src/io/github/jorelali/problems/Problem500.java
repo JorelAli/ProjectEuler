@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.github.jorelali.foreignutils.SieveWithBitset;
 import io.github.jorelali.utils.RT;
 
 public class Problem500 extends RT {
@@ -14,6 +15,17 @@ public class Problem500 extends RT {
 	 * https://www.desmos.com/calculator/pkeexjjmay
 	 */
 	public static void main(final String[] args) {
+		List<Integer> primes = SieveWithBitset.getPrimes(7373522);
+		System.out.println("ye");
+		
+//		List<Integer> primes = ManyPrimeGenerator.getPrimes(500500);
+		System.out.println(primes.get(primes.size() - 1));
+		int result = 1;
+		for(int prime : primes) {
+			result *= prime % 500500507;
+		}
+		System.out.println(result);
+		//System.out.println(c.mod(BigInteger.valueOf(500500507L))); //345013280
 		//System.out.println(BigInteger.valueOf(2).modPow(BigInteger.valueOf(2).pow(500500).subtract(BigInteger.ONE), BigInteger.valueOf(500500507))); //339969113
 		
 //		int CONST = 50000;

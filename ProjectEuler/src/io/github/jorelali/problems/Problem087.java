@@ -22,7 +22,7 @@ public class Problem087 extends RT {
 		
 		//Max possible value is 7071 (sqrt 50 million)
 		
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(5000);
+		List<Integer> primes = SieveWithBitset.getPrimes(5000);
 		Set<Long> numSet = new HashSet<>();
 		
 		for(int x = 0; x < primes.size(); x++) {

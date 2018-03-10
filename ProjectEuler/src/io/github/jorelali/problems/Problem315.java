@@ -24,7 +24,7 @@ public class Problem315 extends RT {
 		//primes.add(137);
 
 		// Create an ArrayList of all prime numbers between 10^7 and 2x10^7
-		ArrayList<Integer> primes = SieveWithBitset.getPrimes(2 * (int) Math.pow(10, 7)).stream()
+		ArrayList<Integer> primes = SieveWithBitset.getPrimesAsSet(2 * (int) Math.pow(10, 7)).stream()
 				.filter(i -> i > Math.pow(10, 7)).collect(Collectors.toCollection(ArrayList::new));
 		Collections.sort(primes);
 

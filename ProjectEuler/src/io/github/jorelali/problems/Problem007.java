@@ -9,7 +9,7 @@ public class Problem007 extends RT{
 	//Program took 094 milliseconds
 	public static void main(final String[] args) {
 		//Zero indexed, so 10001 - 1
-		System.out.println(SieveWithBitset.sieveOfEratosthenes(500000).get(10001 - 1));
+		System.out.println(SieveWithBitset.getPrimes(500000).get(10001 - 1));
 		uptime();
 	}
 }

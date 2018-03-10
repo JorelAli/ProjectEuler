@@ -31,8 +31,8 @@ public class Problem046 extends RT implements Incomplete {
 		// Contains for a HashSet is O(1) compared to O(n) for a list, therefore
 		// you should never use a list if you often need to run contains.
 		Set<Integer> squares = computeSquares(max);
-		Set<Integer> primeSet = Utils.convertListToSet(SieveWithBitset.sieveOfEratosthenes(max));
-		List<Integer> primeList = SieveWithBitset.sieveOfEratosthenes(max);
+		Set<Integer> primeSet = Utils.convertListToSet(SieveWithBitset.getPrimes(max));
+		List<Integer> primeList = SieveWithBitset.getPrimes(max);
 		for (int i = 3; i <= max; i+=2) {
 			if (!primeSet.contains(i)) {
 				boolean satisfy = false;

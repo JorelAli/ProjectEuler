@@ -59,7 +59,7 @@ public class Problem058 extends RT {
 			/* 
 			 * 22861^2 = 522,625,321
 			 */
-			primes = SieveWithBitset.getPrimes(1_000_000_000);
+			primes = SieveWithBitset.getPrimesAsSet(1_000_000_000);
 			System.out.println("Primes generated");
 			uptime();
 			for (int i = 7;; i++) {

@@ -36,8 +36,8 @@ public class Problem549 extends RT {
 		
 		int maxN = 100_000_000;
 		
-		primes = SieveWithBitset.getPrimes(maxN);
-		primeList = SieveWithBitset.sieveOfEratosthenes(maxN);
+		primes = SieveWithBitset.getPrimesAsSet(maxN);
+		primeList = SieveWithBitset.getPrimes(maxN);
 	}
 	
 	static List<Integer> primeList;

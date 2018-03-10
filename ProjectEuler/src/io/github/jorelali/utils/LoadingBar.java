@@ -53,4 +53,8 @@ public class LoadingBar {
 		frame.setTitle(title + " - " + String.valueOf(info));
 	}
 
+	public void destroy() {
+		frame.dispose();
+	}
+	
 }

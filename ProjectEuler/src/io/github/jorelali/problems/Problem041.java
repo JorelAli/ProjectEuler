@@ -38,7 +38,7 @@ public class Problem041 extends RT {
 		 * It's not going to be n = 4 (I tried that already and got 4231, which was incorrect)
 		 */
 		Set<Integer> primes = new HashSet<Integer>();
-		primes.addAll(SieveWithBitset.sieveOfEratosthenes(100000000));
+		primes.addAll(SieveWithBitset.getPrimes(100000000));
 		int max = 0;
 		int count = 0;
 		LoadingBar bar = new LoadingBar("Problem41", primes.size());

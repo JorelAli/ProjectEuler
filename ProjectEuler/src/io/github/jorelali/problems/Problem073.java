@@ -37,7 +37,7 @@ public class Problem073 extends RT {
 	}
 	
 	static int length(int n) {
-		List<Integer> primes = SieveWithBitset.sieveOfEratosthenes(n);
+		List<Integer> primes = SieveWithBitset.getPrimes(n);
 		return length(n, primes, 0) - 2;
 	}
 	
