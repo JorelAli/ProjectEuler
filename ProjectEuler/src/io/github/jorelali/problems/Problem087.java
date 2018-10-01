@@ -9,7 +9,12 @@ import io.github.jorelali.utils.RT;
 
 public class Problem087 extends RT {
 
-	/**/
+	/*
+	 * How many numbers below fifty million can be expressed as the sum of a
+	 * prime square, prime cube, and prime fourth power? 
+	 * 
+	 * Program took 916 milliseconds
+	 */
 	public static void main(final String[] args) {
 		
 		//In fact, there are exactly four numbers below fifty that can be expressed in such a way:
@@ -88,6 +93,9 @@ public class Problem087 extends RT {
 		List<Integer> primesFor3rdPower = SieveWithBitset.getPrimes(367);
 		List<Integer> primesFor2ndPower = SieveWithBitset.getPrimes(7069);
 		Set<Long> numSet = new HashSet<>();
+		
+		//Number of loop iterations = 1524532
+		//System.out.println(primesFor4thPower.size() * primesFor3rdPower.size() * primesFor2ndPower.size());
 		
 		//Generate all possible sequences of primes
 		for(int x = 0; x < primesFor2ndPower.size(); x++) {
