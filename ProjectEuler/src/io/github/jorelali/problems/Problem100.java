@@ -9,21 +9,22 @@ public class Problem100 extends RT {
 
 	//https://www.desmos.com/calculator/p6h3gbm4wj
 	public static void main(final String[] args) {
-		int count = 0;
-		for(long l = 1000000000000L;;l++) {
-			count++;
-			BigDecimal result = function(new BigDecimal(l));
-			if(result.toString().endsWith("0000000000"))  {
-				System.out.println(result.toString());
-				System.out.println(l);
-				
-				break;
-			}
-			if(count % 100000 == 0) {
-				System.out.println(count);
-				//System.out.println(result.toString());
-			}
-		}
+//		int count = 0;
+//		for(long l = 1000000000000L;;l++) {
+//			count++;
+//			BigDecimal result = function(new BigDecimal(l));
+//			if(result.toString().endsWith("0000000000"))  {
+//				System.out.println(result.toString());
+//				System.out.println(l);
+//				
+//				break;
+//			}
+//			if(count % 100000 == 0) {
+//				System.out.println(count);
+//				//System.out.println(result.toString());
+//			}
+//		}
+		System.out.println(cx(new BigDecimal("1000000000000")));
 		uptime();
 	}
 	
@@ -34,6 +35,16 @@ public class Problem100 extends RT {
 		result = result.divide(new BigDecimal(2));
 		result = Utils.nRootNewtonRaphson(result, result, 2, 50, 50);
 		result = result.add(new BigDecimal(0.5));
+		return result;
+	}
+	
+	public static BigDecimal cx(BigDecimal x) {
+		BigDecimal two = BigDecimal.valueOf(2);
+		BigDecimal root2 = Utils.nRootNewtonRaphson(two, two, 2, 200, 200);
+		
+		BigDecimal result = root2.multiply(x.subtract(BigDecimal.valueOf(0.5)));
+		result = result.add(BigDecimal.ONE);
+		result = result.divide(new BigDecimal(2));
 		return result;
 	}
 	
