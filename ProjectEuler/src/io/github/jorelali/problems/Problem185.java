@@ -9,6 +9,9 @@ public class Problem185 extends RT {
 
 	/* https://projecteuler.net/problem=185 
 	 * 
+	 * See https://en.wikipedia.org/wiki/Mastermind_(board_game)#Genetic_algorithm
+	 * 
+	 * 
 	 * The game Number Mind is a variant of the well known game Master Mind.
 		
 		Instead of coloured pegs, you have to guess a secret sequence of digits. 
@@ -73,5 +76,20 @@ public class Problem185 extends RT {
 		}
 		System.out.println(Arrays.toString(arr));
 		uptime();
+	}
+	
+	public static void genetic() {
+		int i = 1;
+		//guess
+		
+		//get some response? X1 and Y1
+		
+		while(x[i] != P) {
+			i++;
+			E[i] = empty;
+			h = 1;
+			//init population
+			
+		}
 	}
 }
