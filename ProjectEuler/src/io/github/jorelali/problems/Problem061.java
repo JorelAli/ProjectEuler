@@ -2,6 +2,7 @@ package io.github.jorelali.problems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
 
 import io.github.jorelali.utils.RT;
@@ -10,52 +11,17 @@ public class Problem061 extends RT {
 
 	/* https://projecteuler.net/problem=61 */
 	public static void main(final String[] args) {
-		
+		new Problem061();
+	}
+	
+	public Problem061() {
 		// Compute sets with 4 digits
-		List<Integer> p3s = new ArrayList<>();
-		List<Integer> p4s = new ArrayList<>();
-		List<Integer> p5s = new ArrayList<>();
-		List<Integer> p6s = new ArrayList<>();
-		List<Integer> p7s = new ArrayList<>();
-		List<Integer> p8s = new ArrayList<>();
-		
-		for(int i = 0; ; i++) {
-			final int p3 = p3(i);
-			final int p4 = p4(i);
-			final int p5 = p5(i);
-			final int p6 = p6(i);
-			final int p7 = p7(i);
-			final int p8 = p8(i);
-			
-			if (p3 > 999 && p3 < 10000) {
-				p3s.add(p3);
-			}
-			if (p4 > 999 && p4 < 10000) {
-				p4s.add(p4);
-			}
-			if (p5 > 999 && p5 < 10000) {
-				p5s.add(p5);
-			}
-			if (p6 > 999 && p6 < 10000) {
-				p6s.add(p6);
-			}
-			if (p7 > 999 && p7 < 10000) {
-				p7s.add(p7);
-			}
-			if (p8 > 999 && p8 < 10000) {
-				p8s.add(p8);
-			}
-			
-			if (p3 >= 10000 &&
-				p4 >= 10000 &&
-				p5 >= 10000 &&
-				p6 >= 10000 &&
-				p7 >= 10000 &&
-				p8 >= 10000) {
-				break;
-			}
-			
-		}
+		List<Integer> p3s = computeDigits(this::p3, 4);
+		List<Integer> p4s = computeDigits(this::p4, 4);
+		List<Integer> p5s = computeDigits(this::p5, 4);
+		List<Integer> p6s = computeDigits(this::p6, 4);
+		List<Integer> p7s = computeDigits(this::p7, 4);
+		List<Integer> p8s = computeDigits(this::p8, 4);
 		
 		// We know that p8s are going to have the smallest list, so let's start with
 		// finding p3s that start with the end of p8s
@@ -68,7 +34,7 @@ public class Problem061 extends RT {
 		System.out.println(p8s);
 		
 		System.out.println("Filtered p8s:");
-		List<Integer> p8s2 = p8s.stream().map(i -> i % 100).filter(i -> i > 9).collect(Collectors.toList());
+		List<Integer> p8s2 = p8s.stream().map(this::lastTwoDigits).filter(i -> i > 9).collect(Collectors.toList());
 		System.out.println(p8s2);
 		
 		List<Integer> p3s2 = p3s.stream().filter(i -> p8s2.stream().anyMatch(p8 -> String.valueOf(i).startsWith(String.valueOf(p8)))).collect(Collectors.toList());
@@ -89,27 +55,54 @@ public class Problem061 extends RT {
 		uptime();
 	}
 	
-	static int p3(int n) {
+	// Figurate functions:
+	
+	int p3(int n) {
 		return n * (n + 1) / 2;
 	}
 	
-	static int p4(int n) {
+	int p4(int n) {
 		return n * n;
 	}
 	
-	static int p5(int n) {
+	int p5(int n) {
 		return n * ((3 * n) - 1) / 2;
 	}
 	
-	static int p6(int n) {
+	int p6(int n) {
 		return n * ((2 * n) - 1);
 	}
 	
-	static int p7(int n) {
+	int p7(int n) {
 		return n * ((5 * n) - 3) / 2;
 	}
 	
-	static int p8(int n) {
+	int p8(int n) {
 		return n * ((3 * n) - 2);
+	}
+	
+	// Helper functions:
+	
+	List<Integer> computeDigits(IntUnaryOperator function, int digits) {
+		List<Integer> ps = new ArrayList<>();
+		final int lowerBound = (int) Math.pow(10, digits - 1) - 1;
+		final int upperBound = (int) Math.pow(10, digits);
+
+		for(int i = 0, p = 0; p < upperBound; i++) {
+			p = function.applyAsInt(i);
+			if (p > lowerBound && p < upperBound) {
+				ps.add(p);
+			}
+		}
+
+		return ps;
+	}
+	
+	int firstTwoDigits(int n) {
+		return n / 100;
+	}
+	
+	int lastTwoDigits(int n) {
+		return n % 100;
 	}
 }
