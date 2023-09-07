@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.function.IntUnaryOperator;
 
 import io.github.jorelali.utils.RT;
+import io.github.jorelali.utils.Utils;
 
 @SuppressWarnings("unchecked")
 public class Problem061 extends RT {
 
-	/* https://projecteuler.net/problem=61 */
+	/* https://projecteuler.net/problem=61
+	 * 
+	 * 097ms */
 	public static void main(final String[] args) {
 		new Problem061();
 	}
@@ -96,9 +99,18 @@ public class Problem061 extends RT {
 //		System.out.println(getSequences(getSequences(getSequences(p3s, p4s), p5s), p3s));
 		
 		// Obviously this should fail. Our desired sequence is p3, p5, p4, (p3)
-		drawSequences(p3s, p4s, p5s);
+//		drawSequences(p3s, p4s, p5s);
+//		
+//		drawSequences(p3s, p5s, p4s);
 		
-		drawSequences(p3s, p5s, p4s);
+//		System.out.println(Utils.generatePermutations(List.of(1, 2, 3, 4, 5, 6, 7, 8)));
+		for(List<List<Integer>> l : Utils.generatePermutations(List.of(p3s, p4s, p5s, p6s, p7s, p8s))) {
+			List<Deque<Integer>> result = drawSequences(l.toArray(List[]::new));
+			if (result.size() > 0) {
+				System.out.println(result.get(0).stream().reduce(Integer::sum).get());
+				break;
+			}
+		}
 		
 //		System.out.println("3 -> 4: " + p3s.stream().filter(p3 -> p4s.stream().anyMatch(p4 -> lastTwoDigits(p3) == firstTwoDigits(p4))).collect(Collectors.toList()));
 //		System.out.println("4 -> 5: " + p4s.stream().filter(p4 -> p5s.stream().anyMatch(p5 -> lastTwoDigits(p4) == firstTwoDigits(p5))).collect(Collectors.toList()));
@@ -137,7 +149,7 @@ public class Problem061 extends RT {
 	
 	// More helper functions:
 	
-	void drawSequences(List<Integer>... lists) {
+	List<Deque<Integer>> drawSequences(List<Integer>... lists) {
 		// [
 		//   [1521, 2147],
 		//   ...
@@ -179,7 +191,11 @@ public class Problem061 extends RT {
 		// Check last sequence
 		list = list.stream().filter(l -> isSequence(l.peekLast(), l.peekFirst())).toList();
 		
-		System.out.println(list);
+		if (!list.isEmpty()) {
+			// System.out.println(list);
+		}
+		
+		return list;
 	}
 	
 	boolean isSequence(int pFirst, int pSecond) {

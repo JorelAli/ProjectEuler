@@ -209,7 +209,7 @@ public class Utils {
 
 
 	/**
-	 * Converts a Set<> into a List<>
+	 * Converts a Set<> into a (modifiable) List<>
 	 */
 	public static <T> List<T> convertSetToList(Set<T> set) {
 		List<T> list = new ArrayList<T>();
@@ -218,7 +218,7 @@ public class Utils {
 	}
 
 	/**
-	 * Converts a List<> into a Set<>
+	 * Converts a List<> into a (modifiable) Set<>
 	 */
 	public static <T> Set<T> convertListToSet(List<T> list) {
 		Set<T> set = new HashSet<T>();
@@ -630,6 +630,33 @@ public class Utils {
 	 */
 	public static boolean isPrime(int i) {
 		return isPrime(i, 20);
+	}
+
+	// https://stackoverflow.com/questions/10305153/generating-all-possible-permutations-of-a-list-recursively
+	public static <E> List<List<E>> generatePermutations(List<E> original) {
+		if (original.isEmpty()) {
+			List<List<E>> result = new ArrayList<>();
+			result.add(new ArrayList<>());
+			return result;
+		}
+		E firstElement = original.get(0);
+		
+		List<E> newOriginal = new ArrayList<>();
+		for(int i = 1; i < original.size(); i++) {
+			newOriginal.add(original.get(i));
+		}
+		original = newOriginal;
+		
+		List<List<E>> returnValue = new ArrayList<>();
+		List<List<E>> permutations = generatePermutations(original);
+		for (List<E> smallerPermutated : permutations) {
+			for (int index = 0; index <= smallerPermutated.size(); index++) {
+				List<E> temp = new ArrayList<>(smallerPermutated);
+				temp.add(index, firstElement);
+				returnValue.add(temp);
+			}
+		}
+		return returnValue;
 	}
 	
 }
