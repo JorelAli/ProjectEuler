@@ -367,6 +367,63 @@ public class Utils {
 	public static long gcd(long a, long b) {
 		return b == 0 ? a : gcd(b, a % b);
 	}
+	
+	/**
+	 * Synonyms for the GCD include the greatest common factor (GCF), the
+	 * highest common factor (HCF), the highest common divisor (HCD), and the
+	 * greatest common measure (GCM)<br><br>
+	 *  
+	 * Returns the greatest common divisor between a and b. gcd(8, 12) = 4
+	 * 
+	 * Implemented using the <a href="https://en.wikipedia.org/wiki/Binary_GCD_algorithm">Binary GCD algorithm</a>
+	 * Using implementation from <a href="https://www.geeksforgeeks.org/steins-algorithm-for-finding-gcd/">Geeks for Geeks</a>
+	 */
+	public static int fastGCD(int a, int b) {
+		// GCD(0, b) == b; GCD(a, 0) == a,
+        // GCD(0, 0) == 0
+        if (a == 0)
+            return b;
+        if (b == 0)
+            return a;
+ 
+        // Finding K, where K is the greatest
+        // power of 2 that divides both a and b
+        int k;
+        for (k = 0; ((a | b) & 1) == 0; ++k)
+        {
+            a >>= 1;
+            b >>= 1;
+        }
+ 
+        // Dividing a by 2 until a becomes odd
+        while ((a & 1) == 0)
+            a >>= 1;
+ 
+        // From here on, 'a' is always odd.
+        do
+        {
+            // If b is even, remove
+            // all factor of 2 in b
+            while ((b & 1) == 0)
+                b >>= 1;
+ 
+            // Now a and b are both odd. Swap
+            // if necessary so a <= b, then set
+            // b = b - a (which is even)
+            if (a > b)
+            {
+                // Swap u and v.
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+ 
+            b = (b - a);
+        } while (b != 0);
+ 
+        // restore common factors of 2
+        return a << k;
+	}
 
 	/**
 	 * Computes Euler's Totient function
@@ -641,6 +698,7 @@ public class Utils {
 		}
 		E firstElement = original.get(0);
 		
+		// Need to tweak the original answer to not modify the original list!
 		List<E> newOriginal = new ArrayList<>();
 		for(int i = 1; i < original.size(); i++) {
 			newOriginal.add(original.get(i));
