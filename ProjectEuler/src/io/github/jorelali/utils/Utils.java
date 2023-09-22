@@ -717,4 +717,21 @@ public class Utils {
 		return returnValue;
 	}
 	
+	/**
+	 * Gets the number of digits from a BigInteger without using strings or loops
+	 * 
+	 * From https://stackoverflow.com/questions/18828377/biginteger-count-the-number-of-decimal-digits-in-a-scalable-method
+	 * 
+	 * @param number
+	 * @return
+	 */
+	public static int getDigitCount(BigInteger number) {
+		final double factor = Math.log(2) / Math.log(10);
+		final int digitCount = (int) (factor * number.bitLength() + 1);
+		if (BigInteger.TEN.pow(digitCount - 1).compareTo(number) > 0) {
+			return digitCount - 1;
+		}
+		return digitCount;
+	}
+	
 }
