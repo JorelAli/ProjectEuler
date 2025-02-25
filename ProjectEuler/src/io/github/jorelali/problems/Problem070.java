@@ -9,7 +9,6 @@ import io.github.jorelali.utils.RT;
 public class Problem070 extends RT {
 
 	/*
-	 * 8319823
 	 * Program took 03 seconds, 247 milliseconds
 	 */
 	public static void main(final String[] args) {

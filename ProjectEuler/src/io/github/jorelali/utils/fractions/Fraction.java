@@ -42,6 +42,11 @@ public class Fraction implements Comparable<Fraction> {
 		return this;
 	}
 	
+	public Fraction multiply(int n) {
+		setNumerator(numerator * n);
+		return this;
+	}
+	
 	public Fraction multiply(Fraction f) {
 		setNumerator(numerator * f.numerator);
 		setDenominator(f.denominator * denominator);
