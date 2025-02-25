@@ -24,7 +24,20 @@ public class Problem719 extends RT {
 		long max = 1_000_000_000_000L;
 		// long max = 10_000;
 		for(long l = 1; l*l <= max; l++) {
-		// for(long l = 1; l <= max; l++) {
+			// The mod-9 optimization:
+			// When we split up numbers in this way (e.g. 81 -> [8, 1])
+			// this preserves the digit-sum. e.g. 6724 will always have
+			// a digit sum of 19 (mod 9), regardless of how it's been split up.
+			// For example:
+			// 6724 -> 6 + 7 + 2 + 4 = 19 (mod 9) = 1
+			// 6 + 72 + 4 = 82 (mod 9) = 1
+			// This situation is only true when l (mod 9) is 0 or 1, so
+			// we can ignore all other cases where l (mod 9) is greater
+			// than 0 or 1 to give us a ~3-4x speed improvement.
+			if (l % 9 > 1) {
+				continue;
+			}
+			
 			long lSquared = l*l;
 			if (isSNumber(lSquared, l)) {
 				sum += lSquared;
@@ -48,24 +61,6 @@ public class Problem719 extends RT {
 			}
 		}
 		return false;
-	}
-
-	static boolean isSNumber(long l) {
-		final double sqrt = Math.sqrt(l);
-
-		// First property of S-numbers: It has to be a perfect
-		// square. We can easily filter out non-S-numbers by
-		// checking if it's a perfect square or not
-		if (!Utils.isInteger(sqrt)) {
-			return false;
-		} else {
-			for (List<Long> split : generateSplits(Utils.digits(l))) {
-				if (split.size() > 1 && split.stream().reduce(0L, Long::sum) == sqrt) {
-					return true;
-				}
-			}
-			return false;
-		}
 	}
 
 	// Generate a list of splits. E.g. generateSplits([8, 1]) = [[8, 1], [81]]

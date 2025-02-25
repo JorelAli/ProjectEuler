@@ -442,6 +442,32 @@ public class Utils {
 		return (int) (count * n);
 	}
 	
+	/**
+	 * Computes Euler's Totient function, generating values from
+	 * 1 to {@code limit}
+	 * @param limit the number to compute totients up to
+	 * @return an array of totients from 1 to {@limit}
+	 * @see {@link https://cp-algorithms.com/algebra/phi-function.html#etf_1_to_n}
+	 */
+	public static long[] fastTotients(int limit) {
+		long[] totientValues = new long[limit + 1];
+
+		// Initialize totientValues[i] = i for all i
+		for (int i = 0; i <= limit; i++) {
+			totientValues[i] = i;
+		}
+
+		// Sieve-like approach to calculate totient function for all numbers up to 'limit'
+		for (int prime = 2; prime <= limit; prime++) {
+			if (totientValues[prime] == prime) { // Check if 'prime' is actually prime
+				for (int multiple = prime; multiple <= limit; multiple += prime) {
+					totientValues[multiple] = totientValues[multiple] * (prime - 1) / prime;
+				}
+			}
+		}
+		return totientValues;
+	}
+	
 	//Old totient functions, no longer used anymore (due to being slow/not working)
 //	static Map<Integer, Integer> totientMap = new HashMap<>();
 //	
